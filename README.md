@@ -1,2 +1,3 @@
-# otus_java
-OTUS "Java developer" homeworks.
+# OTUS "Java developer" homeworks.
+Alexander Fedorov
+denderov@gmail.com
