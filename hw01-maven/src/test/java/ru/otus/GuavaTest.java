@@ -1,3 +1,5 @@
+package ru.otus;
+
 import com.google.common.collect.Iterables;
 import org.junit.Test;
 
