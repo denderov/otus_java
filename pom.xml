@@ -21,6 +21,7 @@
         <com.google.guava.version>28.1-jre</com.google.guava.version>
         <maven-assembly-plugin.version>3.1.1</maven-assembly-plugin.version>
         <junit.version>4.12</junit.version>
+        <hamcrest-core.version>2.1</hamcrest-core.version>
     </properties>
 
     <dependencyManagement>
@@ -34,6 +35,18 @@
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
+                <scope>test</scope>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.hamcrest</groupId>
+                        <artifactId>hamcrest-core</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.hamcrest</groupId>
+                <artifactId>hamcrest-core</artifactId>
+                <version>${hamcrest-core.version}</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>
