@@ -5,7 +5,10 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
@@ -15,6 +18,7 @@ public class OriginalArrayListTest {
     public void checkAddMethod() {
         ArrayList<Integer> integerArrayList = new ArrayList<>();
         integerArrayList.add(1);
+
         assertEquals(1,integerArrayList.size());
         assertThat(integerArrayList, CoreMatchers.hasItem(1));
     }
@@ -22,9 +26,12 @@ public class OriginalArrayListTest {
     @Test
     public void checkCollectionsAddAll() {
         Integer[] integerArray = getIntegers();
+
         ArrayList<Integer> integerArrayList = new ArrayList<>();
         Collections.addAll(integerArrayList, integerArray);
+
         assertEquals(20,integerArrayList.size());
+
         assertThat(integerArrayList, CoreMatchers.hasItems(integerArray));
     }
 
@@ -32,15 +39,32 @@ public class OriginalArrayListTest {
     public void checkCollectionsCopy() {
         Integer[] integerArray = getIntegers();
         Integer[] reverseIntegerArray = getReverseIntegers();
+
         ArrayList<Integer> integerArrayList = new ArrayList<>();
         Collections.addAll(integerArrayList, integerArray);
+
         ArrayList<Integer> copyIntegerArrayList = new ArrayList<>();
         Collections.addAll(copyIntegerArrayList, reverseIntegerArray);
+
         Collections.copy(copyIntegerArrayList,integerArrayList);
-        assertEquals(20,integerArrayList.size());
-        assertThat(integerArrayList, CoreMatchers.hasItems(integerArray));
-        assertEquals(20, copyIntegerArrayList.size());
-        assertThat(copyIntegerArrayList, CoreMatchers.hasItems(integerArray));
+
+        assertThat(copyIntegerArrayList, is(equalTo(integerArrayList)));
+    }
+
+    @Test
+    public void checkCollectionsSort() {
+        Integer[] integerArray = getIntegers();
+        Integer[] reverseIntegerArray = getReverseIntegers();
+
+        ArrayList<Integer> integerArrayList = new ArrayList<>();
+        Collections.addAll(integerArrayList, integerArray);
+
+        ArrayList<Integer> reverseIntegerArrayList = new ArrayList<>();
+        Collections.addAll(reverseIntegerArrayList, reverseIntegerArray);
+
+        Collections.sort(integerArrayList, Comparator.reverseOrder());
+
+        assertThat(integerArrayList, is(equalTo(reverseIntegerArrayList)));
     }
 
     private Integer[] getReverseIntegers() {
