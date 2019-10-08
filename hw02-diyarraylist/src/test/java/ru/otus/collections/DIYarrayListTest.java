@@ -3,7 +3,6 @@ package ru.otus.collections;
 import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 
-//import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
