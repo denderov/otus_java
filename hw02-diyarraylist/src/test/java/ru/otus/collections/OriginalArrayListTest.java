@@ -1,4 +1,4 @@
-package ru.otus;
+package ru.otus.collections;
 
 import org.hamcrest.CoreMatchers;
 import org.junit.Test;
