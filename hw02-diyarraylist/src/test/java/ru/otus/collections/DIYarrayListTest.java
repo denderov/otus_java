@@ -17,7 +17,7 @@ public class DIYarrayListTest {
     public void checkCollectionsAddAll() {
         Integer[] integerArray = getIntegers();
 
-        DIYarrayList<Integer> integerArrayList = new DIYarrayList<>();
+        DIYarrayList<Integer> integerArrayList = new DIYarrayList<>(16);
         Collections.addAll(integerArrayList, integerArray);
 
         assertEquals(20,integerArrayList.size());
@@ -30,10 +30,10 @@ public class DIYarrayListTest {
         Integer[] integerArray = getIntegers();
         Integer[] reverseIntegerArray = getReverseIntegers();
 
-        DIYarrayList<Integer> integerArrayList = new DIYarrayList<>();
+        DIYarrayList<Integer> integerArrayList = new DIYarrayList<>(16);
         Collections.addAll(integerArrayList, integerArray);
 
-        DIYarrayList<Integer> copyIntegerArrayList = new DIYarrayList<>();
+        DIYarrayList<Integer> copyIntegerArrayList = new DIYarrayList<>(16);
         Collections.addAll(copyIntegerArrayList, reverseIntegerArray);
 
         Collections.copy(copyIntegerArrayList,integerArrayList);
@@ -46,10 +46,10 @@ public class DIYarrayListTest {
         Integer[] integerArray = getIntegers();
         Integer[] reverseIntegerArray = getReverseIntegers();
 
-        DIYarrayList<Integer> integerArrayList = new DIYarrayList<>();
+        DIYarrayList<Integer> integerArrayList = new DIYarrayList<>(16);
         Collections.addAll(integerArrayList, integerArray);
 
-        DIYarrayList<Integer> reverseIntegerArrayList = new DIYarrayList<>();
+        DIYarrayList<Integer> reverseIntegerArrayList = new DIYarrayList<>(16);
         Collections.addAll(reverseIntegerArrayList, reverseIntegerArray);
 
         Collections.sort(integerArrayList, Comparator.reverseOrder());

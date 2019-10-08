@@ -6,14 +6,17 @@ import java.util.List;
 import java.util.ListIterator;
 
 public class DIYarrayList<E> implements List<E> {
+
+    private int size;
+
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return size == 0;
     }
 
     @Override
