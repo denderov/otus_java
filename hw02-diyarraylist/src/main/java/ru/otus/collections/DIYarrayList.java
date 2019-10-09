@@ -1,13 +1,39 @@
 package ru.otus.collections;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 public class DIYarrayList<E> implements List<E> {
 
     private int size;
+
+    private int capacity;
+
+    private int prevCapacity;
+
+    private static final int DEFAULT_PREV_CAPACITY = 5;
+
+    private static final int DEFAULT_CAPACITY = 8;
+
+    E[] data;
+
+    public DIYarrayList() {
+        this(DEFAULT_CAPACITY);
+    }
+
+    public DIYarrayList(int initialCapacity) {
+        this.size = 0;
+        this.prevCapacity = DEFAULT_PREV_CAPACITY;
+        if (initialCapacity > 0) {
+            this.data = (E[]) new Object[initialCapacity];
+            this.capacity = initialCapacity;
+        } else if (initialCapacity == 0) {
+            this.data = (E[]) new Object[DEFAULT_CAPACITY];
+            this.capacity = DEFAULT_CAPACITY;
+        } else {
+            throw new IllegalArgumentException("Illegal Capacity: "+
+                    initialCapacity);
+        }
+    }
 
     @Override
     public int size() {
@@ -41,7 +67,18 @@ public class DIYarrayList<E> implements List<E> {
 
     @Override
     public boolean add(E e) {
-        return false;
+        size++;
+        if (size == data.length)
+            data = grow();
+        data[size-1] = e;
+        return true;
+    }
+
+    private E[] grow() {
+        capacity += prevCapacity;
+        prevCapacity = capacity - prevCapacity;
+        return data = Arrays.copyOf(data,
+                capacity);
     }
 
     @Override
