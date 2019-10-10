@@ -146,18 +146,74 @@ public class DIYarrayList<E> implements List<E> {
         return 0;
     }
 
+    private void rangeCheckForAdd(int index) {
+        if (index > size || index < 0)
+            throw new IndexOutOfBoundsException("Index: "+index);
+    }
+
     @Override
     public ListIterator<E> listIterator() {
-        return null;
+        return new ListItr(0);
     }
 
     @Override
     public ListIterator<E> listIterator(int index) {
-        return null;
+        rangeCheckForAdd(index);
+        return new ListItr(index);
     }
 
     @Override
     public List<E> subList(int fromIndex, int toIndex) {
         return null;
+    }
+
+    private class ListItr implements ListIterator<E> {
+        public ListItr(int index) {
+        }
+
+        @Override
+        public boolean hasNext() {
+            return false;
+        }
+
+        @Override
+        public E next() {
+            return null;
+        }
+
+        @Override
+        public boolean hasPrevious() {
+            return false;
+        }
+
+        @Override
+        public E previous() {
+            return null;
+        }
+
+        @Override
+        public int nextIndex() {
+            return 0;
+        }
+
+        @Override
+        public int previousIndex() {
+            return 0;
+        }
+
+        @Override
+        public void remove() {
+
+        }
+
+        @Override
+        public void set(E e) {
+
+        }
+
+        @Override
+        public void add(E e) {
+
+        }
     }
 }
