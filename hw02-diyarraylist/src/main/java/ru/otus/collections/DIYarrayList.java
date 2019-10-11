@@ -1,6 +1,7 @@
 package ru.otus.collections;
 
 import java.util.*;
+import java.util.function.Consumer;
 
 public class DIYarrayList<E> implements List<E> {
 
@@ -14,7 +15,7 @@ public class DIYarrayList<E> implements List<E> {
 
     private static final int DEFAULT_CAPACITY = 8;
 
-    E[] data;
+    private E[] data;
 
     public DIYarrayList() {
         this(DEFAULT_CAPACITY);
@@ -52,7 +53,7 @@ public class DIYarrayList<E> implements List<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return null;
+        return new Itr();
     }
 
     @Override
@@ -146,14 +147,14 @@ public class DIYarrayList<E> implements List<E> {
         return 0;
     }
 
-    private void rangeCheckForAdd(int index) {
-        if (index > size || index < 0)
-            throw new IndexOutOfBoundsException("Index: "+index);
-    }
-
     @Override
     public ListIterator<E> listIterator() {
         return new ListItr(0);
+    }
+
+    private void rangeCheckForAdd(int index) {
+        if (index > size || index < 0)
+            throw new IndexOutOfBoundsException("Index: "+index);
     }
 
     @Override
@@ -167,18 +168,69 @@ public class DIYarrayList<E> implements List<E> {
         return null;
     }
 
-    private class ListItr implements ListIterator<E> {
-        public ListItr(int index) {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DIYarrayList<?> that = (DIYarrayList<?>) o;
+        return size == that.size &&
+                Arrays.equals(data, that.data);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = hashCodeRange(0, size);
+        return hash;
+    }
+
+    int hashCodeRange(int from, int to) {
+        final Object[] es = data;
+        int hashCode = 1;
+        for (int i = from; i < to; i++) {
+            Object e = es[i];
+            hashCode = 31 * hashCode + (e == null ? 0 : e.hashCode());
         }
+        return hashCode;
+    }
+
+    private class Itr implements Iterator<E> {
+        int cursor;
+        int lastRet = -1;
 
         @Override
         public boolean hasNext() {
-            return false;
+            return cursor != size;
         }
 
         @Override
         public E next() {
-            return null;
+            int i = cursor;
+            if (i >= size)
+                throw new NoSuchElementException();
+            Object[] elementData = DIYarrayList.this.data;
+            if (i >= elementData.length)
+                throw new ConcurrentModificationException();
+            cursor = i + 1;
+            return (E) elementData[lastRet = i];
+        }
+
+        @Override
+        public void remove() {
+            if (lastRet < 0)
+                throw new IllegalStateException();
+            DIYarrayList.this.remove(lastRet);
+            cursor = lastRet;
+            lastRet = -1;
+        }
+
+        @Override
+        public void forEachRemaining(Consumer<? super E> action) {
+
+        }
+    }
+
+    private class ListItr extends Itr implements ListIterator<E> {
+        public ListItr(int i) {
         }
 
         @Override
@@ -199,11 +251,6 @@ public class DIYarrayList<E> implements List<E> {
         @Override
         public int previousIndex() {
             return 0;
-        }
-
-        @Override
-        public void remove() {
-
         }
 
         @Override
