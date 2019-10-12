@@ -58,7 +58,7 @@ public class DIYarrayList<E> implements List<E> {
 
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        return Arrays.copyOf(data, size);
     }
 
     @Override
