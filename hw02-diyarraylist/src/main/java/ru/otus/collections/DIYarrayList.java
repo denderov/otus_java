@@ -48,7 +48,7 @@ public class DIYarrayList<E> implements List<E> {
 
     @Override
     public boolean contains(Object o) {
-        return false;
+        throw new UnsupportedOperationException("Invalid operation for DIY arrayList.");
     }
 
     @Override
@@ -63,7 +63,7 @@ public class DIYarrayList<E> implements List<E> {
 
     @Override
     public <T> T[] toArray(T[] a) {
-        return null;
+        throw new UnsupportedOperationException("Invalid operation for DIY arrayList.");
     }
 
     @Override
@@ -84,42 +84,42 @@ public class DIYarrayList<E> implements List<E> {
 
     @Override
     public boolean remove(Object o) {
-        return false;
+        throw new UnsupportedOperationException("Invalid operation for DIY arrayList.");
     }
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        return false;
+        throw new UnsupportedOperationException("Invalid operation for DIY arrayList.");
     }
 
     @Override
     public boolean addAll(Collection<? extends E> c) {
-        return false;
+        throw new UnsupportedOperationException("Invalid operation for DIY arrayList.");
     }
 
     @Override
     public boolean addAll(int index, Collection<? extends E> c) {
-        return false;
+        throw new UnsupportedOperationException("Invalid operation for DIY arrayList.");
     }
 
     @Override
     public boolean removeAll(Collection<?> c) {
-        return false;
+        throw new UnsupportedOperationException("Invalid operation for DIY arrayList.");
     }
 
     @Override
     public boolean retainAll(Collection<?> c) {
-        return false;
+        throw new UnsupportedOperationException("Invalid operation for DIY arrayList.");
     }
 
     @Override
     public void clear() {
-
+        throw new UnsupportedOperationException("Invalid operation for DIY arrayList.");
     }
 
     @Override
     public E get(int index) {
-        return null;
+        throw new UnsupportedOperationException("Invalid operation for DIY arrayList.");
     }
 
     @Override
@@ -135,17 +135,17 @@ public class DIYarrayList<E> implements List<E> {
 
     @Override
     public E remove(int index) {
-        return null;
+        throw new UnsupportedOperationException("Invalid operation for DIY arrayList.");
     }
 
     @Override
     public int indexOf(Object o) {
-        return 0;
+        throw new UnsupportedOperationException("Invalid operation for DIY arrayList.");
     }
 
     @Override
     public int lastIndexOf(Object o) {
-        return 0;
+        throw new UnsupportedOperationException("Invalid operation for DIY arrayList.");
     }
 
     @Override
@@ -166,7 +166,7 @@ public class DIYarrayList<E> implements List<E> {
 
     @Override
     public List<E> subList(int fromIndex, int toIndex) {
-        return null;
+        throw new UnsupportedOperationException("Invalid operation for DIY arrayList.");
     }
 
     @Override
@@ -180,11 +180,10 @@ public class DIYarrayList<E> implements List<E> {
 
     @Override
     public int hashCode() {
-        int hash = hashCodeRange(0, size);
-        return hash;
+        return hashCodeRange(0, size);
     }
 
-    int hashCodeRange(int from, int to) {
+    private int hashCodeRange(int from, int to) {
         final Object[] es = data;
         int hashCode = 1;
         for (int i = from; i < to; i++) {
@@ -226,7 +225,7 @@ public class DIYarrayList<E> implements List<E> {
 
         @Override
         public void forEachRemaining(Consumer<? super E> action) {
-
+            throw new UnsupportedOperationException("Invalid operation for DIY arrayList iterator.");
         }
     }
 
@@ -236,22 +235,22 @@ public class DIYarrayList<E> implements List<E> {
 
         @Override
         public boolean hasPrevious() {
-            return false;
+            throw new UnsupportedOperationException("Invalid operation for DIY arrayList iterator.");
         }
 
         @Override
         public E previous() {
-            return null;
+            throw new UnsupportedOperationException("Invalid operation for DIY arrayList iterator.");
         }
 
         @Override
         public int nextIndex() {
-            return 0;
+            throw new UnsupportedOperationException("Invalid operation for DIY arrayList iterator.");
         }
 
         @Override
         public int previousIndex() {
-            return 0;
+            throw new UnsupportedOperationException("Invalid operation for DIY arrayList iterator.");
         }
 
         @Override
@@ -261,7 +260,7 @@ public class DIYarrayList<E> implements List<E> {
 
         @Override
         public void add(E e) {
-
+            throw new UnsupportedOperationException("Invalid operation for DIY arrayList iterator.");
         }
     }
 }

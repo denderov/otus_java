@@ -20,7 +20,7 @@ public class DIYarrayListTest {
         DIYarrayList<Integer> integerArrayList = new DIYarrayList<>(16);
         Collections.addAll(integerArrayList, integerArray);
 
-        assertEquals(20,integerArrayList.size());
+        assertEquals(20, integerArrayList.size());
 
         assertThat(integerArrayList, CoreMatchers.hasItems(integerArray));
     }
@@ -36,7 +36,7 @@ public class DIYarrayListTest {
         DIYarrayList<Integer> copyIntegerArrayList = new DIYarrayList<>(16);
         Collections.addAll(copyIntegerArrayList, reverseIntegerArray);
 
-        Collections.copy(copyIntegerArrayList,integerArrayList);
+        Collections.copy(copyIntegerArrayList, integerArrayList);
 
         assertThat(copyIntegerArrayList, is(equalTo(integerArrayList)));
     }
@@ -57,17 +57,29 @@ public class DIYarrayListTest {
         assertThat(integerArrayList, is(equalTo(reverseIntegerArrayList)));
     }
 
+    @Test(expected = UnsupportedOperationException.class)
+    public void checkDIYarrayListUnsupportedOperationException() {
+        Integer[] integerArray = getIntegers();
+
+        DIYarrayList<Integer> integerArrayList = new DIYarrayList<>(16);
+        Collections.addAll(integerArrayList, integerArray);
+
+        integerArrayList.contains(1);
+    }
+
+
     private Integer[] getReverseIntegers() {
+
         Integer[] reverseIntegerArray = new Integer[20];
-        for (int i = 0; i <20; i++) {
-            reverseIntegerArray[i] = 19-i;
+        for (int i = 0; i < 20; i++) {
+            reverseIntegerArray[i] = 19 - i;
         }
         return reverseIntegerArray;
     }
 
     private Integer[] getIntegers() {
         Integer[] integerArray = new Integer[20];
-        for (int i = 0; i <20; i++) {
+        for (int i = 0; i < 20; i++) {
             integerArray[i] = i;
         }
         return integerArray;
