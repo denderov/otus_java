@@ -255,7 +255,7 @@ public class DIYarrayList<E> implements List<E> {
 
         @Override
         public void set(E e) {
-
+            DIYarrayList.this.set(lastRet, e);
         }
 
         @Override
