@@ -7,7 +7,7 @@ public class DIYarrayList<E> implements List<E> {
 
     private int size;
 
-    private int capacity;
+//    private int capacity;
 
     private int prevCapacity;
 
@@ -15,7 +15,7 @@ public class DIYarrayList<E> implements List<E> {
 
     private static final int DEFAULT_CAPACITY = 8;
 
-    private E[] data;
+    private Object[] data;
 
     public DIYarrayList() {
         this(DEFAULT_CAPACITY);
@@ -23,13 +23,14 @@ public class DIYarrayList<E> implements List<E> {
 
     public DIYarrayList(int initialCapacity) {
         this.size = 0;
-        this.prevCapacity = DEFAULT_PREV_CAPACITY;
         if (initialCapacity > 0) {
-            this.data = (E[]) new Object[initialCapacity];
-            this.capacity = initialCapacity;
+            this.prevCapacity = (int) ((double)initialCapacity/1.6);
+            this.data =  new Object[initialCapacity];
+//            this.capacity = initialCapacity;
         } else if (initialCapacity == 0) {
-            this.data = (E[]) new Object[DEFAULT_CAPACITY];
-            this.capacity = DEFAULT_CAPACITY;
+            this.prevCapacity = DEFAULT_PREV_CAPACITY;
+            this.data = new Object[DEFAULT_CAPACITY];
+//            this.capacity = DEFAULT_CAPACITY;
         } else {
             throw new IllegalArgumentException("Illegal Capacity: "+
                     initialCapacity);
@@ -75,9 +76,9 @@ public class DIYarrayList<E> implements List<E> {
         return true;
     }
 
-    private E[] grow() {
-        capacity += prevCapacity;
-        prevCapacity = capacity - prevCapacity;
+    private Object[] grow() {
+        int capacity = data.length + prevCapacity;
+        prevCapacity = data.length;
         return data = Arrays.copyOf(data,
                 capacity);
     }
@@ -124,13 +125,14 @@ public class DIYarrayList<E> implements List<E> {
 
     @Override
     public E set(int index, E element) {
+        rangeCheck(index);
         data[index] = element;
         return element;
     }
 
     @Override
     public void add(int index, E element) {
-
+        throw new UnsupportedOperationException("Invalid operation for DIY arrayList.");
     }
 
     @Override
@@ -153,14 +155,14 @@ public class DIYarrayList<E> implements List<E> {
         return new ListItr(0);
     }
 
-    private void rangeCheckForAdd(int index) {
+    private void rangeCheck(int index) {
         if (index > size || index < 0)
             throw new IndexOutOfBoundsException("Index: "+index);
     }
 
     @Override
     public ListIterator<E> listIterator(int index) {
-        rangeCheckForAdd(index);
+        rangeCheck(index);
         return new ListItr(index);
     }
 
