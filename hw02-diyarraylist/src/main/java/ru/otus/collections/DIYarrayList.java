@@ -7,8 +7,6 @@ public class DIYarrayList<E> implements List<E> {
 
     private int size;
 
-//    private int capacity;
-
     private int prevCapacity;
 
     private static final int DEFAULT_PREV_CAPACITY = 5;
@@ -26,11 +24,9 @@ public class DIYarrayList<E> implements List<E> {
         if (initialCapacity > 0) {
             this.prevCapacity = (int) ((double)initialCapacity/1.6);
             this.data =  new Object[initialCapacity];
-//            this.capacity = initialCapacity;
         } else if (initialCapacity == 0) {
             this.prevCapacity = DEFAULT_PREV_CAPACITY;
             this.data = new Object[DEFAULT_CAPACITY];
-//            this.capacity = DEFAULT_CAPACITY;
         } else {
             throw new IllegalArgumentException("Illegal Capacity: "+
                     initialCapacity);
