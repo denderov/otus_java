@@ -22,13 +22,13 @@ public class DIYarrayList<E> implements List<E> {
     public DIYarrayList(int initialCapacity) {
         this.size = 0;
         if (initialCapacity > 0) {
-            this.prevCapacity = (int) ((double)initialCapacity/1.6);
-            this.data =  new Object[initialCapacity];
+            this.prevCapacity = (int) ((double) initialCapacity / 1.6);
+            this.data = new Object[initialCapacity];
         } else if (initialCapacity == 0) {
             this.prevCapacity = DEFAULT_PREV_CAPACITY;
             this.data = new Object[DEFAULT_CAPACITY];
         } else {
-            throw new IllegalArgumentException("Illegal Capacity: "+
+            throw new IllegalArgumentException("Illegal Capacity: " +
                     initialCapacity);
         }
     }
@@ -68,7 +68,7 @@ public class DIYarrayList<E> implements List<E> {
         size++;
         if (size == data.length)
             data = grow();
-        data[size-1] = e;
+        data[size - 1] = e;
         return true;
     }
 
@@ -153,7 +153,7 @@ public class DIYarrayList<E> implements List<E> {
 
     private void rangeCheck(int index) {
         if (index > size || index < 0)
-            throw new IndexOutOfBoundsException("Index: "+index);
+            throw new IndexOutOfBoundsException("Index: " + index);
     }
 
     @Override
