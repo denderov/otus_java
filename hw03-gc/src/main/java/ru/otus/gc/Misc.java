@@ -14,7 +14,7 @@ public class Misc {
 //        command line argument for remote
 //        -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
         for (int i = 0; i < 1000000; i++) {
-            Integer[] integers = new Integer[1000];
+            Integer[] integers = new Integer[300000];
             Arrays.fill(integers,i);
             Thread.sleep(1000);
             System.out.println(i);
