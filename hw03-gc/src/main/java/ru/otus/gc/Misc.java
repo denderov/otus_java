@@ -6,7 +6,6 @@ import javax.management.NotificationEmitter;
 import javax.management.NotificationListener;
 import javax.management.openmbean.CompositeData;
 import java.lang.management.GarbageCollectorMXBean;
-import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,15 +17,11 @@ public class Misc {
     public static void main(String[] args) throws InterruptedException {
 //        logExamples();
 
-//        command line argument for remote
-//        -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
         switchOnMonitoring();
-        for (int i = 0; i < 1000000; i++) {
-            Integer[] integers = new Integer[50000];
-            Arrays.fill(integers, i);
-            Thread.sleep(100);
-            System.out.println(i);
-        }
+
+        Benchmark benchmark = new Benchmark(500000);
+        benchmark.run();
+
     }
 
     private static void switchOnMonitoring() {
