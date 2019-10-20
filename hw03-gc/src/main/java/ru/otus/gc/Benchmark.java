@@ -2,7 +2,7 @@ package ru.otus.gc;
 
 import java.util.Arrays;
 
-public class Benchmark {
+public class Benchmark implements BenchmarkMBean{
 
     private int size;
 
@@ -19,5 +19,16 @@ public class Benchmark {
             Thread.sleep(100);
 //            System.out.println(i);
         }
+    }
+
+    @Override
+    public int getSize() {
+        return size;
+    }
+
+    @Override
+    public void setSize(int size) {
+        this.size = size;
+        System.out.println("New size is "+size);
     }
 }

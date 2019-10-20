@@ -2,10 +2,10 @@ package ru.otus.gc;
 
 import com.sun.management.GarbageCollectionNotificationInfo;
 
-import javax.management.NotificationEmitter;
-import javax.management.NotificationListener;
+import javax.management.*;
 import javax.management.openmbean.CompositeData;
 import java.lang.management.GarbageCollectorMXBean;
+import java.lang.management.ManagementFactory;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,12 +14,16 @@ public class Misc {
 
     private static Logger logger = Logger.getLogger(Misc.class.getName());
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, MalformedObjectNameException, NotCompliantMBeanException, InstanceAlreadyExistsException, MBeanRegistrationException {
 //        logExamples();
 
         switchOnMonitoring();
 
+        MBeanServer mBeanServer = ManagementFactory.getPlatformMBeanServer();
+        ObjectName name = new ObjectName("ru.otus.gc:type=Benchmark");
+
         Benchmark benchmark = new Benchmark(500000);
+        mBeanServer.registerMBean(benchmark, name);
         benchmark.run();
 
     }
