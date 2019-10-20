@@ -1,6 +1,13 @@
 package ru.otus.gc;
 
+import com.sun.management.GarbageCollectionNotificationInfo;
+
+import javax.management.NotificationEmitter;
+import javax.management.NotificationListener;
+import javax.management.openmbean.CompositeData;
+import java.lang.management.GarbageCollectorMXBean;
 import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -13,11 +20,34 @@ public class Misc {
 
 //        command line argument for remote
 //        -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
+        switchOnMonitoring();
         for (int i = 0; i < 1000000; i++) {
             Integer[] integers = new Integer[50000];
-            Arrays.fill(integers,new Integer(i));
+            Arrays.fill(integers, i);
             Thread.sleep(100);
             System.out.println(i);
+        }
+    }
+
+    private static void switchOnMonitoring() {
+        List<GarbageCollectorMXBean> gcbeans = java.lang.management.ManagementFactory.getGarbageCollectorMXBeans();
+        for (GarbageCollectorMXBean gcbean : gcbeans) {
+            System.out.println("GC name:" + gcbean.getName());
+            NotificationEmitter emitter = (NotificationEmitter) gcbean;
+            NotificationListener listener = (notification, handback) -> {
+                if (notification.getType().equals(GarbageCollectionNotificationInfo.GARBAGE_COLLECTION_NOTIFICATION)) {
+                    GarbageCollectionNotificationInfo info = GarbageCollectionNotificationInfo.from((CompositeData) notification.getUserData());
+                    String gcName = info.getGcName();
+                    String gcAction = info.getGcAction();
+                    String gcCause = info.getGcCause();
+
+                    long startTime = info.getGcInfo().getStartTime();
+                    long duration = info.getGcInfo().getDuration();
+
+                    System.out.println("start:" + startTime + " Name:" + gcName + ", action:" + gcAction + ", gcCause:" + gcCause + "(" + duration + " ms)");
+                }
+            };
+            emitter.addNotificationListener(listener, null, null);
         }
     }
 
