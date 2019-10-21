@@ -22,9 +22,12 @@ public class Misc {
         MBeanServer mBeanServer = ManagementFactory.getPlatformMBeanServer();
         ObjectName name = new ObjectName("ru.otus.gc:type=Benchmark");
 
-        Benchmark benchmark = new Benchmark(500000);
+        Benchmark benchmark = new Benchmark(10000000);
         mBeanServer.registerMBean(benchmark, name);
+
+        long beginTime = System.currentTimeMillis();
         benchmark.run();
+        System.out.println("time elapsed: "+(System.currentTimeMillis()-beginTime)/1000);
 
     }
 
