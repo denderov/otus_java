@@ -1,163 +1,68 @@
--Xms1024m
--Xmx1024m
--XX:+PrintSafepointStatistics
--XX:PrintSafepointStatisticsCount=1
--XX:+HeapDumpOnOutOfMemoryError
--XX:HeapDumpPath=./logs/dump
--XX:+UseSerialGC
+### Способ измерения
 
-time elapsed: 131
-time elapsed: 134
+Тестовый стенд - виртуальная машина с 4ГБ памяти и 2 ядрами. Память на хип выделено 1ГБ (-Xms1024m -Xmx1024m)
 
+Запуск тестов осуществляется путем вызова метода run() из класса Benchmark. 
+Точка входа - класс Misc. В этом же классе организована подписка на GarbageCollectorMXBean с выводом основных показателей на консоль.
 
-#### G1
+Помимо этого, в параметрах запуска указан вывод краткого лога -Xlog:gc на консоль. Плюс вывод детального лога в файл.
+Вывод логов и текстовая информация с консоли сохранены в папке logs.
 
-###### 2 CPUs
+Детальный лог для каждого из рассматриваемых сборщиков мусора обработан в онлайн анализаторе логов [gceasy.io](gceasy.io).
 
-time elapsed: 105
+Рассмотрим результаты.
 
-time elapsed: 160
+### SerialGC
 
-Garbage collector: 
+[gceasy.io log](https://gceasy.io/my-gc-report.jsp?p=c2hhcmVkLzIwMTkvMTEvNS8tLVNlcmlhbEdjLS0yMC01MS0yMA==&channel=WEB)
 
-Name = 'G1 Young Generation', Collections = 662, Total time spent = 1 minute
+_1_ Throughput : **85.737%**
 
-Garbage collector: 
+_2_ Latency:
 
-Name = 'G1 Old Generation', Collections = 41, Total time spent = 24.130 seconds
+|Pause|Duration|
+|---|---|
+|Avg Pause GC Time| 	1 sec 454 ms|
+|Max Pause GC Time| 	1 sec 990 ms|
 
-#### CMS
+Несмотря на примитивность serial GC показал приемлемые результаты.  
 
-###### 2 CPUs
+### ParallelGC
 
-time elapsed: 146
+[gceasy.io log](https://gceasy.io/my-gc-report.jsp?p=c2hhcmVkLzIwMTkvMTEvNS8tLVBhcmFsbGVsR2MtLTIwLTU1LTQ=&channel=WEB)
 
-time elapsed: 163
+_1_ Throughput : **87.126%**
 
-Garbage collector: 
+_2_ Latency:
 
-Name = 'ParNew', Collections = 198, Total time spent = 1 minute
+|Pause|Duration|
+|---|---|
+|Avg Pause GC Time| 	1 sec 540 ms|
+|Max Pause GC Time| 	4 sec 360 ms|
 
-Garbage collector: 
+Parallel GC не смог существенно опередить своего предшественника. Вероятно это связано с тем, что высокие накладные расходы "съели" возможные преимущества параллельного выполнения операций.
 
-Name = 'ConcurrentMarkSweep', Collections = 105, Total time spent = 1 minute
+Параллельное выполнение оказалось не слишком эффективно в условиях: 
 
-#### ParallelGC
+1) небольшого количества доступной памяти, что, учитывая относительно большой размер коллекций, не дало эффективно использовать механизм параллельного доступа к памяти (TLAB);
 
-###### 2 CPUs
+2) всего двух доступных физических ядер. 
 
-time elapsed: 144
+### G1GC
 
-time elapsed: 182
+[gceasy.io log](https://gceasy.io/my-gc-report.jsp?p=c2hhcmVkLzIwMTkvMTEvNS8tLUcxR2MtLTIwLTU3LTEy&channel=WEB)
 
-Garbage collector: 
+_1_ Throughput : **93.832%**
 
-Name = 'PS MarkSweep', Collections = 99, Total time spent = 24.153 seconds
+_2_ Latency:
 
-Garbage collector:
- 
-Name = 'PS Scavenge', Collections = 389, Total time spent = 2 minutes
+|Pause|Duration|
+|---|---|
+|Avg Pause GC Time| 	253 ms|
+|Max Pause GC Time| 	3 sec 120 ms|
 
-#### SerialGC
+Неожиданно, победителем и по пропускной способности и по задержкам оказался новый сборщик мусора G1. Я связываю это с более эффективной работой с памятью на рассматриваемых параметрах по сравнению с parallel GC.
 
-###### 2 CPUs
+### Выводы
 
-time elapsed: 98
-
-Garbage collector: 
-
-Name = 'Copy', Collections = 193, Total time spent = 34.637 seconds
-
-Garbage collector: 
-
-Name = 'MarkSweepCompact', Collections = 96, Total time spent = 49.196 seconds
-
-
-
-#### G1
-
-time elapsed: 255
-
-Garbage collector: 
-
-Name = 'G1 Young Generation', Collections = 940, Total time spent = 2 minutes
-
-Garbage collector: 
-
-Name = 'G1 Old Generation', Collections = 39, Total time spent = 40.107 seconds
-
-time elapsed: 294
-
-Garbage collector: 
-
-Name = 'G1 Young Generation', Collections = 1,020, Total time spent = 2 minutes
-
-Garbage collector: 
-
-Name = 'G1 Old Generation', Collections = 50, Total time spent = 50.632 seconds
-
-#### CMS
-
-time elapsed: 319
-
-Garbage collector: 
-
-Name = 'ParNew', Collections = 405, Total time spent = 2 minutes
-
-Garbage collector: 
-
-Name = 'ConcurrentMarkSweep', Collections = 105, Total time spent = 2 minutes
-
-time elapsed: 327
-
-Garbage collector: 
-
-Name = 'ParNew', Collections = 401, Total time spent = 2 minutes
-
-Garbage collector: 
-
-Name = 'ConcurrentMarkSweep', Collections = 102, Total time spent = 2 minutes
-
-#### ParallelGC
-
-time elapsed: 173
-
-Garbage collector: 
-
-Name = 'PS MarkSweep', Collections = 100, Total time spent = 26.091 seconds
-
-Garbage collector: 
-
-Name = 'PS Scavenge', Collections = 390, Total time spent = 2 minutes
-
-time elapsed: 179
-
-Garbage collector: 
-
-Name = 'PS MarkSweep', Collections = 100, Total time spent = 32.271 seconds
-
-Garbage collector:
- 
-Name = 'PS Scavenge', Collections = 389, Total time spent = 2 minutes
-
-#### SerialGC
-
-time elapsed: 119
-
-Garbage collector: 
-
-Name = 'Copy', Collections = 195, Total time spent = 43.692 seconds
-
-Garbage collector: 
-
-Name = 'MarkSweepCompact', Collections = 97, Total time spent = 58.432 seconds
-
-time elapsed: 168
-
-Garbage collector: 
-
-Name = 'Copy', Collections = 198, Total time spent = 1 minute
-
-Garbage collector: 
-
-Name = 'MarkSweepCompact', Collections = 98, Total time spent = 1 minute
+Главным выводом из проведенной работы можно считать то, что производительность сборщиков мусора зависит от конкретного аппаратного и программного окружения и особенностей реализации приложения. Для выбора конкретного сборщика, требуется помимо понимания различий, проводить замеры и внимательно отслеживать показатели производительности.   

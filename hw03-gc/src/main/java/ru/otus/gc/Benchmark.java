@@ -1,10 +1,9 @@
 package ru.otus.gc;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public class Benchmark implements BenchmarkMBean{
+public class Benchmark implements BenchmarkMBean {
 
     private int size;
     private int i;
@@ -28,7 +27,7 @@ public class Benchmark implements BenchmarkMBean{
             }
             clearHalfTail(stringList);
             Thread.sleep(1000);
-            System.out.println("Size of list is "+stringList.size());
+            System.out.println("Size of list is " + stringList.size());
         }
     }
 
@@ -49,6 +48,6 @@ public class Benchmark implements BenchmarkMBean{
     @Override
     public void setSize(int size) {
         this.size = size;
-        System.out.println("New size is "+size);
+        System.out.println("New size is " + size);
     }
 }

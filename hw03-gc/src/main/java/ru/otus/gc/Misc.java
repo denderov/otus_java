@@ -14,14 +14,13 @@ public class Misc {
 
     private static Logger logger = Logger.getLogger(Misc.class.getName());
 
-    public static void main(String[] args) throws InterruptedException, MalformedObjectNameException, NotCompliantMBeanException, InstanceAlreadyExistsException, MBeanRegistrationException {
-//        logExamples();
+    public static void main(String[] args) throws MalformedObjectNameException, NotCompliantMBeanException, InstanceAlreadyExistsException, MBeanRegistrationException {
 
         switchOnMonitoring();
 
 
         MBeanServer mBeanServer = ManagementFactory.getPlatformMBeanServer();
-        ObjectName name = new ObjectName("ru.otus.gc:type=Benchmark");
+        ObjectName name = new ObjectName("ru.otus.SerialGc:type=Benchmark");
 
         Benchmark benchmark = new Benchmark(100000);
         mBeanServer.registerMBean(benchmark, name);
@@ -33,7 +32,7 @@ public class Misc {
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
-            System.out.println("time elapsed: "+(System.currentTimeMillis()-beginTime)/1000);
+            System.out.println("time elapsed: " + (System.currentTimeMillis() - beginTime) / 1000);
         }
 
     }
@@ -64,7 +63,7 @@ public class Misc {
         logger.info("main method started");
         System.out.println("Ordinal message");
         System.err.println("Error message");
-        logger.log(Level.WARNING,"warning");
+        logger.log(Level.WARNING, "warning");
     }
 
 }

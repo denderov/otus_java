@@ -1,0 +1,346 @@
+/usr/lib/jvm/java-11-openjdk-11.0.5.10-0.fc30.x86_64/bin/java -Xms1024m -Xmx1024m -Xlog:gc -Xlog:gc*:/home/naf/IdeaProjects/otus_java/hw03-gc/logs/gc -XX:+UseSerialGC -javaagent:/home/naf/Downloads/ideaIC-2019.2.2/idea-IC-192.6603.28/lib/idea_rt.jar=40897:/home/naf/Downloads/ideaIC-2019.2.2/idea-IC-192.6603.28/bin -Dfile.encoding=UTF-8 -classpath /home/naf/IdeaProjects/otus_java/hw03-gc/target/classes ru.otus.gc.Misc
+[0.017s][info][gc] Using Serial
+GC name:Copy
+GC name:MarkSweepCompact
+Size of list is 50000
+Size of list is 100000
+Size of list is 150000
+Size of list is 200000
+Size of list is 250000
+Size of list is 300000
+Size of list is 350000
+Size of list is 400000
+Size of list is 450000
+Size of list is 500000
+Size of list is 550000
+Size of list is 600000
+Size of list is 650000
+Size of list is 700000
+Size of list is 750000
+Size of list is 800000
+Size of list is 850000
+Size of list is 900000
+Size of list is 950000
+Size of list is 1000000
+Size of list is 1050000
+Size of list is 1100000
+Size of list is 1150000
+Size of list is 1200000
+Size of list is 1250000
+Size of list is 1300000
+Size of list is 1350000
+Size of list is 1400000
+Size of list is 1450000
+Size of list is 1500000
+Size of list is 1550000
+[35.044s][info][gc] GC(0) Pause Young (Allocation Failure) 273M->116M(989M) 317.568ms
+start:34673 Name:Copy, action:end of minor GC, gcCause:Allocation Failure(317 ms)
+Size of list is 1600000
+Size of list is 1650000
+Size of list is 1700000
+Size of list is 1750000
+Size of list is 1800000
+Size of list is 1850000
+Size of list is 1900000
+Size of list is 1950000
+Size of list is 2000000
+Size of list is 2050000
+Size of list is 2100000
+Size of list is 2150000
+Size of list is 2200000
+Size of list is 2250000
+Size of list is 2300000
+Size of list is 2350000
+Size of list is 2400000
+Size of list is 2450000
+Size of list is 2500000
+Size of list is 2550000
+Size of list is 2600000
+Size of list is 2650000
+Size of list is 2700000
+Size of list is 2750000
+Size of list is 2800000
+Size of list is 2850000
+Size of list is 2900000
+Size of list is 2950000
+Size of list is 3000000
+Size of list is 3050000
+Size of list is 3100000
+Size of list is 3150000
+Size of list is 3200000
+Size of list is 3250000
+Size of list is 3300000
+[71.222s][info][gc] GC(1) Pause Young (Allocation Failure) 389M->323M(989M) 576.670ms
+start:70593 Name:Copy, action:end of minor GC, gcCause:Allocation Failure(575 ms)
+Size of list is 3350000
+Size of list is 3400000
+Size of list is 3450000
+Size of list is 3500000
+Size of list is 3550000
+Size of list is 3600000
+Size of list is 3650000
+Size of list is 3700000
+Size of list is 3750000
+Size of list is 3800000
+Size of list is 3850000
+Size of list is 3900000
+Size of list is 3950000
+Size of list is 4000000
+Size of list is 4050000
+Size of list is 4100000
+Size of list is 4150000
+Size of list is 4200000
+Size of list is 4250000
+Size of list is 4300000
+Size of list is 4350000
+Size of list is 4400000
+Size of list is 4450000
+Size of list is 4500000
+Size of list is 4550000
+Size of list is 4600000
+Size of list is 4650000
+Size of list is 4700000
+Size of list is 4750000
+Size of list is 4800000
+Size of list is 4850000
+Size of list is 4900000
+Size of list is 4950000
+Size of list is 5000000
+Size of list is 5050000
+Size of list is 5100000
+[108.441s][info][gc] GC(2) Pause Young (Allocation Failure) 596M->560M(989M) 541.094ms
+start:107847 Name:Copy, action:end of minor GC, gcCause:Allocation Failure(540 ms)
+Size of list is 5150000
+Size of list is 5200000
+Size of list is 5250000
+Size of list is 5300000
+Size of list is 5350000
+Size of list is 5400000
+Size of list is 5450000
+Size of list is 5500000
+Size of list is 5550000
+Size of list is 5600000
+Size of list is 5650000
+Size of list is 5700000
+Size of list is 5750000
+Size of list is 5800000
+Size of list is 5850000
+Size of list is 5900000
+Size of list is 5950000
+Size of list is 6000000
+Size of list is 6050000
+Size of list is 6100000
+Size of list is 6150000
+Size of list is 6200000
+Size of list is 6250000
+Size of list is 6300000
+Size of list is 6350000
+Size of list is 6400000
+Size of list is 6450000
+Size of list is 6500000
+Size of list is 6550000
+Size of list is 6600000
+Size of list is 6650000
+Size of list is 6700000
+Size of list is 6750000
+Size of list is 6800000
+[144.307s][info][gc] GC(4) Pause Full (Allocation Failure) 833M->516M(989M) 1174.262ms
+[144.307s][info][gc] GC(3) Pause Young (Allocation Failure) 833M->516M(989M) 1174.819ms
+start:143080 Name:Copy, action:end of minor GC, gcCause:Allocation Failure(0 ms)
+start:143080 Name:MarkSweepCompact, action:end of major GC, gcCause:Allocation Failure(1174 ms)
+Size of list is 6850000
+Size of list is 6900000
+Size of list is 6950000
+Size of list is 7000000
+Size of list is 7050000
+Size of list is 7100000
+Size of list is 7150000
+Size of list is 7200000
+Size of list is 7250000
+Size of list is 7300000
+Size of list is 7350000
+Size of list is 7400000
+Size of list is 7450000
+Size of list is 7500000
+Size of list is 7550000
+Size of list is 7600000
+Size of list is 7650000
+Size of list is 7700000
+Size of list is 7750000
+Size of list is 7800000
+Size of list is 7850000
+Size of list is 7900000
+Size of list is 7950000
+Size of list is 8000000
+Size of list is 8050000
+Size of list is 8100000
+Size of list is 8150000
+Size of list is 8200000
+Size of list is 8250000
+Size of list is 8300000
+Size of list is 8350000
+Size of list is 8400000
+Size of list is 8450000
+Size of list is 8500000
+Size of list is 8550000
+Size of list is 8600000
+Size of list is 8650000
+Size of list is 8700000
+Size of list is 8750000
+[185.557s][info][gc] GC(6) Pause Full (Allocation Failure) 789M->652M(989M) 1428.796ms
+[185.558s][info][gc] GC(5) Pause Young (Allocation Failure) 789M->652M(989M) 1429.117ms
+start:184075 Name:Copy, action:end of minor GC, gcCause:Allocation Failure(0 ms)
+start:184075 Name:MarkSweepCompact, action:end of major GC, gcCause:Allocation Failure(1429 ms)
+Size of list is 8800000
+Size of list is 8850000
+Size of list is 8900000
+Size of list is 8950000
+Size of list is 9000000
+Size of list is 9050000
+Size of list is 9100000
+Size of list is 9150000
+Size of list is 9200000
+Size of list is 9250000
+Size of list is 9300000
+Size of list is 9350000
+Size of list is 9400000
+Size of list is 9450000
+Size of list is 9500000
+Size of list is 9550000
+Size of list is 9600000
+Size of list is 9650000
+Size of list is 9700000
+Size of list is 9750000
+Size of list is 9800000
+Size of list is 9850000
+Size of list is 9900000
+Size of list is 9950000
+Size of list is 10000000
+Size of list is 10050000
+Size of list is 10100000
+Size of list is 10150000
+Size of list is 10200000
+Size of list is 10250000
+Size of list is 10300000
+Size of list is 10350000
+[219.876s][info][gc] GC(8) Pause Full (Allocation Failure) 925M->779M(989M) 1590.937ms
+[219.876s][info][gc] GC(7) Pause Young (Allocation Failure) 925M->779M(989M) 1591.276ms
+start:218232 Name:Copy, action:end of minor GC, gcCause:Allocation Failure(0 ms)
+start:218232 Name:MarkSweepCompact, action:end of major GC, gcCause:Allocation Failure(1590 ms)
+Size of list is 10400000
+Size of list is 10450000
+Size of list is 10500000
+Size of list is 10550000
+Size of list is 10600000
+Size of list is 10650000
+Size of list is 10700000
+Size of list is 10750000
+Size of list is 10800000
+Size of list is 10850000
+Size of list is 10900000
+Size of list is 10950000
+Size of list is 11000000
+Size of list is 11050000
+Size of list is 11100000
+Size of list is 11150000
+Size of list is 11200000
+Size of list is 11250000
+Size of list is 11300000
+Size of list is 11350000
+Size of list is 11400000
+Size of list is 11450000
+Size of list is 11500000
+Size of list is 11550000
+Size of list is 11600000
+Size of list is 11650000
+Size of list is 11700000
+Size of list is 11750000
+Size of list is 11800000
+Size of list is 11850000
+Size of list is 11900000
+[253.827s][info][gc] GC(9) Pause Full (Allocation Failure) 989M->872M(989M) 1835.960ms
+start:251938 Name:MarkSweepCompact, action:end of major GC, gcCause:Allocation Failure(1836 ms)
+Size of list is 11950000
+Size of list is 12000000
+Size of list is 12050000
+Size of list is 12100000
+Size of list is 12150000
+Size of list is 12200000
+Size of list is 12250000
+Size of list is 12300000
+Size of list is 12350000
+Size of list is 12400000
+Size of list is 12450000
+Size of list is 12500000
+Size of list is 12550000
+Size of list is 12600000
+Size of list is 12650000
+Size of list is 12700000
+Size of list is 12750000
+[275.931s][info][gc] GC(10) Pause Full (Allocation Failure) 989M->931M(989M) 4359.125ms
+start:271519 Name:MarkSweepCompact, action:end of major GC, gcCause:Allocation Failure(4358 ms)
+Size of list is 12800000
+Size of list is 12850000
+Size of list is 12900000
+Size of list is 12950000
+Size of list is 13000000
+Size of list is 13050000
+Size of list is 13100000
+Size of list is 13150000
+[286.119s][info][gc] GC(11) Pause Full (Allocation Failure) 989M->989M(989M) 1582.767ms
+start:284483 Name:MarkSweepCompact, action:end of major GC, gcCause:Allocation Failure(1582 ms)
+[287.597s][info][gc] GC(12) Pause Full (Allocation Failure) 989M->989M(989M) 1471.524ms
+[289.488s][info][gc] GC(13) Pause Full (Allocation Failure) 989M->962M(989M) 1890.247ms
+start:286072 Name:MarkSweepCompact, action:end of major GC, gcCause:Allocation Failure(1471 ms)
+start:287544 Name:MarkSweepCompact, action:end of major GC, gcCause:Allocation Failure(1890 ms)
+Size of list is 13200000
+Size of list is 13250000
+Size of list is 13300000
+Size of list is 13350000
+[295.403s][info][gc] GC(14) Pause Full (Allocation Failure) 989M->989M(989M) 1553.922ms
+[296.902s][info][gc] GC(15) Pause Full (Allocation Failure) 989M->989M(989M) 1498.181ms
+[298.850s][info][gc] GC(16) Pause Full (Allocation Failure) 989M->976M(989M) 1947.301ms
+start:293796 Name:MarkSweepCompact, action:end of major GC, gcCause:Allocation Failure(1554 ms)
+start:295351 Name:MarkSweepCompact, action:end of major GC, gcCause:Allocation Failure(1498 ms)
+start:296849 Name:MarkSweepCompact, action:end of major GC, gcCause:Allocation Failure(1947 ms)
+Size of list is 13400000
+Size of list is 13450000
+[302.980s][info][gc] GC(17) Pause Full (Allocation Failure) 989M->982M(989M) 1963.654ms
+start:300963 Name:MarkSweepCompact, action:end of major GC, gcCause:Allocation Failure(1964 ms)
+Size of list is 13500000
+[305.580s][info][gc] GC(18) Pause Full (Allocation Failure) 989M->989M(989M) 1513.038ms
+[307.121s][info][gc] GC(19) Pause Full (Allocation Failure) 989M->989M(989M) 1539.465ms
+[309.045s][info][gc] GC(20) Pause Full (Allocation Failure) 989M->986M(989M) 1924.279ms
+start:304014 Name:MarkSweepCompact, action:end of major GC, gcCause:Allocation Failure(1513 ms)
+start:305528 Name:MarkSweepCompact, action:end of major GC, gcCause:Allocation Failure(1539 ms)
+start:307067 Name:MarkSweepCompact, action:end of major GC, gcCause:Allocation Failure(1925 ms)
+Size of list is 13550000
+[312.023s][info][gc] GC(21) Pause Full (Allocation Failure) 989M->986M(989M) 1924.848ms
+start:310046 Name:MarkSweepCompact, action:end of major GC, gcCause:Allocation Failure(1924 ms)
+[313.545s][info][gc] GC(22) Pause Full (Allocation Failure) 989M->989M(989M) 1488.641ms
+[315.007s][info][gc] GC(23) Pause Full (Allocation Failure) 989M->989M(989M) 1462.155ms
+[316.506s][info][gc] GC(24) Pause Full (Allocation Failure) 989M->989M(989M) 1497.930ms
+[318.226s][info][gc] GC(25) Pause Full (Allocation Failure) 989M->989M(989M) 1719.480ms
+[319.720s][info][gc] GC(26) Pause Full (Allocation Failure) 989M->989M(989M) 1493.442ms
+[321.204s][info][gc] GC(27) Pause Full (Allocation Failure) 989M->989M(989M) 1483.704ms
+[322.665s][info][gc] GC(28) Pause Full (Allocation Failure) 989M->989M(989M) 1460.876ms
+[322.987s][info][gc] GC(29) Pause Full (Allocation Failure) 989M->1M(989M) 321.481ms
+start:312003 Name:MarkSweepCompact, action:end of major GC, gcCause:Allocation Failure(1488 ms)
+start:313492 Name:MarkSweepCompact, action:end of major GC, gcCause:Allocation Failure(1462 ms)
+start:314955 Name:MarkSweepCompact, action:end of major GC, gcCause:Allocation Failure(1497 ms)
+start:316453 Name:MarkSweepCompact, action:end of major GC, gcCause:Allocation Failure(1719 ms)
+start:318173 Name:MarkSweepCompact, action:end of major GC, gcCause:Allocation Failure(1494 ms)
+start:319667 Name:MarkSweepCompact, action:end of major GC, gcCause:Allocation Failure(1484 ms)
+start:321151 Name:MarkSweepCompact, action:end of major GC, gcCause:Allocation Failure(1461 ms)
+start:322612 Name:MarkSweepCompact, action:end of major GC, gcCause:Allocation Failure(322 ms)
+time elapsed: 320
+Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
+	at java.base/jdk.internal.misc.Unsafe.allocateUninitializedArray(Unsafe.java:1269)
+	at java.base/java.lang.invoke.StringConcatFactory$MethodHandleInlineCopyStrategy.newArray(StringConcatFactory.java:1633)
+	at java.base/java.lang.invoke.DirectMethodHandle$Holder.invokeStatic(DirectMethodHandle$Holder)
+	at java.base/java.lang.invoke.LambdaForm$MH/0x0000000840087840.invoke(LambdaForm$MH)
+	at java.base/java.lang.invoke.LambdaForm$MH/0x0000000840087c40.linkToTargetMethod(LambdaForm$MH)
+	at ru.otus.gc.Benchmark.run(Benchmark.java:27)
+	at ru.otus.gc.Misc.main(Misc.java:32)
+
+Process finished with exit code 1
