@@ -1,6 +1,8 @@
 package ru.otus.gc;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Benchmark implements BenchmarkMBean{
 
@@ -15,12 +17,23 @@ public class Benchmark implements BenchmarkMBean{
     void run() throws InterruptedException {
 //        command line argument for remote
 //        -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
-        for (i = 0; i < 100; i++) {
-            String[] strings = new String[size];
-            for (int i = 0, len = strings.length; i < len; i++)
-                strings[i] = new String();
-            Thread.sleep(10);
+
+        List<String> stringList = new ArrayList<>();
+
+        String stringPrefix = "String object number ";
+
+        while (true) {
+            for (i = 0; i < size; i++) {
+                stringList.add(stringPrefix + i);
+            }
+            clearHalfTail(stringList);
+            Thread.sleep(1000);
+            System.out.println("Size of list is "+stringList.size());
         }
+    }
+
+    private void clearHalfTail(List<String> stringList) {
+        stringList.subList(size / 2, size).clear();
     }
 
     @Override

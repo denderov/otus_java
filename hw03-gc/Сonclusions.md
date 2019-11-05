@@ -1,3 +1,78 @@
+-Xms1024m
+-Xmx1024m
+-XX:+PrintSafepointStatistics
+-XX:PrintSafepointStatisticsCount=1
+-XX:+HeapDumpOnOutOfMemoryError
+-XX:HeapDumpPath=./logs/dump
+-XX:+UseSerialGC
+
+time elapsed: 131
+time elapsed: 134
+
+
+#### G1
+
+###### 2 CPUs
+
+time elapsed: 105
+
+time elapsed: 160
+
+Garbage collector: 
+
+Name = 'G1 Young Generation', Collections = 662, Total time spent = 1 minute
+
+Garbage collector: 
+
+Name = 'G1 Old Generation', Collections = 41, Total time spent = 24.130 seconds
+
+#### CMS
+
+###### 2 CPUs
+
+time elapsed: 146
+
+time elapsed: 163
+
+Garbage collector: 
+
+Name = 'ParNew', Collections = 198, Total time spent = 1 minute
+
+Garbage collector: 
+
+Name = 'ConcurrentMarkSweep', Collections = 105, Total time spent = 1 minute
+
+#### ParallelGC
+
+###### 2 CPUs
+
+time elapsed: 144
+
+time elapsed: 182
+
+Garbage collector: 
+
+Name = 'PS MarkSweep', Collections = 99, Total time spent = 24.153 seconds
+
+Garbage collector:
+ 
+Name = 'PS Scavenge', Collections = 389, Total time spent = 2 minutes
+
+#### SerialGC
+
+###### 2 CPUs
+
+time elapsed: 98
+
+Garbage collector: 
+
+Name = 'Copy', Collections = 193, Total time spent = 34.637 seconds
+
+Garbage collector: 
+
+Name = 'MarkSweepCompact', Collections = 96, Total time spent = 49.196 seconds
+
+
 
 #### G1
 
