@@ -17,9 +17,9 @@
 
 [gceasy.io log](https://gceasy.io/my-gc-report.jsp?p=c2hhcmVkLzIwMTkvMTEvNS8tLVNlcmlhbEdjLS0yMC01MS0yMA==&channel=WEB)
 
-1) Throughput : **85.737%**
+_1_ Throughput : **85.737%**
 
-2) Latency:
+_2_ Latency:
 
 |Pause|Duration|
 |---|---|
@@ -32,9 +32,9 @@
 
 [gceasy.io log](https://gceasy.io/my-gc-report.jsp?p=c2hhcmVkLzIwMTkvMTEvNS8tLVBhcmFsbGVsR2MtLTIwLTU1LTQ=&channel=WEB)
 
-1) Throughput : **87.126%**
+_1_ Throughput : **87.126%**
 
-2) Latency:
+_2_ Latency:
 
 |Pause|Duration|
 |---|---|
@@ -53,9 +53,9 @@ Parallel GC не смог существенно опередить своего
 
 [gceasy.io log](https://gceasy.io/my-gc-report.jsp?p=c2hhcmVkLzIwMTkvMTEvNS8tLUcxR2MtLTIwLTU3LTEy&channel=WEB)
 
-1) Throughput : **93.832%**
+_1_ Throughput : **93.832%**
 
-2) Latency:
+_2_ Latency:
 
 |Pause|Duration|
 |---|---|
