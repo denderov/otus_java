@@ -2,7 +2,8 @@
 
 Тестовый стенд - виртуальная машина с 4ГБ памяти и 2 ядрами. Память на хип выделено 1ГБ (-Xms1024m -Xmx1024m)
 
-Запуск тестов осуществляется путем вызова метода run() из класса Benchmark. 
+Запуск тестов осуществляется путем вызова метода run() из класса Benchmark. В методе реализовано заполнение коллекции строковыми объектами в бесконечном цикле порциями по 100000 объектов с последующим удалением половины от указанного количества. Между итерациями установлена пауза 1000 мс.  
+
 Точка входа - класс Misc. В этом же классе организована подписка на GarbageCollectorMXBean с выводом основных показателей на консоль.
 
 Помимо этого, в параметрах запуска указан вывод краткого лога -Xlog:gc на консоль. Плюс вывод детального лога в файл.
@@ -16,9 +17,9 @@
 
 [gceasy.io log](https://gceasy.io/my-gc-report.jsp?p=c2hhcmVkLzIwMTkvMTEvNS8tLVNlcmlhbEdjLS0yMC01MS0yMA==&channel=WEB)
 
-_1_ Throughput : **85.737%**
+1) Throughput : **85.737%**
 
-_2_ Latency:
+2) Latency:
 
 |Pause|Duration|
 |---|---|
@@ -31,9 +32,9 @@ _2_ Latency:
 
 [gceasy.io log](https://gceasy.io/my-gc-report.jsp?p=c2hhcmVkLzIwMTkvMTEvNS8tLVBhcmFsbGVsR2MtLTIwLTU1LTQ=&channel=WEB)
 
-_1_ Throughput : **87.126%**
+1) Throughput : **87.126%**
 
-_2_ Latency:
+2) Latency:
 
 |Pause|Duration|
 |---|---|
@@ -52,9 +53,9 @@ Parallel GC не смог существенно опередить своего
 
 [gceasy.io log](https://gceasy.io/my-gc-report.jsp?p=c2hhcmVkLzIwMTkvMTEvNS8tLUcxR2MtLTIwLTU3LTEy&channel=WEB)
 
-_1_ Throughput : **93.832%**
+1) Throughput : **93.832%**
 
-_2_ Latency:
+2) Latency:
 
 |Pause|Duration|
 |---|---|
