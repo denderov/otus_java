@@ -1,0 +1,454 @@
+/usr/lib/jvm/java-11-openjdk-11.0.5.10-0.fc30.x86_64/bin/java -Xms1024m -Xmx1024m -Xlog:gc -Xlog:gc*:/home/naf/IdeaProjects/otus_java/hw03-gc/logs/G1Gc -XX:+UseG1GC -javaagent:/home/naf/Downloads/ideaIC-2019.2.2/idea-IC-192.6603.28/lib/idea_rt.jar=39325:/home/naf/Downloads/ideaIC-2019.2.2/idea-IC-192.6603.28/bin -Dfile.encoding=UTF-8 -classpath /home/naf/IdeaProjects/otus_java/hw03-gc/target/classes ru.otus.gc.Misc
+[0.054s][info][gc] Using G1
+GC name:G1 Young Generation
+GC name:G1 Old Generation
+Size of list is 50000
+Size of list is 100000
+Size of list is 150000
+Size of list is 200000
+Size of list is 250000
+Size of list is 300000
+[7.834s][info][gc] GC(0) Pause Young (Normal) (G1 Evacuation Pause) 55M->43M(1024M) 96.855ms
+start:7661 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Evacuation Pause(96 ms)
+Size of list is 350000
+Size of list is 400000
+Size of list is 450000
+Size of list is 500000
+Size of list is 550000
+Size of list is 600000
+[14.074s][info][gc] GC(1) Pause Young (Normal) (G1 Evacuation Pause) 94M->92M(1024M) 101.864ms
+start:13897 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Evacuation Pause(101 ms)
+Size of list is 650000
+Size of list is 700000
+Size of list is 750000
+Size of list is 800000
+Size of list is 850000
+Size of list is 900000
+[20.293s][info][gc] GC(2) Pause Young (Normal) (G1 Evacuation Pause) 141M->141M(1024M) 99.219ms
+start:20118 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Evacuation Pause(99 ms)
+Size of list is 950000
+Size of list is 1000000
+Size of list is 1050000
+Size of list is 1100000
+Size of list is 1150000
+Size of list is 1200000
+Size of list is 1250000
+[27.572s][info][gc] GC(3) Pause Young (Normal) (G1 Evacuation Pause) 192M->193M(1024M) 114.451ms
+start:27382 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Evacuation Pause(113 ms)
+Size of list is 1300000
+Size of list is 1350000
+Size of list is 1400000
+Size of list is 1450000
+Size of list is 1500000
+Size of list is 1550000
+[33.830s][info][gc] GC(4) Pause Young (Normal) (G1 Evacuation Pause) 237M->237M(1024M) 115.850ms
+start:33639 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Evacuation Pause(115 ms)
+Size of list is 1600000
+Size of list is 1650000
+Size of list is 1700000
+Size of list is 1750000
+Size of list is 1800000
+Size of list is 1850000
+[40.091s][info][gc] GC(5) Pause Young (Normal) (G1 Evacuation Pause) 292M->293M(1024M) 94.878ms
+start:39920 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Evacuation Pause(95 ms)
+Size of list is 1900000
+Size of list is 1950000
+Size of list is 2000000
+Size of list is 2050000
+Size of list is 2100000
+Size of list is 2150000
+Size of list is 2200000
+[47.368s][info][gc] GC(6) Pause Young (Normal) (G1 Evacuation Pause) 337M->337M(1024M) 108.022ms
+start:47184 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Evacuation Pause(108 ms)
+Size of list is 2250000
+Size of list is 2300000
+Size of list is 2350000
+Size of list is 2400000
+Size of list is 2450000
+Size of list is 2500000
+[53.646s][info][gc] GC(7) Pause Young (Normal) (G1 Evacuation Pause) 381M->382M(1024M) 83.572ms
+start:53487 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Evacuation Pause(83 ms)
+Size of list is 2550000
+Size of list is 2600000
+Size of list is 2650000
+Size of list is 2700000
+Size of list is 2750000
+Size of list is 2800000
+Size of list is 2850000
+[60.947s][info][gc] GC(8) Pause Young (Normal) (G1 Evacuation Pause) 442M->442M(1024M) 97.681ms
+start:60775 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Evacuation Pause(96 ms)
+Size of list is 2900000
+Size of list is 2950000
+Size of list is 3000000
+Size of list is 3050000
+Size of list is 3100000
+Size of list is 3150000
+[67.225s][info][gc] GC(9) Pause Young (Normal) (G1 Evacuation Pause) 486M->486M(1024M) 87.728ms
+start:67062 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Evacuation Pause(87 ms)
+Size of list is 3200000
+Size of list is 3250000
+Size of list is 3300000
+Size of list is 3350000
+Size of list is 3400000
+Size of list is 3450000
+[73.508s][info][gc] GC(10) Pause Young (Concurrent Start) (G1 Evacuation Pause) 530M->531M(1024M) 89.314ms
+[73.508s][info][gc] GC(11) Concurrent Cycle
+start:73343 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Evacuation Pause(89 ms)
+[74.165s][info][gc] GC(11) Pause Remark 531M->295M(1024M) 4.604ms
+[74.511s][info][gc] GC(11) Pause Cleanup 295M->295M(1024M) 0.486ms
+[74.524s][info][gc] GC(11) Concurrent Cycle 1015.574ms
+Size of list is 3500000
+Size of list is 3550000
+Size of list is 3600000
+Size of list is 3650000
+Size of list is 3700000
+Size of list is 3750000
+Size of list is 3800000
+[80.894s][info][gc] GC(12) Pause Young (Normal) (G1 Evacuation Pause) 339M->339M(1024M) 78.821ms
+start:80739 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Evacuation Pause(79 ms)
+Size of list is 3850000
+Size of list is 3900000
+Size of list is 3950000
+Size of list is 4000000
+Size of list is 4050000
+Size of list is 4100000
+Size of list is 4150000
+[88.263s][info][gc] GC(13) Pause Young (Normal) (G1 Evacuation Pause) 409M->410M(1024M) 112.323ms
+start:88075 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Evacuation Pause(112 ms)
+Size of list is 4200000
+Size of list is 4250000
+Size of list is 4300000
+Size of list is 4350000
+Size of list is 4400000
+Size of list is 4450000
+Size of list is 4500000
+[95.730s][info][gc] GC(14) Pause Young (Normal) (G1 Evacuation Pause) 460M->460M(1024M) 217.506ms
+start:95436 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Evacuation Pause(217 ms)
+Size of list is 4550000
+Size of list is 4600000
+Size of list is 4650000
+Size of list is 4700000
+Size of list is 4750000
+Size of list is 4800000
+Size of list is 4850000
+[103.166s][info][gc] GC(15) Pause Young (Normal) (G1 Evacuation Pause) 506M->507M(1024M) 78.344ms
+start:103012 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Evacuation Pause(77 ms)
+Size of list is 4900000
+Size of list is 4950000
+Size of list is 5000000
+Size of list is 5050000
+Size of list is 5100000
+Size of list is 5150000
+Size of list is 5200000
+Size of list is 5250000
+[111.579s][info][gc] GC(16) Pause Young (Concurrent Start) (G1 Evacuation Pause) 562M->562M(1024M) 105.448ms
+[111.579s][info][gc] GC(17) Concurrent Cycle
+start:111398 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Evacuation Pause(104 ms)
+[112.628s][info][gc] GC(17) Pause Remark 569M->434M(1024M) 2.969ms
+Size of list is 5300000
+Size of list is 5350000
+[114.116s][info][gc] GC(17) Pause Cleanup 447M->447M(1024M) 1.142ms
+[114.149s][info][gc] GC(17) Concurrent Cycle 2570.590ms
+Size of list is 5400000
+Size of list is 5450000
+Size of list is 5500000
+Size of list is 5550000
+Size of list is 5600000
+Size of list is 5650000
+[120.826s][info][gc] GC(18) Pause Young (Normal) (G1 Evacuation Pause) 488M->488M(1024M) 605.097ms
+start:120145 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Evacuation Pause(604 ms)
+Size of list is 5700000
+Size of list is 5750000
+Size of list is 5800000
+Size of list is 5850000
+Size of list is 5900000
+Size of list is 5950000
+Size of list is 6000000
+[128.261s][info][gc] GC(19) Pause Young (Concurrent Start) (G1 Evacuation Pause) 530M->531M(1024M) 125.508ms
+[128.262s][info][gc] GC(20) Concurrent Cycle
+start:128061 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Evacuation Pause(124 ms)
+Size of list is 6050000
+[129.686s][info][gc] GC(20) Pause Remark 545M->487M(1024M) 1.577ms
+[130.253s][info][gc] GC(20) Pause Cleanup 487M->487M(1024M) 0.846ms
+[130.257s][info][gc] GC(20) Concurrent Cycle 1995.453ms
+Size of list is 6100000
+[130.738s][info][gc] GC(21) Pause Young (Concurrent Start) (G1 Humongous Allocation) 490M->491M(1024M) 38.377ms
+[130.738s][info][gc] GC(22) Concurrent Cycle
+start:130624 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Humongous Allocation(38 ms)
+[131.849s][info][gc] GC(22) Pause Remark 530M->526M(1024M) 2.718ms
+Size of list is 6150000
+[132.583s][info][gc] GC(22) Pause Cleanup 533M->533M(1024M) 0.689ms
+[132.587s][info][gc] GC(22) Concurrent Cycle 1848.398ms
+Size of list is 6200000
+Size of list is 6250000
+Size of list is 6300000
+Size of list is 6350000
+Size of list is 6400000
+[137.304s][info][gc] GC(23) Pause Young (Normal) (G1 Evacuation Pause) 567M->567M(1024M) 87.263ms
+start:137141 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Evacuation Pause(87 ms)
+Size of list is 6450000
+Size of list is 6500000
+Size of list is 6550000
+Size of list is 6600000
+Size of list is 6650000
+Size of list is 6700000
+Size of list is 6750000
+Size of list is 6800000
+[145.752s][info][gc] GC(24) Pause Young (Concurrent Start) (G1 Evacuation Pause) 616M->616M(1024M) 94.822ms
+[145.752s][info][gc] GC(25) Concurrent Cycle
+start:145582 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Evacuation Pause(94 ms)
+Size of list is 6850000
+[147.134s][info][gc] GC(25) Pause Remark 630M->556M(1024M) 3.345ms
+[147.831s][info][gc] GC(25) Pause Cleanup 556M->556M(1024M) 0.741ms
+[147.834s][info][gc] GC(25) Concurrent Cycle 2081.794ms
+Size of list is 6900000
+Size of list is 6950000
+Size of list is 7000000
+Size of list is 7050000
+Size of list is 7100000
+Size of list is 7150000
+[153.641s][info][gc] GC(26) Pause Young (Normal) (G1 Evacuation Pause) 594M->595M(1024M) 102.440ms
+start:153462 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Evacuation Pause(102 ms)
+Size of list is 7200000
+Size of list is 7250000
+Size of list is 7300000
+Size of list is 7350000
+Size of list is 7400000
+Size of list is 7450000
+Size of list is 7500000
+Size of list is 7550000
+Size of list is 7600000
+[163.174s][info][gc] GC(27) Pause Young (Concurrent Start) (G1 Evacuation Pause) 657M->657M(1024M) 121.063ms
+[163.175s][info][gc] GC(28) Concurrent Cycle
+start:162977 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Evacuation Pause(121 ms)
+Size of list is 7650000
+[164.628s][info][gc] GC(28) Pause Remark 667M->605M(1024M) 1.838ms
+[165.380s][info][gc] GC(28) Pause Cleanup 605M->605M(1024M) 0.663ms
+[165.383s][info][gc] GC(28) Concurrent Cycle 2208.765ms
+Size of list is 7700000
+Size of list is 7750000
+Size of list is 7800000
+Size of list is 7850000
+Size of list is 7900000
+Size of list is 7950000
+Size of list is 8000000
+Size of list is 8050000
+Size of list is 8100000
+[174.148s][info][gc] GC(29) Pause Young (Normal) (G1 Evacuation Pause) 662M->663M(1024M) 125.893ms
+start:173946 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Evacuation Pause(126 ms)
+Size of list is 8150000
+Size of list is 8200000
+Size of list is 8250000
+Size of list is 8300000
+Size of list is 8350000
+Size of list is 8400000
+Size of list is 8450000
+Size of list is 8500000
+Size of list is 8550000
+Size of list is 8600000
+Size of list is 8650000
+[186.267s][info][gc] GC(30) Pause Young (Concurrent Start) (G1 Evacuation Pause) 736M->736M(1024M) 425.001ms
+[186.267s][info][gc] GC(31) Concurrent Cycle
+start:185766 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Evacuation Pause(424 ms)
+Size of list is 8700000
+Size of list is 8750000
+[189.513s][info][gc] GC(31) Pause Remark 757M->690M(1024M) 2.999ms
+[190.358s][info][gc] GC(31) Pause Cleanup 690M->690M(1024M) 0.680ms
+[190.361s][info][gc] GC(31) Concurrent Cycle 4094.495ms
+Size of list is 8800000
+Size of list is 8850000
+Size of list is 8900000
+[192.731s][info][gc] GC(32) Pause Young (Normal) (G1 Evacuation Pause) 709M->710M(1024M) 71.827ms
+start:192583 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Evacuation Pause(72 ms)
+Size of list is 8950000
+Size of list is 9000000
+Size of list is 9050000
+Size of list is 9100000
+Size of list is 9150000
+[198.112s][info][gc] GC(33) Pause Young (Concurrent Start) (G1 Humongous Allocation) 744M->744M(1024M) 114.633ms
+[198.113s][info][gc] GC(34) Concurrent Cycle
+start:197922 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Humongous Allocation(114 ms)
+Size of list is 9200000
+[199.761s][info][gc] GC(34) Pause Remark 806M->771M(1024M) 2.984ms
+Size of list is 9250000
+[200.802s][info][gc] GC(34) Pause Cleanup 778M->778M(1024M) 0.877ms
+[200.807s][info][gc] GC(34) Concurrent Cycle 2693.921ms
+Size of list is 9300000
+Size of list is 9350000
+Size of list is 9400000
+Size of list is 9450000
+Size of list is 9500000
+Size of list is 9550000
+[207.266s][info][gc] GC(35) Pause Young (Normal) (G1 Evacuation Pause) 812M->813M(1024M) 158.443ms
+start:207031 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Evacuation Pause(158 ms)
+Size of list is 9600000
+Size of list is 9650000
+Size of list is 9700000
+Size of list is 9750000
+Size of list is 9800000
+Size of list is 9850000
+[213.690s][info][gc] GC(36) Pause Young (Concurrent Start) (G1 Evacuation Pause) 856M->856M(1024M) 105.530ms
+[213.692s][info][gc] GC(37) Concurrent Cycle
+start:213508 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Evacuation Pause(105 ms)
+Size of list is 9900000
+[215.524s][info][gc] GC(37) Pause Remark 868M->785M(1024M) 3.421ms
+Size of list is 9950000
+[216.501s][info][gc] GC(37) Pause Cleanup 792M->792M(1024M) 1.239ms
+[216.504s][info][gc] GC(37) Concurrent Cycle 2811.821ms
+Size of list is 10000000
+Size of list is 10050000
+Size of list is 10100000
+Size of list is 10150000
+[220.594s][info][gc] GC(38) Pause Young (Normal) (G1 Evacuation Pause) 817M->818M(1024M) 77.557ms
+start:220440 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Evacuation Pause(77 ms)
+Size of list is 10200000
+Size of list is 10250000
+Size of list is 10300000
+Size of list is 10350000
+Size of list is 10400000
+Size of list is 10450000
+Size of list is 10500000
+[227.996s][info][gc] GC(39) Pause Young (Concurrent Start) (G1 Evacuation Pause) 862M->862M(1024M) 85.807ms
+start:227834 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Evacuation Pause(86 ms)
+[228.000s][info][gc] GC(40) Concurrent Cycle
+Size of list is 10550000
+[229.967s][info][gc] GC(40) Pause Remark 875M->824M(1024M) 3.953ms
+Size of list is 10600000
+[231.021s][info][gc] GC(40) Pause Cleanup 831M->831M(1024M) 0.963ms
+[231.025s][info][gc] GC(40) Concurrent Cycle 3024.732ms
+Size of list is 10650000
+Size of list is 10700000
+Size of list is 10750000
+Size of list is 10800000
+[234.900s][info][gc] GC(41) Pause Young (Normal) (G1 Evacuation Pause) 855M->855M(1024M) 73.031ms
+start:234751 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Evacuation Pause(73 ms)
+Size of list is 10850000
+Size of list is 10900000
+Size of list is 10950000
+Size of list is 11000000
+Size of list is 11050000
+Size of list is 11100000
+[241.307s][info][gc] GC(42) Pause Young (Concurrent Start) (G1 Evacuation Pause) 899M->900M(1024M) 116.292ms
+[241.308s][info][gc] GC(43) Concurrent Cycle
+start:241115 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Evacuation Pause(116 ms)
+Size of list is 11150000
+[243.263s][info][gc] GC(43) Pause Remark 907M->869M(1024M) 1.798ms
+Size of list is 11200000
+[244.322s][info][gc] GC(43) Pause Cleanup 876M->876M(1024M) 1.055ms
+[244.325s][info][gc] GC(43) Concurrent Cycle 3017.721ms
+Size of list is 11250000
+Size of list is 11300000
+Size of list is 11350000
+Size of list is 11400000
+Size of list is 11450000
+[249.252s][info][gc] GC(44) Pause Young (Normal) (G1 Evacuation Pause) 906M->906M(1024M) 110.076ms
+start:249066 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Evacuation Pause(109 ms)
+Size of list is 11500000
+Size of list is 11550000
+Size of list is 11600000
+Size of list is 11650000
+Size of list is 11700000
+Size of list is 11750000
+[255.673s][info][gc] GC(45) Pause Young (Concurrent Start) (G1 Evacuation Pause) 950M->951M(1024M) 112.654ms
+[255.674s][info][gc] GC(46) Concurrent Cycle
+start:255485 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Evacuation Pause(112 ms)
+Size of list is 11800000
+[257.833s][info][gc] GC(46) Pause Remark 960M->919M(1024M) 1.824ms
+Size of list is 11850000
+[258.992s][info][gc] GC(46) Pause Cleanup 926M->926M(1024M) 0.917ms
+[258.996s][info][gc] GC(46) Concurrent Cycle 3322.031ms
+Size of list is 11900000
+Size of list is 11950000
+Size of list is 12000000
+Size of list is 12050000
+Size of list is 12100000
+[263.777s][info][gc] GC(47) Pause Young (Normal) (G1 Evacuation Pause) 954M->954M(1024M) 194.307ms
+start:263507 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Evacuation Pause(194 ms)
+Size of list is 12150000
+Size of list is 12200000
+Size of list is 12250000
+Size of list is 12300000
+Size of list is 12350000
+Size of list is 12400000
+[270.322s][info][gc] GC(48) To-space exhausted
+[270.323s][info][gc] GC(48) Pause Young (Concurrent Start) (G1 Evacuation Pause) 998M->1005M(1024M) 147.435ms
+[270.323s][info][gc] GC(49) Concurrent Cycle
+start:270099 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Evacuation Pause(147 ms)
+Size of list is 12450000
+[272.863s][info][gc] GC(49) Pause Remark 1016M->976M(1024M) 2.326ms
+Size of list is 12500000
+[274.123s][info][gc] GC(49) Pause Cleanup 983M->983M(1024M) 0.952ms
+[274.126s][info][gc] GC(49) Concurrent Cycle 3803.492ms
+Size of list is 12550000
+Size of list is 12600000
+Size of list is 12650000
+Size of list is 12700000
+[277.582s][info][gc] GC(50) To-space exhausted
+[277.583s][info][gc] GC(50) Pause Young (Prepare Mixed) (G1 Evacuation Pause) 1009M->1013M(1024M) 174.087ms
+start:277333 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Evacuation Pause(174 ms)
+Size of list is 12750000
+Size of list is 12800000
+[279.792s][info][gc] GC(51) To-space exhausted
+[279.793s][info][gc] GC(51) Pause Young (Mixed) (G1 Evacuation Pause) 1022M->1022M(1024M) 83.564ms
+[281.392s][info][gc] GC(52) Pause Full (G1 Evacuation Pause) 1022M->934M(1024M) 1598.812ms
+start:279634 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Evacuation Pause(82 ms)
+start:279717 Name:G1 Old Generation, action:end of major GC, gcCause:G1 Evacuation Pause(1599 ms)
+Size of list is 12850000
+Size of list is 12900000
+Size of list is 12950000
+Size of list is 13000000
+Size of list is 13050000
+Size of list is 13100000
+Size of list is 13150000
+[288.891s][info][gc] GC(53) To-space exhausted
+[288.892s][info][gc] GC(53) Pause Young (Concurrent Start) (G1 Evacuation Pause) 985M->991M(1024M) 111.987ms
+[288.892s][info][gc] GC(54) Concurrent Cycle
+start:288704 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Evacuation Pause(111 ms)
+Size of list is 13200000
+[291.538s][info][gc] GC(54) Pause Remark 1001M->992M(1024M) 6.325ms
+Size of list is 13250000
+Size of list is 13300000
+[294.033s][info][gc] GC(54) Pause Cleanup 1006M->1006M(1024M) 1.184ms
+[294.037s][info][gc] GC(54) Concurrent Cycle 5145.570ms
+Size of list is 13350000
+Size of list is 13400000
+Size of list is 13450000
+[296.621s][info][gc] GC(55) To-space exhausted
+[296.621s][info][gc] GC(55) Pause Young (Normal) (G1 Evacuation Pause) 1021M->1021M(1024M) 323.248ms
+[299.746s][info][gc] GC(56) Pause Full (G1 Evacuation Pause) 1021M->979M(1024M) 3124.600ms
+start:296222 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Evacuation Pause(323 ms)
+start:296545 Name:G1 Old Generation, action:end of major GC, gcCause:G1 Evacuation Pause(3125 ms)
+Size of list is 13500000
+Size of list is 13550000
+Size of list is 13600000
+Size of list is 13650000
+Size of list is 13700000
+Size of list is 13750000
+[306.571s][info][gc] GC(57) To-space exhausted
+[306.571s][info][gc] GC(57) Pause Young (Concurrent Start) (G1 Evacuation Pause) 1021M->1021M(1024M) 411.076ms
+[306.572s][info][gc] GC(59) Concurrent Cycle
+[309.665s][info][gc] GC(58) Pause Full (G1 Evacuation Pause) 1021M->1001M(1024M) 3093.789ms
+start:306084 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Evacuation Pause(411 ms)
+start:306495 Name:G1 Old Generation, action:end of major GC, gcCause:G1 Evacuation Pause(3094 ms)
+[309.668s][info][gc] GC(59) Concurrent Cycle 3096.277ms
+[309.767s][info][gc] GC(60) Pause Young (Concurrent Start) (G1 Humongous Allocation) 1005M->1004M(1024M) 14.382ms
+[309.767s][info][gc] GC(61) Concurrent Cycle
+[309.878s][info][gc] GC(62) Pause Young (Normal) (G1 Humongous Allocation) 1004M->1004M(1024M) 13.401ms
+[312.808s][info][gc] GC(63) Pause Full (G1 Humongous Allocation) 1004M->1004M(1024M) 2929.470ms
+[315.547s][info][gc] GC(64) Pause Full (G1 Humongous Allocation) 1004M->1004M(1024M) 2738.955ms
+[315.549s][info][gc] GC(61) Concurrent Cycle 5781.482ms
+start:309677 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Humongous Allocation(14 ms)
+start:309789 Name:G1 Young Generation, action:end of minor GC, gcCause:G1 Humongous Allocation(13 ms)
+start:309802 Name:G1 Old Generation, action:end of major GC, gcCause:G1 Humongous Allocation(2930 ms)
+start:312732 Name:G1 Old Generation, action:end of major GC, gcCause:G1 Humongous Allocation(2739 ms)
+time elapsed: 314
+Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
+	at java.base/java.util.Arrays.copyOf(Arrays.java:3689)
+	at java.base/java.util.ArrayList.grow(ArrayList.java:237)
+	at java.base/java.util.ArrayList.grow(ArrayList.java:242)
+	at java.base/java.util.ArrayList.add(ArrayList.java:485)
+	at java.base/java.util.ArrayList.add(ArrayList.java:498)
+	at ru.otus.gc.Benchmark.run(Benchmark.java:27)
+	at ru.otus.gc.Misc.main(Misc.java:32)
+
+Process finished with exit code 1
