@@ -15,6 +15,9 @@
         <module>hw01-maven</module>
         <module>hw02-diyarraylist</module>
         <module>hw03-gc</module>
+        <module>hw04-autoLogging</module>
+        <module>hw04-autoLogging</module>
+        <module>hw04-autoLogging</module>
     </modules>
 
     <properties>
