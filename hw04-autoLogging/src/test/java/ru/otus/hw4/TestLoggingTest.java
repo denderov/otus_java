@@ -8,7 +8,8 @@ import org.junit.jupiter.api.TestInstance;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class TestLoggingTest {
@@ -23,8 +24,7 @@ public class TestLoggingTest {
     @Test
     public void checkIfAgentWorking() {
         new TestLogging().calculation(6);
-        assertEquals("executed method: calculation, param: 6\n", output.toString());
-//        assertThat(output.toString(), containsString("executed method: calculation, param: 6"));
+        assertThat(output.toString(), containsString("executed method: calculation, param: 6"));
     }
 
 
