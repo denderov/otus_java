@@ -5,8 +5,6 @@ import org.objectweb.asm.*;
 import java.lang.invoke.CallSite;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 import static org.objectweb.asm.Opcodes.H_INVOKESTATIC;
 
@@ -18,7 +16,7 @@ public class TestLoggingMethodVisitor extends MethodVisitor {
 
     TestLoggingMethodVisitor(int api, MethodVisitor mv, String methodName, String descriptor) {
 
-        super(api,mv);
+        super(api, mv);
 
         this.methodName = methodName;
         this.descriptor = descriptor;
@@ -49,15 +47,39 @@ public class TestLoggingMethodVisitor extends MethodVisitor {
 
             Type[] types = Type.getArgumentTypes(descriptor);
 
+            StringBuilder listOfArguments = new StringBuilder("(");
+
+            StringBuilder logText = new StringBuilder("executed method: ");
+
+            int types_count = types.length;
+
+            if (types_count == 0) {
+                logText.append(methodName).append(", no params");
+            } else if (types_count == 1) {
+                logText.append(methodName).append(", param: ");
+            } else {
+                logText.append(methodName).append(", params: ");
+            }
+
             mv.visitFieldInsn(Opcodes.GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;");
 
-            for (int i = 0; i < types.length; i++) {
-                mv.visitVarInsn(types[i].getOpcode(Opcodes.ILOAD), i + 1);
-            }
-            String listOfArguments = "("+Arrays.stream(types).map(Type::getDescriptor).collect(Collectors.joining(""))+")"+"Ljava/lang/String;";
-            String logText = "executed method: "+methodName+", param: "+Arrays.stream(types).map(type -> "\u0001").collect(Collectors.joining(", "));
+            for (int i = 0; i < types_count; i++) {
 
-            mv.visitInvokeDynamicInsn("makeConcatWithConstants", listOfArguments, handle, logText);
+                mv.visitVarInsn(types[i].getOpcode(Opcodes.ILOAD), i + 1);
+
+                listOfArguments.append(types[i].getDescriptor());
+
+                if (i > 0) {
+                    logText.append(", ");
+                }
+                logText.append("\u0001");
+
+            }
+
+            listOfArguments.append(")Ljava/lang/String;");
+            logText.append(")Ljava/lang/String;");
+
+            mv.visitInvokeDynamicInsn("makeConcatWithConstants", listOfArguments.toString(), handle, logText.toString());
 
             mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, "java/io/PrintStream", "println", "(Ljava/lang/String;)V", false);
 
