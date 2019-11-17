@@ -1,4 +1,4 @@
-package ru.otus.hw4;
+package ru.otus.hw04;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -11,25 +11,30 @@ import java.io.PrintStream;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+/*
+It is necessary to specify the path to the agent in VM options before run tests. Like this:
+-ea -javaagent:/home/homework/IdeaProjects/otus_java/hw04-autoLogging/target/AutomagicAgent.jar
+ */
+
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class TestLoggingTest {
+class TestLoggingTest {
 
     private ByteArrayOutputStream output = new ByteArrayOutputStream();
 
     @BeforeAll
-    public void setUpStreams() {
+    void setUpStreams() {
         System.setOut(new PrintStream(output));
     }
 
     @Test
-    public void checkIfAgentWorking() {
+    void checkIfAgentForSingleParameterMethodWorking() {
         new TestLogging().calculation(6);
         assertThat(output.toString(), containsString("executed method: calculation, param: 6"));
     }
 
 
     @AfterAll
-    public void cleanUpStreams() {
+    void cleanUpStreams() {
         System.setOut(null);
     }
 }

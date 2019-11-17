@@ -1,4 +1,4 @@
-package ru.otus.hw4;
+package ru.otus.hw04;
 
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
@@ -19,10 +19,7 @@ public class AutomagicAgent {
                                     Class<?> classBeingRedefined,
                                     ProtectionDomain protectionDomain,
                                     byte[] classfileBuffer) {
-                if (className.equals("ru/otus/hw4/TestLogging")) {
-                    return addLogMethod(classfileBuffer);
-                }
-                return classfileBuffer;
+                return addLogMethod(classfileBuffer);
             }
         });
     }
@@ -30,9 +27,9 @@ public class AutomagicAgent {
     private static byte[] addLogMethod(byte[] originalClass) {
         ClassReader cr = new ClassReader(originalClass);
         ClassWriter cw = new ClassWriter(cr, ClassWriter.COMPUTE_MAXS);
-        ClassVisitor cv = new ClassVisitor(Opcodes.ASM7, cw) {
+        ClassVisitor cv = new TestLoggingClassVisitor(Opcodes.ASM7, cw);
 
-        };
+        cr.accept(cv,Opcodes.ASM7);
 
         byte[] finalClass = cw.toByteArray();
 
