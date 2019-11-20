@@ -26,7 +26,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-plugin.version}</version>
                 <configuration>
-                    <argLine>-javaagent:/home/naf/IdeaProjects/otus_java/hw04-agent/target/AutomagicAgent.jar</argLine>
+                    <argLine>-javaagent:${project.basedir}/hw04-agent/target/AutomagicAgent.jar</argLine>
                 </configuration>
             </plugin>
             <plugin>
