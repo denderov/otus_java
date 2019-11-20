@@ -16,7 +16,7 @@
         <module>hw02-diyarraylist</module>
         <module>hw03-gc</module>
         <module>hw04-autoLogging</module>
-        <module>hw04-agent</module>
+        <module>hw04-autoLogging/hw04-agent</module>
     </modules>
 
     <properties>
