@@ -35,9 +35,12 @@ public class TestLoggingMethodVisitor extends MethodVisitor {
     }
 
     public void visitCode() {
+
+
         super.visitCode();
 
         if (isAnnotationPresent) {
+            System.out.println("visitCode for "+methodName);
             Handle handle = new Handle(
                     H_INVOKESTATIC,
                     Type.getInternalName(java.lang.invoke.StringConcatFactory.class),
