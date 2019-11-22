@@ -80,7 +80,6 @@ public class TestLoggingMethodVisitor extends MethodVisitor {
             }
 
             listOfArguments.append(")Ljava/lang/String;");
-            logText.append(")Ljava/lang/String;");
 
             mv.visitInvokeDynamicInsn("makeConcatWithConstants", listOfArguments.toString(), handle, logText.toString());
 
