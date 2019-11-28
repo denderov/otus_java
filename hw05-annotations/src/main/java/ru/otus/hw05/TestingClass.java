@@ -9,7 +9,7 @@ import java.util.List;
 public class TestingClass {
 
 
-    public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException {
+    public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException {
 
         String className = "ru.otus.hw05.ClassForTesting";
 
@@ -38,18 +38,15 @@ public class TestingClass {
 
         for (Method method : testingMethods) {
 
-            var instanceOfClassForTesting = classForTesting.newInstance();
+            var instanceOfClassForTesting = classForTesting.getDeclaredConstructor().newInstance();
 
             for (Method beforeMethod : beforeMethods) {
-                System.out.println(beforeMethod.getName());
                 beforeMethod.invoke(instanceOfClassForTesting);
             }
 
             method.invoke(instanceOfClassForTesting);
-            System.out.println(method.getName());
 
             for (Method afterMethod : afterMethods) {
-                System.out.println(afterMethod.getName());
                 afterMethod.invoke(instanceOfClassForTesting);
             }
 
