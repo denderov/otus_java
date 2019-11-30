@@ -16,7 +16,6 @@ public class TestingClass {
     private String className;
     private int count = 0;
     private int passed = 0;
-    private int failed = 0;
     private List<Method> testingMethods = new ArrayList<>();
     private List<Method> beforeMethods = new ArrayList<>();
     private List<Method> afterMethods = new ArrayList<>();
@@ -41,10 +40,10 @@ public class TestingClass {
 
             }
         } catch (ClassNotFoundException e) {
-            System.out.printf("Class %s not found: %s %n",className,e.getCause());
+            System.out.printf("Class %s not found: %s %n", className, e.getCause());
         }
 
-        System.out.printf("%nResult: Total count: %d, Passed: %d, Failed: %d%n", count, passed, failed);
+        System.out.printf("%nResult: Total count: %d, Passed: %d, Failed: %d%n", count, passed, count - passed);
 
     }
 
@@ -53,7 +52,7 @@ public class TestingClass {
         try {
             instanceOfClassForTesting = classForTesting.getDeclaredConstructor().newInstance();
         } catch (Exception e) {
-            System.out.printf("Class %s cannot be instantiated: %s %n",classForTesting.getName(),e.getCause());
+            System.out.printf("Class %s cannot be instantiated: %s %n", classForTesting.getName(), e.getCause());
         }
         return instanceOfClassForTesting;
     }
@@ -62,9 +61,8 @@ public class TestingClass {
 
         try {
 
-            invokeMethodsFromCollection(instanceOfClassForTesting, beforeMethods);
-
             try {
+                invokeMethodsFromCollection(instanceOfClassForTesting, beforeMethods);
                 method.invoke(instanceOfClassForTesting);
             } finally {
                 invokeMethodsFromCollection(instanceOfClassForTesting, afterMethods);
@@ -75,7 +73,6 @@ public class TestingClass {
 
         } catch (IllegalAccessException | InvocationTargetException e) {
             System.out.printf("%s - Test '%s' - failed: %s %n", ++count, method.getName(), e.getCause());
-            failed++;
         }
 
     }
