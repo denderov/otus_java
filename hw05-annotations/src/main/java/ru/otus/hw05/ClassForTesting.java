@@ -1,5 +1,9 @@
 package ru.otus.hw05;
 
+import ru.otus.hw05.annotation.After;
+import ru.otus.hw05.annotation.Before;
+import ru.otus.hw05.annotation.Test;
+
 public class ClassForTesting {
 
     @Before
@@ -29,7 +33,12 @@ public class ClassForTesting {
 
     @Test
     void testMethod2() {
-        System.out.println("Test method number 2");
+        throw new RuntimeException("Test method number 2 must failed");
+    }
+
+    @Test
+    void testMethod3() {
+        System.out.println("Test method number 3");
     }
 
 }
