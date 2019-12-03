@@ -26,7 +26,7 @@ public class CashBundle {
 
             int withdrawNoteCount = Math.min(noteCount, quotient);
 
-            moneybox.merge(faceValue, -withdrawNoteCount, Integer::sum);
+            this.put(faceValue, -withdrawNoteCount);
             outCashBundle.put(faceValue, withdrawNoteCount);
 
             sum -= withdrawNoteCount * faceValue;

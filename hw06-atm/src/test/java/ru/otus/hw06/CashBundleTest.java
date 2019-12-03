@@ -8,13 +8,13 @@ import static org.hamcrest.MatcherAssert.assertThat;
 class CashBundleTest {
 
     @Test
-    void toStringEmptyCashBundleCheck() {
+    void emptyCashBundleCheck() {
         CashBundle cashBundle = new CashBundle();
         assertThat(cashBundle.toString(), equalTo("Cash bundle is empty"));
     }
 
     @Test
-    void toStringNonEmptyCashBundleCheck() {
+    void nonEmptyCashBundleCheck() {
         CashBundle cashBundle = new CashBundle()
                 .put(200, 100)
                 .put(100, 1000)
