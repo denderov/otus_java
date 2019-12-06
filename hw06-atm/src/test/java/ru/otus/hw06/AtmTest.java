@@ -9,13 +9,13 @@ class AtmTest {
 
     @Test
     void emptyAtm() {
-        Atm atm = new Atm();
+        Atm atm = new ConcreteAtm();
         assertThat(atm.toString(), equalTo("ATM{Cassette=Cash bundle is empty}"));
     }
 
     @Test
     void nonEmptyAtm() {
-        Atm atm = new Atm()
+        Atm atm = new ConcreteAtm()
                 .replenishment(Banknote.ONE_HUNDRED, 100)
                 .replenishment(Banknote.ONE_THOUSAND, 100)
                 .replenishment(Banknote.ONE_HUNDRED, 100)
@@ -25,7 +25,7 @@ class AtmTest {
 
     @Test
     void atmWithdrawTest() {
-        Atm atm = new Atm()
+        Atm atm = new ConcreteAtm()
                 .replenishment(Banknote.ONE_HUNDRED, 100)
                 .replenishment(Banknote.ONE_THOUSAND, 100)
                 .replenishment(Banknote.ONE_HUNDRED, 100)

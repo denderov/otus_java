@@ -1,27 +1,11 @@
 package ru.otus.hw06;
 
-public class Atm {
+public interface Atm {
 
-    private CashBundle cassette = new CashBundle();
+    Atm replenishment(Banknote faceValue, int noteCount);
 
-    public Atm replenishment(Banknote faceValue, int noteCount) {
+    CashBundle withdraw(int amount);
 
-        cassette.put(faceValue, noteCount);
 
-        return this;
 
-    }
-
-    public CashBundle withdraw(int amount) {
-
-        return cassette.get(amount);
-
-    }
-
-    @Override
-    public String toString() {
-        return "ATM{" +
-                "Cassette=" + cassette +
-                '}';
-    }
 }
