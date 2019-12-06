@@ -4,7 +4,7 @@ public class Atm {
 
     private CashBundle cassette = new CashBundle();
 
-    public Atm replenishment(int faceValue, int noteCount) {
+    public Atm replenishment(Banknote faceValue, int noteCount) {
 
         cassette.put(faceValue, noteCount);
 

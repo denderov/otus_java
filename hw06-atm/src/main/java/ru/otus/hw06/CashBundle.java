@@ -7,36 +7,45 @@ import java.util.TreeMap;
 
 public class CashBundle {
 
-    private SortedMap<Integer, Integer> moneybox = new TreeMap<>();
+    private SortedMap<Banknote, Integer> moneybox = new TreeMap<>();
 
     public CashBundle get(int sum) {
 
         CashBundle outCashBundle = new CashBundle();
 
-        SortedMap<Integer, Integer> reversedMoneybox = new TreeMap<>(Collections.reverseOrder());
+        SortedMap<Banknote, Integer> reversedMoneybox = new TreeMap<>(Collections.reverseOrder());
 
         reversedMoneybox.putAll(moneybox);
 
-        for (Map.Entry<Integer, Integer> entry : reversedMoneybox.entrySet()) {
+        for (Map.Entry<Banknote, Integer> entry : reversedMoneybox.entrySet()) {
 
-            int faceValue = entry.getKey();
+            Banknote key = entry.getKey();
+            int faceValue = key.getFaceValue();
             int noteCount = entry.getValue();
 
             int quotient = sum / faceValue;
 
             int withdrawNoteCount = Math.min(noteCount, quotient);
 
-            this.put(faceValue, -withdrawNoteCount);
-            outCashBundle.put(faceValue, withdrawNoteCount);
+            this.put(key, -withdrawNoteCount);
+            if (withdrawNoteCount > 0) {
+                outCashBundle.put(key, withdrawNoteCount);
+            }
 
             sum -= withdrawNoteCount * faceValue;
 
         }
 
+        if (sum > 0) {
+            throw new RuntimeException("It's impossible to collect cash bundle!");
+        }
+
+        this.moneybox.values().remove(0);
+
         return outCashBundle;
     }
 
-    public CashBundle put(int faceValue, int noteCount) {
+    public CashBundle put(Banknote faceValue, int noteCount) {
 
         moneybox.merge(faceValue, noteCount, Integer::sum);
 
