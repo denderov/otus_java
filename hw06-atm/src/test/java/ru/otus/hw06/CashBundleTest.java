@@ -42,7 +42,7 @@ class CashBundleTest {
                 .put(Banknote.ONE_HUNDRED, 1000)
                 .put(Banknote.TWO_HUNDRED, 100);
         Throwable thrown = assertThrows(RuntimeException.class, () -> {
-            ConcreteCashBundle cashBundleReceived = cashBundle.get(350);
+            CashBundle cashBundleReceived = cashBundle.get(350);
         });
         assertNotNull(thrown.getMessage());
     }

@@ -1,9 +1,9 @@
 package ru.otus.hw06;
 
 public interface CashBundle {
-    ConcreteCashBundle get(int sum);
+    CashBundle get(int sum);
 
-    ConcreteCashBundle put(Banknote faceValue, int noteCount);
+    CashBundle put(Banknote faceValue, int noteCount);
 
     int getAmount();
 }
