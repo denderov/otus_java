@@ -14,7 +14,22 @@
     <properties>
         <junit-jupiter.version>5.5.2</junit-jupiter.version>
         <hamcrest.version>2.1</hamcrest.version>
+        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
     </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+                <configuration>
+                    <argLine>-javaagent:${project.basedir}/../hw04-agent/target/AutomagicAgent.jar</argLine>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 
     <dependencies>
         <dependency>
