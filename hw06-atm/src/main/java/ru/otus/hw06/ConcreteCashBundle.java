@@ -7,7 +7,7 @@ import java.util.TreeMap;
 
 public class ConcreteCashBundle implements CashBundle {
 
-    private SortedMap<Banknote, Integer> moneybox = new TreeMap<>();
+    private final SortedMap<Banknote, Integer> moneybox = new TreeMap<>();
 
     @Override
     public ConcreteCashBundle get(int sum) {

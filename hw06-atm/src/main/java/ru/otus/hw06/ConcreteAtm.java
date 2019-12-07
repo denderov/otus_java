@@ -2,7 +2,7 @@ package ru.otus.hw06;
 
 public class ConcreteAtm implements Atm {
 
-    private ConcreteCashBundle cassette = new ConcreteCashBundle();
+    private final CashBundle cassette = new ConcreteCashBundle();
 
     @Override
     public ConcreteAtm replenishment(Banknote faceValue, int noteCount) {
@@ -18,7 +18,7 @@ public class ConcreteAtm implements Atm {
 
         try {
 
-            ConcreteCashBundle withdrawCash = cassette.get(amount);
+            CashBundle withdrawCash = cassette.get(amount);
             System.out.println("Withdraw cash: {" + withdrawCash.toString() + "}");
 
         } catch (Exception e) {
