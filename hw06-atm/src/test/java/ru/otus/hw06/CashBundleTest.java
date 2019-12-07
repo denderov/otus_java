@@ -11,13 +11,13 @@ class CashBundleTest {
 
     @Test
     void emptyCashBundleCheck() {
-        CashBundle cashBundle = new CashBundle();
+        CashBundle cashBundle = new ConcreteCashBundle();
         assertThat(cashBundle.toString(), equalTo("Cash bundle is empty"));
     }
 
     @Test
     void nonEmptyCashBundleCheck() {
-        CashBundle cashBundle = new CashBundle()
+        CashBundle cashBundle = new ConcreteCashBundle()
                 .put(Banknote.TWO_HUNDRED, 100)
                 .put(Banknote.ONE_HUNDRED, 1000)
                 .put(Banknote.TWO_HUNDRED, 100);
@@ -26,7 +26,7 @@ class CashBundleTest {
 
     @Test
     void getCashBundleCheck() {
-        CashBundle cashBundle = new CashBundle()
+        CashBundle cashBundle = new ConcreteCashBundle()
                 .put(Banknote.TWO_HUNDRED, 100)
                 .put(Banknote.ONE_HUNDRED, 1000)
                 .put(Banknote.TWO_HUNDRED, 100);
@@ -37,12 +37,12 @@ class CashBundleTest {
 
     @Test
     void isExceptionIfImpossibleToCollect() {
-        CashBundle cashBundle = new CashBundle()
+        CashBundle cashBundle = new ConcreteCashBundle()
                 .put(Banknote.TWO_HUNDRED, 100)
                 .put(Banknote.ONE_HUNDRED, 1000)
                 .put(Banknote.TWO_HUNDRED, 100);
         Throwable thrown = assertThrows(RuntimeException.class, () -> {
-            CashBundle cashBundleReceived = cashBundle.get(350);
+            ConcreteCashBundle cashBundleReceived = cashBundle.get(350);
         });
         assertNotNull(thrown.getMessage());
     }

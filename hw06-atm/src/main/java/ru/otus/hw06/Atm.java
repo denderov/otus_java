@@ -4,8 +4,10 @@ public interface Atm {
 
     Atm replenishment(Banknote faceValue, int noteCount);
 
-    CashBundle withdraw(int amount);
+    void withdraw(int amount);
 
+    void getAmountBalance();
 
+    void getCashBalance();
 
 }
