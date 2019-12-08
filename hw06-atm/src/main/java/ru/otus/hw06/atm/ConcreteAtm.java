@@ -1,4 +1,8 @@
-package ru.otus.hw06;
+package ru.otus.hw06.atm;
+
+import ru.otus.hw06.Banknote;
+import ru.otus.hw06.cash_bundle.CashBundle;
+import ru.otus.hw06.cash_bundle.ConcreteCashBundle;
 
 public class ConcreteAtm implements Atm {
 

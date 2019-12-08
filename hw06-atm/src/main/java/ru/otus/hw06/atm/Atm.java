@@ -1,4 +1,6 @@
-package ru.otus.hw06;
+package ru.otus.hw06.atm;
+
+import ru.otus.hw06.Banknote;
 
 public interface Atm {
 

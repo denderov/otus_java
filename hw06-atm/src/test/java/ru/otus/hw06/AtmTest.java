@@ -1,6 +1,8 @@
 package ru.otus.hw06;
 
 import org.junit.jupiter.api.*;
+import ru.otus.hw06.atm.Atm;
+import ru.otus.hw06.atm.ConcreteAtm;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;

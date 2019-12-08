@@ -1,4 +1,6 @@
-package ru.otus.hw06;
+package ru.otus.hw06.cash_bundle;
+
+import ru.otus.hw06.Banknote;
 
 import java.util.Collections;
 import java.util.Map;
@@ -10,9 +12,9 @@ public class ConcreteCashBundle implements CashBundle {
     private final SortedMap<Banknote, Integer> moneybox = new TreeMap<>();
 
     @Override
-    public ConcreteCashBundle get(int sum) {
+    public CashBundle get(int sum) {
 
-        ConcreteCashBundle outCashBundle = new ConcreteCashBundle();
+        CashBundle outCashBundle = new ConcreteCashBundle();
 
         SortedMap<Banknote, Integer> reversedMoneybox = new TreeMap<>(Collections.reverseOrder());
 

@@ -1,6 +1,8 @@
 package ru.otus.hw06;
 
 import org.junit.jupiter.api.Test;
+import ru.otus.hw06.cash_bundle.CashBundle;
+import ru.otus.hw06.cash_bundle.ConcreteCashBundle;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;

@@ -1,4 +1,6 @@
-package ru.otus.hw06;
+package ru.otus.hw06.cash_bundle;
+
+import ru.otus.hw06.Banknote;
 
 public interface CashBundle {
     CashBundle get(int sum);
