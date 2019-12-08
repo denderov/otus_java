@@ -70,4 +70,16 @@ public class ConcreteCassetteBundle implements CassetteBundle {
                 .mapToInt(Cassette::getAmount)
                 .sum();
     }
+
+    @Override
+    public String toString() {
+
+        if (bundle.isEmpty()) {
+            return "Cassette bundle is empty";
+
+        } else {
+            return "Cassette bundle: " +
+                    bundle;
+        }
+    }
 }

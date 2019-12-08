@@ -56,4 +56,9 @@ public class ConcreteCassette implements Cassette {
     public int getAmount() {
         return this.count * this.banknote.getFaceValue();
     }
+
+    @Override
+    public String toString() {
+        return Integer.toString(count);
+    }
 }

@@ -1,12 +1,13 @@
 package ru.otus.hw06.atm;
 
 import ru.otus.hw06.Banknote;
+import ru.otus.hw06.atm.cassette_bundle.CassetteBundle;
+import ru.otus.hw06.atm.cassette_bundle.ConcreteCassetteBundle;
 import ru.otus.hw06.cash_bundle.CashBundle;
-import ru.otus.hw06.cash_bundle.ConcreteCashBundle;
 
 public class ConcreteAtm implements Atm {
 
-    private final CashBundle cassette = new ConcreteCashBundle();
+    private final CassetteBundle cassette = new ConcreteCassetteBundle();
 
     @Override
     public ConcreteAtm replenishment(Banknote faceValue, int noteCount) {

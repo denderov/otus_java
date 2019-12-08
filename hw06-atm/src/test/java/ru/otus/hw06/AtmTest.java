@@ -34,7 +34,7 @@ class AtmTest {
     void emptyAtm() {
         Atm atm = new ConcreteAtm();
         atm.getCashBalance();
-        assertThat(output.toString(), containsString("ATM: {Cassette=Cash bundle is empty}"));
+        assertThat(output.toString(), containsString("ATM: {Cassette=Cassette bundle is empty}"));
     }
 
     @Test
@@ -45,7 +45,7 @@ class AtmTest {
                 .replenishment(Banknote.ONE_HUNDRED, 100)
                 .replenishment(Banknote.FIVE_HUNDRED, 100);
         atm.getCashBalance();
-        assertThat(output.toString(), containsString("ATM: {Cassette=Cash bundle: {100=200, 500=100, 1000=100}}"));
+        assertThat(output.toString(), containsString("ATM: {Cassette=Cassette bundle: {100=200, 500=100, 1000=100}}"));
     }
 
     @Test
@@ -58,7 +58,7 @@ class AtmTest {
         atm.withdraw(100500);
         assertThat(output.toString(), containsString("Withdraw cash: {Cash bundle: {500=1, 1000=100}}"));
         atm.getCashBalance();
-        assertThat(output.toString(), containsString("ATM: {Cassette=Cash bundle: {100=200, 500=99}}"));
+        assertThat(output.toString(), containsString("ATM: {Cassette=Cassette bundle: {100=200, 500=99, 1000=0}}"));
     }
 
     @Test
