@@ -74,7 +74,7 @@ public class ConcreteCashBundle implements CashBundle {
             return "Cash bundle is empty";
 
         } else {
-            return "Cash bundle: "+ moneybox;
+            return "Cash bundle: " + moneybox;
         }
 
     }

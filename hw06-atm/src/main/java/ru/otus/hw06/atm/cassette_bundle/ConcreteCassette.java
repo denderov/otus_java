@@ -9,11 +9,10 @@ public class ConcreteCassette implements Cassette {
     private final Banknote banknote;
     private int count;
 
-    public ConcreteCassette(Banknote banknote,int count) {
+    public ConcreteCassette(Banknote banknote, int count) {
         this.banknote = banknote;
         this.count = count;
     }
-
 
     @Override
     public CashBundle getCash(int count) {
@@ -32,10 +31,9 @@ public class ConcreteCassette implements Cassette {
     @Override
     public Cassette put(int count) {
 
-        if (count+this.count >= 0) {
+        if (count + this.count >= 0) {
             this.count += count;
-        }
-        else {
+        } else {
             throw new RuntimeException("The count of the deposit is less than the existing!");
         }
 

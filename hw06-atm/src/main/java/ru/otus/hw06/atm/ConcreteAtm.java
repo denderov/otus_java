@@ -10,7 +10,7 @@ public class ConcreteAtm implements Atm {
     private final CassetteBundle cassette = new ConcreteCassetteBundle();
 
     @Override
-    public ConcreteAtm replenishment(Banknote faceValue, int noteCount) {
+    public Atm replenishment(Banknote faceValue, int noteCount) {
 
         cassette.put(faceValue, noteCount);
 
@@ -38,7 +38,7 @@ public class ConcreteAtm implements Atm {
     public void getAmountBalance() {
 
         int amountBalance = cassette.getAmount();
-        System.out.println("ATM: {Amount=" +amountBalance+'}');
+        System.out.println("ATM: {Amount=" + amountBalance + '}');
 
     }
 

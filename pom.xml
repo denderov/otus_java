@@ -19,6 +19,7 @@
         <module>hw04-agent</module>
         <module>hw05-annotations</module>
         <module>hw06-atm</module>
+        <module>hw06-atmDept</module>
     </modules>
 
     <properties>
