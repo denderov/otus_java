@@ -1,4 +1,6 @@
-package ru.otus.hw07;
+package ru.otus.hw07.moneybag;
+
+import ru.otus.hw07.MemoStatus;
 
 public interface CashWad {
     void save(MemoStatus status);

@@ -3,6 +3,8 @@ package ru.otus.hw07;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import ru.otus.hw07.moneybag.CashWad;
+import ru.otus.hw07.moneybag.FacedCashWad;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

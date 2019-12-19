@@ -1,16 +1,33 @@
-package ru.otus.hw07;
+package ru.otus.hw07.moneybag;
 
-import java.util.Collections;
-import java.util.Map;
-import java.util.SortedMap;
-import java.util.TreeMap;
+import ru.otus.hw07.Banknote;
+import ru.otus.hw07.MemoStatus;
+
+import java.util.*;
 
 public class ConcreteCashHolder implements CashHolder {
-    private final SortedMap<Banknote, CashWad> moneybox = new TreeMap<>();
+
+    private SortedMap<Banknote, CashWad> moneybox = new TreeMap<>();
+
+    private class Memento {
+        private final SortedMap<Banknote, CashWad> memMoneybox = new TreeMap<>();
+
+
+        private Memento() {
+
+            memMoneybox.putAll(moneybox);
+        }
+
+        SortedMap<Banknote, CashWad> getMoneybox() {
+            return memMoneybox;
+        }
+    }
+
+    private final Map<MemoStatus, Memento> mementoMap = new HashMap<>();
 
     @Override
     public CashHolder get(int sum) {
-        saveMoneybox(MemoStatus.CURRENT);
+        save(MemoStatus.CURRENT);
         CashHolder outCashHolder = new ConcreteCashHolder();
 
 
@@ -81,6 +98,13 @@ public class ConcreteCashHolder implements CashHolder {
                 .sum();
     }
 
-    private void saveMoneybox(MemoStatus current) {
+    @Override
+    public void save(MemoStatus current) {
+        mementoMap.put(current, new Memento());
+    }
+
+    @Override
+    public void restore(MemoStatus status) {
+        moneybox = mementoMap.get(status).getMoneybox();
     }
 }

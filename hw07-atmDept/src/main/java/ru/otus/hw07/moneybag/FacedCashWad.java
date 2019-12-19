@@ -1,4 +1,7 @@
-package ru.otus.hw07;
+package ru.otus.hw07.moneybag;
+
+import ru.otus.hw07.Banknote;
+import ru.otus.hw07.MemoStatus;
 
 import java.util.HashMap;
 import java.util.Map;
