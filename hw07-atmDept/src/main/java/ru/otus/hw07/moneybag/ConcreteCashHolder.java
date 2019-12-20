@@ -9,17 +9,28 @@ public class ConcreteCashHolder implements CashHolder {
 
     private SortedMap<Banknote, CashWad> moneybox = new TreeMap<>();
 
+    public ConcreteCashHolder(ConcreteCashHolder concreteCashHolder) {
+        for (SortedMap.Entry<Banknote, CashWad> entry :
+                concreteCashHolder.moneybox.entrySet()) {
+            CashWad cashWad = new FacedCashWad((FacedCashWad) entry.getValue());
+            this.moneybox.put(entry.getKey(), cashWad);
+        }
+    }
+
+    public ConcreteCashHolder() {
+
+    }
+
     private class Memento {
-        private final SortedMap<Banknote, CashWad> memMoneybox = new TreeMap<>();
 
+        private ConcreteCashHolder concreteCashHolder;
 
-        private Memento() {
-
-            memMoneybox.putAll(moneybox);
+        private Memento(ConcreteCashHolder concreteCashHolder) {
+            this.concreteCashHolder = new ConcreteCashHolder(concreteCashHolder);
         }
 
-        SortedMap<Banknote, CashWad> getMoneybox() {
-            return memMoneybox;
+        ConcreteCashHolder getSaved() {
+            return concreteCashHolder;
         }
     }
 
@@ -100,11 +111,11 @@ public class ConcreteCashHolder implements CashHolder {
 
     @Override
     public void save(MemoStatus current) {
-        mementoMap.put(current, new Memento());
+        mementoMap.put(current, new Memento(this));
     }
 
     @Override
     public void restore(MemoStatus status) {
-        moneybox = mementoMap.get(status).getMoneybox();
+        moneybox = mementoMap.get(status).getSaved().moneybox;
     }
 }

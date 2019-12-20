@@ -21,7 +21,7 @@ class ConcreteCashHolderTest {
     }
 
     @Test
-    @DisplayName("Test correct filling cash holder")
+    @DisplayName("Test correct withdraw cash holder")
     void shouldCorrectGetBanknotes() {
         CashHolder withdrawCash =
         cashHolder.putBanknotes(Banknote.ONE_HUNDRED, 5)
@@ -33,7 +33,7 @@ class ConcreteCashHolderTest {
     }
 
     @Test
-    @DisplayName("Test correct filling cash holder")
+    @DisplayName("Test correct undo cash holder")
     void shouldCorrectUndoWhileException() {
         try {
             cashHolder.save(MemoStatus.CURRENT);

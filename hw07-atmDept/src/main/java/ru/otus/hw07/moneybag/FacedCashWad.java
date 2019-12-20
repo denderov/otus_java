@@ -12,14 +12,15 @@ public class FacedCashWad implements CashWad {
     private int count;
 
     private class Memento {
-        private final int memCount;
 
-        private Memento() {
-            this.memCount = count;
+        private final FacedCashWad facedCashWad;
+
+        private Memento(FacedCashWad facedCashWad) {
+            this.facedCashWad = new FacedCashWad(facedCashWad);
         }
 
-        int getCount() {
-            return memCount;
+        FacedCashWad getSaved() {
+            return facedCashWad;
         }
     }
 
@@ -30,14 +31,19 @@ public class FacedCashWad implements CashWad {
         this.count = count;
     }
 
+    public FacedCashWad(FacedCashWad facedCashWad) {
+        this.banknote = facedCashWad.banknote;
+        this.count = facedCashWad.count;
+    }
+
     @Override
     public void save(MemoStatus status) {
-        mementoMap.put(status, new Memento());
+        mementoMap.put(status, new Memento(this));
     }
 
     @Override
     public void restore(MemoStatus status) {
-        this.count = mementoMap.get(status).getCount();
+        this.count = mementoMap.get(status).getSaved().count;
     }
 
     @Override
