@@ -15,4 +15,6 @@ public interface CashHolder {
     CashHolder putBanknotes(Banknote faceValue, int noteCount);
 
     int getAmount();
+
+    CashHolder clone();
 }

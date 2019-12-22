@@ -5,14 +5,14 @@ import ru.otus.hw07.MemoStatus;
 
 import java.util.*;
 
-public class ConcreteCashHolder implements CashHolder {
+public class ConcreteCashHolder implements CashHolder,Cloneable {
 
     private SortedMap<Banknote, CashWad> moneybox = new TreeMap<>();
 
     public ConcreteCashHolder(ConcreteCashHolder concreteCashHolder) {
         for (SortedMap.Entry<Banknote, CashWad> entry :
                 concreteCashHolder.moneybox.entrySet()) {
-            CashWad cashWad = new FacedCashWad((FacedCashWad) entry.getValue());
+            CashWad cashWad = entry.getValue().clone();
             this.moneybox.put(entry.getKey(), cashWad);
         }
     }
@@ -26,7 +26,7 @@ public class ConcreteCashHolder implements CashHolder {
         private ConcreteCashHolder concreteCashHolder;
 
         private Memento(ConcreteCashHolder concreteCashHolder) {
-            this.concreteCashHolder = new ConcreteCashHolder(concreteCashHolder);
+            this.concreteCashHolder = concreteCashHolder.clone();
         }
 
         ConcreteCashHolder getSaved() {
@@ -34,7 +34,7 @@ public class ConcreteCashHolder implements CashHolder {
         }
     }
 
-    private final Map<MemoStatus, Memento> mementoMap = new HashMap<>();
+    private final Map<MemoStatus, Memento> mementoMap = new EnumMap<>(MemoStatus.class);
 
     @Override
     public CashHolder get(int sum) {
@@ -117,5 +117,11 @@ public class ConcreteCashHolder implements CashHolder {
     @Override
     public void restore(MemoStatus status) {
         moneybox = mementoMap.get(status).getSaved().moneybox;
+    }
+
+    @Override
+    public ConcreteCashHolder clone() {
+
+        return new ConcreteCashHolder(this);
     }
 }

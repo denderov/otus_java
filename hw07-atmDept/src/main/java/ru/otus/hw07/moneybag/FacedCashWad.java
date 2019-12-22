@@ -3,10 +3,9 @@ package ru.otus.hw07.moneybag;
 import ru.otus.hw07.Banknote;
 import ru.otus.hw07.MemoStatus;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.EnumMap;
 
-public class FacedCashWad implements CashWad {
+public class FacedCashWad implements CashWad,Cloneable {
 
     private final Banknote banknote;
     private int count;
@@ -16,7 +15,7 @@ public class FacedCashWad implements CashWad {
         private final FacedCashWad facedCashWad;
 
         private Memento(FacedCashWad facedCashWad) {
-            this.facedCashWad = new FacedCashWad(facedCashWad);
+            this.facedCashWad = facedCashWad.clone();
         }
 
         FacedCashWad getSaved() {
@@ -24,7 +23,7 @@ public class FacedCashWad implements CashWad {
         }
     }
 
-    private final Map<MemoStatus, Memento> mementoMap = new HashMap<>();
+    private final EnumMap<MemoStatus, Memento> mementoMap = new EnumMap<>(MemoStatus.class);
 
     public FacedCashWad(Banknote banknote, int count) {
         this.banknote = banknote;
@@ -87,5 +86,10 @@ public class FacedCashWad implements CashWad {
     @Override
     public int getAmount() {
         return this.getFaceValue() * this.getCount();
+    }
+
+    @Override
+    public FacedCashWad clone() {
+        return new FacedCashWad(this);
     }
 }

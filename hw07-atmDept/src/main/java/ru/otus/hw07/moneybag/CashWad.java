@@ -16,4 +16,6 @@ public interface CashWad {
     int getCount();
 
     int getAmount();
+
+    CashWad clone();
 }
