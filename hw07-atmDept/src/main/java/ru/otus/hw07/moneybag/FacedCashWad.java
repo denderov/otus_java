@@ -30,7 +30,7 @@ public class FacedCashWad implements CashWad,Cloneable {
         this.count = count;
     }
 
-    public FacedCashWad(FacedCashWad facedCashWad) {
+    private FacedCashWad(FacedCashWad facedCashWad) {
         this.banknote = facedCashWad.banknote;
         this.count = facedCashWad.count;
     }
@@ -65,7 +65,7 @@ public class FacedCashWad implements CashWad,Cloneable {
     @Override
     public CashWad putBanknotes(int noteCount) {
         if (noteCount > 0) {
-            this.count = noteCount;
+            this.count += noteCount;
         } else {
             throw new RuntimeException("The count of the deposit cannot be less than the existing!");
         }
@@ -91,5 +91,10 @@ public class FacedCashWad implements CashWad,Cloneable {
     @Override
     public FacedCashWad clone() {
         return new FacedCashWad(this);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(count);
     }
 }

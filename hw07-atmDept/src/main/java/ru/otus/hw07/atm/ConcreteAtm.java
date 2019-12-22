@@ -1,12 +1,38 @@
 package ru.otus.hw07.atm;
 
 import ru.otus.hw07.Banknote;
+import ru.otus.hw07.MemoStatus;
 import ru.otus.hw07.moneybag.CashHolder;
 import ru.otus.hw07.moneybag.ConcreteCashHolder;
 
+import java.util.EnumMap;
+import java.util.Map;
+
 public class ConcreteAtm implements Atm {
 
-    private final CashHolder cassette = new ConcreteCashHolder();
+    private CashHolder cassette = new ConcreteCashHolder();
+
+    private ConcreteAtm(ConcreteAtm concreteAtm) {
+        this.cassette = concreteAtm.cassette.clone();
+    }
+
+    public ConcreteAtm() {
+    }
+
+    private class Memento {
+
+        private ConcreteAtm savedAtm;
+
+        private Memento(ConcreteAtm concreteAtm) {
+            this.savedAtm = concreteAtm.clone();
+        }
+
+        ConcreteAtm getSaved() {
+            return savedAtm;
+        }
+    }
+
+    private final Map<MemoStatus, Memento> mementoMap = new EnumMap<>(MemoStatus.class);
 
     @Override
     public Atm replenishment(Banknote faceValue, int noteCount) {
@@ -34,10 +60,9 @@ public class ConcreteAtm implements Atm {
     }
 
     @Override
-    public void getAmountBalance() {
+    public int getAmount() {
 
-        int amountBalance = cassette.getAmount();
-        System.out.println("ATM: {Amount=" + amountBalance + '}');
+        return cassette.getAmount();
 
     }
 
@@ -54,4 +79,20 @@ public class ConcreteAtm implements Atm {
                 "Cassette=" + cassette +
                 '}';
     }
+
+    @Override
+    public void save(MemoStatus status) {
+        mementoMap.put(status, new Memento(this));
+    }
+
+    @Override
+    public void restore(MemoStatus status) {
+        this.cassette = mementoMap.get(status).getSaved().cassette;
+    }
+
+    @Override
+    public ConcreteAtm clone() {
+        return new ConcreteAtm(this);
+    }
+
 }

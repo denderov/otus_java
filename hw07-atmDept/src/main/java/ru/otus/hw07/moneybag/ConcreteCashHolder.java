@@ -9,7 +9,7 @@ public class ConcreteCashHolder implements CashHolder,Cloneable {
 
     private SortedMap<Banknote, CashWad> moneybox = new TreeMap<>();
 
-    public ConcreteCashHolder(ConcreteCashHolder concreteCashHolder) {
+    private ConcreteCashHolder(ConcreteCashHolder concreteCashHolder) {
         for (SortedMap.Entry<Banknote, CashWad> entry :
                 concreteCashHolder.moneybox.entrySet()) {
             CashWad cashWad = entry.getValue().clone();
@@ -69,8 +69,6 @@ public class ConcreteCashHolder implements CashHolder,Cloneable {
             throw new RuntimeException("It's impossible to collect cash!");
         }
 
-//        this.moneybox.values().remove(0);
-
         return outCashHolder;
     }
 
@@ -123,5 +121,17 @@ public class ConcreteCashHolder implements CashHolder,Cloneable {
     public ConcreteCashHolder clone() {
 
         return new ConcreteCashHolder(this);
+    }
+
+    @Override
+    public String toString() {
+
+        if (moneybox.isEmpty()) {
+            return "Cash holder is empty";
+
+        } else {
+            return "Cash holder: " + moneybox;
+        }
+
     }
 }
