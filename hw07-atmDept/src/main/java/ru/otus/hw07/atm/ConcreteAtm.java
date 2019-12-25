@@ -81,13 +81,23 @@ public class ConcreteAtm implements Atm {
     }
 
     @Override
+    public void save(MemoStatus status) {
+        mementoMap.put(status, new Memento(this));
+    }
+
+    @Override
+    public void restore(MemoStatus status) {
+        this.cassette = mementoMap.get(status).getSaved().cassette;
+    }
+
+    @Override
     public void save() {
-        mementoMap.put(MemoStatus.INIT, new Memento(this));
+        save(MemoStatus.INIT);
     }
 
     @Override
     public void restore() {
-        this.cassette = mementoMap.get(MemoStatus.INIT).getSaved().cassette;
+        restore(MemoStatus.INIT);
     }
 
     @Override

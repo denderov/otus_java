@@ -1,6 +1,7 @@
 package ru.otus.hw07.atm;
 
 import ru.otus.hw07.Banknote;
+import ru.otus.hw07.MemoStatus;
 
 public interface Atm {
 
@@ -11,6 +12,10 @@ public interface Atm {
     int getAmount();
 
     void getCashBalance();
+
+    void save(MemoStatus status);
+
+    void restore(MemoStatus status);
 
     void save();
 
