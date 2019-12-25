@@ -75,7 +75,7 @@ public class AtmDepartmentTest {
         atm1.withdraw(150000);
         atm2.withdraw(15);
 
-        atmDepartment.restore(MemoStatus.INIT);
+        atmDepartment.restore();
 
         atmDepartment.printAmount();
         assertThat(output.toString()).contains("ATM department {Amount=170015}");

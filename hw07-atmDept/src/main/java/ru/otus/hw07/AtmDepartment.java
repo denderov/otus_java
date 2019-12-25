@@ -17,12 +17,12 @@ public class AtmDepartment {
     }
 
     public AtmDepartment addAtm(Atm atm) {
-        atm.save(MemoStatus.INIT);
+        atm.save();
         atmList.add(atm);
         return this;
     }
 
-    public void restore(MemoStatus status) {
-        atmList.forEach(atm -> atm.restore(status));
+    public void restore() {
+        atmList.forEach(atm -> atm.restore());
     }
 }
