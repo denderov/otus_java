@@ -7,6 +7,10 @@ import java.util.*;
 
 public class ConcreteCashHolder implements CashHolder,Cloneable {
 
+    public SortedMap<Banknote, CashWad> getMoneybox() {
+        return moneybox;
+    }
+
     private SortedMap<Banknote, CashWad> moneybox = new TreeMap<>();
 
     private ConcreteCashHolder(ConcreteCashHolder concreteCashHolder) {
@@ -21,20 +25,7 @@ public class ConcreteCashHolder implements CashHolder,Cloneable {
 
     }
 
-    private class Memento {
-
-        private ConcreteCashHolder concreteCashHolder;
-
-        private Memento(ConcreteCashHolder concreteCashHolder) {
-            this.concreteCashHolder = concreteCashHolder.clone();
-        }
-
-        ConcreteCashHolder getSaved() {
-            return concreteCashHolder;
-        }
-    }
-
-    private final Map<MemoStatus, Memento> mementoMap = new EnumMap<>(MemoStatus.class);
+    private final Map<MemoStatus, CashHolderMemento> mementoMap = new EnumMap<>(MemoStatus.class);
 
     @Override
     public CashHolder get(int sum) {
@@ -109,12 +100,12 @@ public class ConcreteCashHolder implements CashHolder,Cloneable {
 
     @Override
     public void save(MemoStatus current) {
-        mementoMap.put(current, new Memento(this));
+        mementoMap.put(current, new CashHolderMemento(this));
     }
 
     @Override
     public void restore(MemoStatus status) {
-        moneybox = mementoMap.get(status).getSaved().moneybox;
+        moneybox = mementoMap.get(status).getSaved().getMoneybox();
     }
 
     @Override

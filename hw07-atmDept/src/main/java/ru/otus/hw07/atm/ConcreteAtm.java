@@ -3,6 +3,7 @@ package ru.otus.hw07.atm;
 import ru.otus.hw07.Banknote;
 import ru.otus.hw07.MemoStatus;
 import ru.otus.hw07.moneybag.CashHolder;
+import ru.otus.hw07.moneybag.CashHolderMemento;
 import ru.otus.hw07.moneybag.ConcreteCashHolder;
 
 import java.util.EnumMap;
@@ -19,20 +20,7 @@ public class ConcreteAtm implements Atm {
     public ConcreteAtm() {
     }
 
-    private class Memento {
-
-        private ConcreteAtm savedAtm;
-
-        private Memento(ConcreteAtm concreteAtm) {
-            this.savedAtm = concreteAtm.clone();
-        }
-
-        ConcreteAtm getSaved() {
-            return savedAtm;
-        }
-    }
-
-    private final Map<MemoStatus, Memento> mementoMap = new EnumMap<>(MemoStatus.class);
+    private final Map<MemoStatus, CashHolderMemento> mementoMap = new EnumMap<>(MemoStatus.class);
 
     @Override
     public Atm replenishment(Banknote faceValue, int noteCount) {
@@ -82,12 +70,12 @@ public class ConcreteAtm implements Atm {
 
     @Override
     public void save(MemoStatus status) {
-        mementoMap.put(status, new Memento(this));
+        mementoMap.put(status, new CashHolderMemento(this.cassette));
     }
 
     @Override
     public void restore(MemoStatus status) {
-        this.cassette = mementoMap.get(status).getSaved().cassette;
+        this.cassette = mementoMap.get(status).getSaved();
     }
 
     @Override

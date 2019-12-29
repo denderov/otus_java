@@ -3,6 +3,8 @@ package ru.otus.hw07.moneybag;
 import ru.otus.hw07.Banknote;
 import ru.otus.hw07.MemoStatus;
 
+import java.util.SortedMap;
+
 public interface CashHolder {
     void save(MemoStatus status);
 
@@ -17,4 +19,6 @@ public interface CashHolder {
     int getAmount();
 
     CashHolder clone();
+
+    SortedMap<Banknote, CashWad> getMoneybox();
 }
