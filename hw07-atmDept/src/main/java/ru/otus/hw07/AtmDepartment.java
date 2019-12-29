@@ -1,6 +1,9 @@
 package ru.otus.hw07;
 
 import ru.otus.hw07.atm.Atm;
+import ru.otus.hw07.command.AddAtmToList;
+import ru.otus.hw07.command.Command;
+import ru.otus.hw07.command.SaveAtm;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +20,10 @@ public class AtmDepartment {
     }
 
     public AtmDepartment addAtm(Atm atm) {
-        atm.save();
-        atmList.add(atm);
+        Command firstSave = new SaveAtm(atm);
+        Command whenAdd = new AddAtmToList(atmList,atm);
+        firstSave.setNext(whenAdd);
+        firstSave.execute();
         return this;
     }
 
