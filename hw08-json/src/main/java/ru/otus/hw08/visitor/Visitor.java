@@ -1,7 +1,6 @@
 package ru.otus.hw08.visitor;
 
 import ru.otus.hw08.traversed.type.*;
-import ru.otus.hw08.traversed_type.*;
 
 public interface Visitor {
     void visit(TraversedInteger traversed) throws IllegalAccessException;

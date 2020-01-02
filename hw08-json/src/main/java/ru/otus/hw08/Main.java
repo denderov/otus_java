@@ -4,7 +4,6 @@ import ru.otus.hw08.traversed.object.Nested;
 import ru.otus.hw08.traversed.object.PrimitiveTypesAndStrings;
 import ru.otus.hw08.traversed.object.Root;
 import ru.otus.hw08.traversed.type.*;
-import ru.otus.hw08.traversed_type.*;
 import ru.otus.hw08.visitor.JsonVisitor;
 import ru.otus.hw08.visitor.Visitor;
 
