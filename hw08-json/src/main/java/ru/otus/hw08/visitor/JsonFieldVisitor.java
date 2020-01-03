@@ -1,6 +1,7 @@
 package ru.otus.hw08.visitor;
 
 import ru.otus.hw08.traversed.type.TraversedField;
+import ru.otus.hw08.traversed.type.TraversedObject;
 
 import javax.json.JsonObjectBuilder;
 import java.lang.reflect.Field;
@@ -30,8 +31,9 @@ public class JsonFieldVisitor implements FieldVisitor {
         } else if (Objects.isNull(field.get(parentObject))) {
             jsonObjectBuilder.addNull(field.getName());
         } else {
-
-//            jsonObjectBuilder.add(fieldName,field.get(parentObject).toString();
+            JsonObjectVisitor fieldObjectVisitor = new JsonObjectVisitor();
+            new TraversedObject(field.get(parentObject)).accept(fieldObjectVisitor);
+            jsonObjectBuilder.add(fieldName,fieldObjectVisitor.getJsonObjectBuilder());
         }
 
     }
