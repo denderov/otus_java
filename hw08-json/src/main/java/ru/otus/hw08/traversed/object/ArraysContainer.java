@@ -2,12 +2,13 @@ package ru.otus.hw08.traversed.object;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Objects;
 
 public class ArraysContainer {
     private final long id;
-    private int[] quantityChain;
-    private char[][] chars;
-    private Collection<String> names;
+    private final int[] quantityChain;
+    private final char[][] chars;
+    private final Collection<String> names;
 
     public ArraysContainer(long id, int[] quantityChain, char[][] chars, Collection<String> names) {
         this.id = id;
@@ -36,7 +37,7 @@ public class ArraysContainer {
         if (id != that.id) return false;
         if (!Arrays.equals(quantityChain, that.quantityChain)) return false;
         if (!Arrays.deepEquals(chars, that.chars)) return false;
-        return names != null ? names.equals(that.names) : that.names == null;
+        return Objects.equals(names, that.names);
     }
 
     @Override

@@ -3,7 +3,7 @@ package ru.otus.hw08.traversed.type;
 import ru.otus.hw08.visitor.ObjectVisitor;
 
 public class TraversedObject {
-    private Object object;
+    private final Object object;
 
     public TraversedObject(Object object) {
         this.object = object;

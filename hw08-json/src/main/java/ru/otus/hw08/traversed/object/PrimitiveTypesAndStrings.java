@@ -3,14 +3,14 @@ package ru.otus.hw08.traversed.object;
 import java.util.Objects;
 
 public class PrimitiveTypesAndStrings {
-    private byte i;
-    private int id;
-    private int longId;
-    private float quantity;
-    private double sum;
-    private char litera;
-    private boolean checked;
-    private String currency;
+    private final byte i;
+    private final int id;
+    private final int longId;
+    private final float quantity;
+    private final double sum;
+    private final char litera;
+    private final boolean checked;
+    private final String currency;
 
     public PrimitiveTypesAndStrings(byte i, int id, int longId, float quantity, double sum, char litera, boolean checked, String currency) {
         this.i = i;

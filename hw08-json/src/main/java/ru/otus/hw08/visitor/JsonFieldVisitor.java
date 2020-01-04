@@ -12,7 +12,7 @@ import java.util.Objects;
 
 public class JsonFieldVisitor implements FieldVisitor {
 
-    private JsonObjectVisitor jsonObjectVisitor;
+    private final JsonObjectVisitor jsonObjectVisitor;
 
     JsonFieldVisitor(JsonObjectVisitor jsonObjectVisitor) {
         this.jsonObjectVisitor = jsonObjectVisitor;

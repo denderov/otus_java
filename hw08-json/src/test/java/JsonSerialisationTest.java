@@ -13,7 +13,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class JsonSerialisationTest {
+class JsonSerialisationTest {
     @Test
     @DisplayName("Test correct serialisation object with primitives")
     void PrimitiveTypesAndStringsObjectTest() throws IllegalAccessException {
