@@ -60,8 +60,6 @@ public class JsonSerialisationTest {
 
         String json = jsonObjectVisitor.getJsonObject().toString();
 
-        System.out.println(json);
-
         ArraysContainer expected = new Gson().fromJson(json, ArraysContainer.class);
         assertThat(arraysContainer).isEqualTo(expected);
     }
