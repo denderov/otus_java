@@ -13,24 +13,17 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) throws IllegalAccessException {
-        JsonObjectVisitor jsonObjectVisitor = new JsonObjectVisitor();
 
         PrimitiveTypesAndStrings primitiveTypesAndStrings = new PrimitiveTypesAndStrings((byte) 1, 2, 3, 4.5f,6.7, '3', true, "currency");
 
-        new TraversedObject(primitiveTypesAndStrings).accept(jsonObjectVisitor);
-
-        System.out.println(jsonObjectVisitor.getJsonObject());
-
-        jsonObjectVisitor = new JsonObjectVisitor();
+        System.out.println(toJson(primitiveTypesAndStrings));
 
         Nested nestedInNested = new Nested(789, null);
         Nested nested = new Nested(456, nestedInNested);
         Root root = new Root(123, "Root", nested);
 
-        new TraversedObject(root).accept(jsonObjectVisitor);
-        System.out.println(jsonObjectVisitor.getJsonObject());
+        System.out.println(toJson(root));
 
-        jsonObjectVisitor = new JsonObjectVisitor();
         int[] ints = {1, 2, 3, 4};
         char[][] chars = {{'a', 'b', 'c'}, {'d', 'e', 'f'}};
         List<String> names = new ArrayList<>();
@@ -39,8 +32,15 @@ public class Main {
         names.add(null);
         ArraysContainer arraysContainer = new ArraysContainer(1, ints, chars, names);
 
-        new TraversedObject(arraysContainer).accept(jsonObjectVisitor);
-        System.out.println(jsonObjectVisitor.getJsonObject());
+        System.out.println(toJson(arraysContainer));
+    }
+
+    private static String toJson(Object object) throws IllegalAccessException {
+        JsonObjectVisitor jsonObjectVisitor = new JsonObjectVisitor();
+
+        new TraversedObject(object).accept(jsonObjectVisitor);
+
+        return jsonObjectVisitor.getJsonObject().toString();
     }
 
 }
