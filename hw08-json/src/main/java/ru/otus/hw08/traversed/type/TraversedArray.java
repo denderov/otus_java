@@ -9,7 +9,7 @@ public class TraversedArray {
         this.array = array;
     }
 
-    public void accept(ArrayVisitor arrayVisitor) {
+    public void accept(ArrayVisitor arrayVisitor) throws IllegalAccessException {
         arrayVisitor.visit(this);
     }
 

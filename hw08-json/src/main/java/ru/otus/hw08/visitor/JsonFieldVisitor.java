@@ -6,6 +6,7 @@ import ru.otus.hw08.traversed.type.TraversedObject;
 
 import javax.json.JsonObjectBuilder;
 import java.lang.reflect.Field;
+import java.util.Collection;
 import java.util.Objects;
 
 public class JsonFieldVisitor implements FieldVisitor {
@@ -27,6 +28,8 @@ public class JsonFieldVisitor implements FieldVisitor {
             jsonObjectBuilder.add(fieldName,field.getLong(parentObject));
         } else if (isFloatNumber(field.getType())) {
             jsonObjectBuilder.add(fieldName,field.getDouble(parentObject));
+        } else if (isBoolean(field.getType())) {
+            jsonObjectBuilder.add(fieldName,field.getBoolean(parentObject));
         } else if (isString(field.getType())) {
             jsonObjectBuilder.add(fieldName,field.get(parentObject).toString());
         } else if (Objects.isNull(field.get(parentObject))) {
@@ -34,6 +37,11 @@ public class JsonFieldVisitor implements FieldVisitor {
         } else if (field.getType().isArray()) {
             JsonArrayVisitor jsonArrayVisitor = new JsonArrayVisitor();
             new TraversedArray(field.get(parentObject)).accept(jsonArrayVisitor);
+            jsonObjectBuilder.add(fieldName, jsonArrayVisitor.getJsonArrayBuilder());
+        } else if (isCollection(field.getType())) {
+            JsonArrayVisitor jsonArrayVisitor = new JsonArrayVisitor();
+            Collection<Object> currentCollection = (Collection<Object>) field.get(parentObject);
+            new TraversedArray(currentCollection.toArray()).accept(jsonArrayVisitor);
             jsonObjectBuilder.add(fieldName, jsonArrayVisitor.getJsonArrayBuilder());
         } else {
             JsonObjectVisitor fieldObjectVisitor = new JsonObjectVisitor();
@@ -58,5 +66,13 @@ public class JsonFieldVisitor implements FieldVisitor {
                 || type == short.class
                 || type  == int.class
                 || type == long.class;
+    }
+
+    private boolean isBoolean(Class<?> type) {
+        return type == boolean.class;
+    }
+
+    private boolean isCollection(Class<?> type) {
+        return Collection.class.isAssignableFrom(type);
     }
 }
