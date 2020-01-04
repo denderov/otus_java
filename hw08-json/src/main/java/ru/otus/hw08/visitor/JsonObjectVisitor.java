@@ -8,29 +8,26 @@ import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.util.Objects;
 
 public class JsonObjectVisitor implements ObjectVisitor {
 
-    private final JsonObjectBuilder jsonObjectBuilder;
-
-    public JsonObjectVisitor() {
-        jsonObjectBuilder = Json.createObjectBuilder();
-    }
-
+    private JsonObjectBuilder jsonObjectBuilder;
 
     @Override
     public void visit(TraversedObject traversedObject) throws IllegalAccessException {
         Object parentObject = traversedObject.getObject();
-        Field[] fields = parentObject.getClass().getDeclaredFields();
+        if (!Objects.isNull(parentObject)) {
+            jsonObjectBuilder = Json.createObjectBuilder();
+            Field[] fields = parentObject.getClass().getDeclaredFields();
 
-        for (Field field:
-                fields) {
-            if (isNotStatic(field)) {
-                new TraversedField(parentObject,field).accept(new JsonFieldVisitor(this));
+            for (Field field:
+                    fields) {
+                if (isNotStatic(field)) {
+                    new TraversedField(parentObject,field).accept(new JsonFieldVisitor(this));
+                }
             }
         }
-
-
     }
 
     private boolean isNotStatic(Field field) {
@@ -42,6 +39,6 @@ public class JsonObjectVisitor implements ObjectVisitor {
     }
 
     public JsonObject getJsonObject() {
-        return getJsonObjectBuilder().build();
+        return Objects.isNull(jsonObjectBuilder)?null:getJsonObjectBuilder().build();
     }
 }

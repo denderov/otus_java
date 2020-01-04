@@ -31,11 +31,12 @@ public class JsonArrayVisitor implements ArrayVisitor {
                 jsonArrayBuilder.add(Array.getBoolean(array, i));
             } else {
                 Object currentObject = Array.get(array, i);
+                Class<?> objectType = currentObject.getClass();
                 if (Objects.isNull(currentObject)) {
                     jsonArrayBuilder.addNull();
-                } else if (isString(type)) {
+                } else if (isString(objectType)) {
                     jsonArrayBuilder.add(currentObject.toString());
-                } else if (type.isArray()) {
+                } else if (objectType.isArray()) {
                     JsonArrayVisitor jsonArrayVisitor = new JsonArrayVisitor();
                     new TraversedArray(currentObject).accept(jsonArrayVisitor);
                     jsonArrayBuilder.add(jsonArrayVisitor.getJsonArrayBuilder());
@@ -60,6 +61,7 @@ public class JsonArrayVisitor implements ArrayVisitor {
 
     private boolean isString(Class<?> type) {
         return type == char.class
+                || type == Character.class
                 || type == String.class;
     }
 
@@ -79,7 +81,7 @@ public class JsonArrayVisitor implements ArrayVisitor {
         return type == boolean.class;
     }
 
-    private boolean isCollection(Class<?> type) {
+    public boolean isCollection(Class<?> type) {
         return Collection.class.isAssignableFrom(type);
     }
 }

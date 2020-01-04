@@ -41,7 +41,8 @@ public class JsonFieldVisitor implements FieldVisitor {
         } else if (isCollection(field.getType())) {
             JsonArrayVisitor jsonArrayVisitor = new JsonArrayVisitor();
             Collection<Object> currentCollection = (Collection<Object>) field.get(parentObject);
-            new TraversedArray(currentCollection.toArray()).accept(jsonArrayVisitor);
+            Object[] array = currentCollection.toArray();
+            new TraversedArray(array).accept(jsonArrayVisitor);
             jsonObjectBuilder.add(fieldName, jsonArrayVisitor.getJsonArrayBuilder());
         } else {
             JsonObjectVisitor fieldObjectVisitor = new JsonObjectVisitor();

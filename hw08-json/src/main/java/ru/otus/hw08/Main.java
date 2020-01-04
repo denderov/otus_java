@@ -1,6 +1,5 @@
 package ru.otus.hw08;
 
-import com.google.gson.Gson;
 import ru.otus.hw08.traversed.object.ArraysContainer;
 import ru.otus.hw08.traversed.object.Nested;
 import ru.otus.hw08.traversed.object.PrimitiveTypesAndStrings;
@@ -34,16 +33,13 @@ public class Main {
         jsonObjectVisitor = new JsonObjectVisitor();
         int[] ints = {1, 2, 3, 4};
         char[][] chars = {{'a', 'b', 'c'}, {'d', 'e', 'f'}};
-        List<Object> objects = new ArrayList<>();
-        objects.add(primitiveTypesAndStrings);
-        objects.add(root);
-        ArraysContainer arraysContainer = new ArraysContainer(1, ints, chars, objects);
+        List<String> names = new ArrayList<>();
+        names.add("One");
+        names.add("Two");
+        ArraysContainer arraysContainer = new ArraysContainer(1, ints, chars, names);
 
         new TraversedObject(arraysContainer).accept(jsonObjectVisitor);
         System.out.println(jsonObjectVisitor.getJsonObject());
-
-        Gson gson = new Gson();
-        System.out.println(gson.toJson(arraysContainer));
     }
 
 }
