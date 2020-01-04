@@ -36,6 +36,7 @@ public class Main {
         List<String> names = new ArrayList<>();
         names.add("One");
         names.add("Two");
+        names.add(null);
         ArraysContainer arraysContainer = new ArraysContainer(1, ints, chars, names);
 
         new TraversedObject(arraysContainer).accept(jsonObjectVisitor);

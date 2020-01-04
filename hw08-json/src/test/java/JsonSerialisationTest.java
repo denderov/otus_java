@@ -54,6 +54,7 @@ public class JsonSerialisationTest {
         List<String> strings = new ArrayList<>();
         strings.add("One");
         strings.add("Two");
+        strings.add(null);
         ArraysContainer arraysContainer = new ArraysContainer(1, ints, chars, strings);
 
         new TraversedObject(arraysContainer).accept(jsonObjectVisitor);
