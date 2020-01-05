@@ -2,6 +2,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import ru.otus.hw08.JsonMaker;
 import ru.otus.hw08.traversed.object.ArraysContainer;
 import ru.otus.hw08.traversed.object.Nested;
 import ru.otus.hw08.traversed.object.PrimitiveTypesAndStrings;
@@ -29,18 +30,18 @@ class JsonSerialisationTest {
 
         assertThat(gson.toJson(null)).isEqualTo(gson.toJson(null));
 
-        assertThat(toJsonString(null)).isEqualTo(gson.toJson(null));
-        assertThat(toJsonString((byte)1)).isEqualTo(gson.toJson((byte)1));
-        assertThat(toJsonString((short)2f)).isEqualTo(gson.toJson((short)2f));
-        assertThat(toJsonString(3)).isEqualTo(gson.toJson(3));
-        assertThat(toJsonString(4L)).isEqualTo(gson.toJson(4L));
-        assertThat(toJsonString(5f)).isEqualTo(gson.toJson(5f));
-        assertThat(toJsonString(6d)).isEqualTo(gson.toJson(6d));
-        assertThat(toJsonString("aaa")).isEqualTo(gson.toJson("aaa"));
-        assertThat(toJsonString('a')).isEqualTo(gson.toJson('a'));
-        assertThat(toJsonString(new int[] {1, 2, 3})).isEqualTo(gson.toJson(new int[] {1, 2, 3}));
-        assertThat(toJsonString(List.of(4, 5, 6))).isEqualTo(gson.toJson(List.of(4, 5, 6)));
-        assertThat(toJsonString(Collections.singletonList(1))).isEqualTo(gson.toJson(Collections.singletonList(1)));
+        assertThat(JsonMaker.toJson(null)).isEqualTo(gson.toJson(null));
+        assertThat(JsonMaker.toJson((byte)1)).isEqualTo(gson.toJson((byte)1));
+        assertThat(JsonMaker.toJson((short)2f)).isEqualTo(gson.toJson((short)2f));
+        assertThat(JsonMaker.toJson(3)).isEqualTo(gson.toJson(3));
+        assertThat(JsonMaker.toJson(4L)).isEqualTo(gson.toJson(4L));
+        assertThat(JsonMaker.toJson(5f)).isEqualTo(gson.toJson(5f));
+        assertThat(JsonMaker.toJson(6d)).isEqualTo(gson.toJson(6d));
+        assertThat(JsonMaker.toJson("aaa")).isEqualTo(gson.toJson("aaa"));
+        assertThat(JsonMaker.toJson('a')).isEqualTo(gson.toJson('a'));
+        assertThat(JsonMaker.toJson(new int[] {1, 2, 3})).isEqualTo(gson.toJson(new int[] {1, 2, 3}));
+        assertThat(JsonMaker.toJson(List.of(4, 5, 6))).isEqualTo(gson.toJson(List.of(4, 5, 6)));
+        assertThat(JsonMaker.toJson(Collections.singletonList(1))).isEqualTo(gson.toJson(Collections.singletonList(1)));
     }
 
     @Test
@@ -48,7 +49,7 @@ class JsonSerialisationTest {
     void PrimitiveTypesAndStringsObjectTest() throws IllegalAccessException {
         Gson gson = new GsonBuilder().serializeNulls().create();
 
-        assertThat(toJsonString(new PrimitiveTypesAndStrings((byte) 1, 2, 3, 4.5f,6.7, '3', true, "currency")))
+        assertThat(JsonMaker.toJson(new PrimitiveTypesAndStrings((byte) 1, 2, 3, 4.5f,6.7, '3', true, "currency")))
                 .isEqualTo(gson.toJson(new PrimitiveTypesAndStrings((byte) 1, 2, 3, 4.5f,6.7, '3', true, "currency")));
     }
 
@@ -61,7 +62,7 @@ class JsonSerialisationTest {
         Nested nested = new Nested(456, nestedInNested);
         Root root = new Root(123, "Root", nested);
 
-        assertThat(toJsonString(root))
+        assertThat(JsonMaker.toJson(root))
                 .isEqualTo(gson.toJson(root));
     }
 
@@ -78,7 +79,7 @@ class JsonSerialisationTest {
         strings.add(null);
         ArraysContainer arraysContainer = new ArraysContainer(1, ints, chars, strings);
 
-        assertThat(toJsonString(arraysContainer))
+        assertThat(JsonMaker.toJson(arraysContainer))
                 .isEqualTo(gson.toJson(arraysContainer));
     }
 }
