@@ -18,15 +18,16 @@ public class JsonObjectVisitor implements ObjectVisitor {
     public void visit(TraversedObject traversedObject) throws IllegalAccessException {
         Object parentObject = traversedObject.getObject();
         if (!Objects.isNull(parentObject)) {
-            jsonObjectBuilder = Json.createObjectBuilder();
-            Field[] fields = parentObject.getClass().getDeclaredFields();
+                jsonObjectBuilder = Json.createObjectBuilder();
+                Field[] fields = parentObject.getClass().getDeclaredFields();
 
-            for (Field field:
-                    fields) {
-                if (isNotStatic(field)) {
-                    new TraversedField(parentObject,field).accept(new JsonFieldVisitor(this));
+                for (Field field:
+                        fields) {
+                    if (isNotStatic(field)) {
+                        new TraversedField(parentObject,field).accept(new JsonFieldVisitor(this));
+                    }
                 }
-            }
+
         }
     }
 
@@ -38,7 +39,4 @@ public class JsonObjectVisitor implements ObjectVisitor {
         return jsonObjectBuilder;
     }
 
-    public JsonObject getJsonObject() {
-        return Objects.isNull(jsonObjectBuilder)?null:getJsonObjectBuilder().build();
-    }
 }
