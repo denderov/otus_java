@@ -1,5 +1,7 @@
 package ru.otus.hw08;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import ru.otus.hw08.traversed.object.ArraysContainer;
 import ru.otus.hw08.traversed.object.Nested;
 import ru.otus.hw08.traversed.object.PrimitiveTypesAndStrings;
@@ -7,6 +9,8 @@ import ru.otus.hw08.traversed.object.Root;
 import ru.otus.hw08.traversed.type.TraversedObject;
 import ru.otus.hw08.visitor.JsonObjectVisitor;
 
+import javax.json.Json;
+import javax.json.JsonArrayBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +44,7 @@ public class Main {
 
         new TraversedObject(object).accept(jsonObjectVisitor);
 
-        return jsonObjectVisitor.getJsonObject().toString();
+        return jsonObjectVisitor.getJsonObject();
     }
 
 }

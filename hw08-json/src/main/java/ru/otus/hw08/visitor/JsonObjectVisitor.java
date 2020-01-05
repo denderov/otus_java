@@ -4,7 +4,6 @@ import ru.otus.hw08.traversed.type.TraversedField;
 import ru.otus.hw08.traversed.type.TraversedObject;
 
 import javax.json.Json;
-import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -38,7 +37,7 @@ public class JsonObjectVisitor implements ObjectVisitor {
         return jsonObjectBuilder;
     }
 
-    public JsonObject getJsonObject() {
-        return Objects.isNull(jsonObjectBuilder)?null:getJsonObjectBuilder().build();
+    public String getJsonObject() {
+        return Objects.isNull(jsonObjectBuilder)?"null":getJsonObjectBuilder().build().toString();
     }
 }
