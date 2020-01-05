@@ -34,7 +34,7 @@ public class ExecutorDemo {
       Optional<User> user = executor.selectRecord(connection, "select id, name from user where id  = ?", userId, resultSet -> {
         try {
           if (resultSet.next()) {
-            return new User(resultSet.getLong("id"), resultSet.getString("name"));
+            return new User(resultSet.getLong("id"), resultSet.getString("name"), age);
           }
         } catch (SQLException e) {
           logger.error(e.getMessage(), e);

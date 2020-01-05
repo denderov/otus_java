@@ -34,7 +34,7 @@ public class DbServiceDemo {
     DbExecutor<User> dbExecutor = new DbExecutor<>();
     UserDao userDao = new UserDaoJdbc(sessionManager, dbExecutor);
     DBServiceUser dbServiceUser = new DbServiceUserImpl(userDao);
-    long id = dbServiceUser.saveUser(new User(0, "dbServiceUser"));
+    long id = dbServiceUser.saveUser(new User(0, "dbServiceUser", age));
     Optional<User> user = dbServiceUser.getUser(id);
 
     System.out.println(user);
