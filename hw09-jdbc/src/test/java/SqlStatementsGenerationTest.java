@@ -3,6 +3,7 @@ import org.junit.jupiter.api.Test;
 import ru.otus.traverse.builder.InsertBuilder;
 import ru.otus.traverse.builder.SelectBuilder;
 import ru.otus.traverse.builder.SqlStatementBuilder;
+import ru.otus.traverse.builder.UpdateBuilder;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -31,4 +32,17 @@ public class SqlStatementsGenerationTest {
                 .build();
         assertThat(insertStatement).isEqualTo("insert into user(name,age) values (?,?)");
     }
+
+    @Test
+    @DisplayName("Test correct building update statement")
+    void updateStatementBuildingTest() {
+        SqlStatementBuilder statementBuilder = new UpdateBuilder();
+        String selectStatement = statementBuilder.addTableName("user")
+                .addIdColumnName("id")
+                .addColumnName("name")
+                .addColumnName("age")
+                .build();
+        assertThat(selectStatement).isEqualTo("update user set name = ?, age = ? where id = ?");
+    }
+
 }
