@@ -1,16 +1,12 @@
 package ru.otus.hw08;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import ru.otus.hw08.traversed.object.ArraysContainer;
 import ru.otus.hw08.traversed.object.Nested;
 import ru.otus.hw08.traversed.object.PrimitiveTypesAndStrings;
 import ru.otus.hw08.traversed.object.Root;
-import ru.otus.hw08.traversed.type.TraversedObject;
-import ru.otus.hw08.visitor.JsonObjectVisitor;
+import ru.otus.hw08.traversed.type.TraversedElement;
+import ru.otus.hw08.visitor.JsonElementVisitor;
 
-import javax.json.Json;
-import javax.json.JsonArrayBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,11 +36,11 @@ public class Main {
     }
 
     private static String toJson(Object object) throws IllegalAccessException {
-        JsonObjectVisitor jsonObjectVisitor = new JsonObjectVisitor();
+        JsonElementVisitor jsonElementVisitor = new JsonElementVisitor();
 
-        new TraversedObject(object).accept(jsonObjectVisitor);
+        new TraversedElement(object).accept(jsonElementVisitor);
 
-        return jsonObjectVisitor.getJsonObject();
+        return jsonElementVisitor.getJson();
     }
 
 }

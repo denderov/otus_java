@@ -4,6 +4,7 @@ import ru.otus.hw08.traversed.type.TraversedField;
 import ru.otus.hw08.traversed.type.TraversedObject;
 
 import javax.json.Json;
+import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -17,15 +18,16 @@ public class JsonObjectVisitor implements ObjectVisitor {
     public void visit(TraversedObject traversedObject) throws IllegalAccessException {
         Object parentObject = traversedObject.getObject();
         if (!Objects.isNull(parentObject)) {
-            jsonObjectBuilder = Json.createObjectBuilder();
-            Field[] fields = parentObject.getClass().getDeclaredFields();
+                jsonObjectBuilder = Json.createObjectBuilder();
+                Field[] fields = parentObject.getClass().getDeclaredFields();
 
-            for (Field field:
-                    fields) {
-                if (isNotStatic(field)) {
-                    new TraversedField(parentObject,field).accept(new JsonFieldVisitor(this));
+                for (Field field:
+                        fields) {
+                    if (isNotStatic(field)) {
+                        new TraversedField(parentObject,field).accept(new JsonFieldVisitor(this));
+                    }
                 }
-            }
+
         }
     }
 
@@ -37,7 +39,4 @@ public class JsonObjectVisitor implements ObjectVisitor {
         return jsonObjectBuilder;
     }
 
-    public String getJsonObject() {
-        return Objects.isNull(jsonObjectBuilder)?"null":getJsonObjectBuilder().build().toString();
-    }
 }

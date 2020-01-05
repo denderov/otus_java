@@ -1,35 +1,49 @@
 package ru.otus.hw08.helper;
 
 import java.util.Collection;
+import java.util.Objects;
 
 public class Condition {
 
     private Condition() {
     }
 
-    public static boolean isString(Class<?> type) {
-        return type == char.class
-                || type == Character.class
+    public static boolean isInteger(Object object) {
+        Class<?> type = object.getClass();
+        return type == Byte.class
+                || type == Short.class
+                || type  == Integer.class
+                || type == Long.class;
+    }
+
+    public static boolean isFloat(Object object) {
+        Class<?> type = object.getClass();
+        return type == Float.class
+                || type == Double.class;
+    }
+
+    public static boolean isString(Object object) {
+        Class<?> type = object.getClass();
+        return type == Character.class
                 || type == String.class;
     }
 
-    public static boolean isFloatNumber(Class<?> type) {
-        return type == float.class
-                || type == double.class;
+    public static boolean isArray(Object object) {
+        Class<?> type = object.getClass();
+        return type.isArray();
     }
 
-    public static boolean isInteger(Class<?> type) {
-        return type == byte.class
-                || type == short.class
-                || type  == int.class
-                || type == long.class;
-    }
-
-    public static boolean isBoolean(Class<?> type) {
-        return type == boolean.class;
-    }
-
-    public static boolean isCollection(Class<?> type) {
+    public static boolean isCollection(Object object) {
+        Class<?> type = object.getClass();
         return Collection.class.isAssignableFrom(type);
+    }
+
+    public static boolean isNull(Object object) {
+        return Objects.isNull(object);
+    }
+
+    public static boolean isBoolean(Object object) {
+        Class<?> type = object.getClass();
+        return type == Boolean.class;
     }
 }

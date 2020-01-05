@@ -6,19 +6,20 @@ import ru.otus.hw08.traversed.object.ArraysContainer;
 import ru.otus.hw08.traversed.object.Nested;
 import ru.otus.hw08.traversed.object.PrimitiveTypesAndStrings;
 import ru.otus.hw08.traversed.object.Root;
-import ru.otus.hw08.traversed.type.TraversedObject;
-import ru.otus.hw08.visitor.JsonObjectVisitor;
+import ru.otus.hw08.traversed.type.TraversedElement;
+import ru.otus.hw08.visitor.JsonElementVisitor;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class JsonSerialisationTest {
     private String toJsonString(Object o) throws IllegalAccessException {
-        JsonObjectVisitor jsonObjectVisitor = new JsonObjectVisitor();
-        new TraversedObject(o).accept(jsonObjectVisitor);
-        return jsonObjectVisitor.getJsonObject().toString();
+        JsonElementVisitor jsonElementVisitor = new JsonElementVisitor();
+        new TraversedElement(o).accept(jsonElementVisitor);
+        return jsonElementVisitor.getJson();
     }
 
     @Test
