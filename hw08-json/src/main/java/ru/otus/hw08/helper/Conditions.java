@@ -3,9 +3,9 @@ package ru.otus.hw08.helper;
 import java.util.Collection;
 import java.util.Objects;
 
-public class Condition {
+public class Conditions {
 
-    private Condition() {
+    private Conditions() {
     }
 
     public static boolean isInteger(Object object) {
