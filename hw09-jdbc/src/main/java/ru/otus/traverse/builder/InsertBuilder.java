@@ -1,11 +1,18 @@
 package ru.otus.traverse.builder;
 
+import java.util.Set;
 import java.util.stream.Collectors;
 
-public class InsertBuilder extends AbstractStatementBuilder {
+public class InsertBuilder implements Strategy {
 
     @Override
-    public String build() {
+    public String execute(ClassContext context) {
+        String tableName = context.getClassName();
+        Set<String> columns  = context.getFields()
+                .stream()
+                .map(field->field.getName())
+                .collect(Collectors.toSet());
+
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("insert into ")
                 .append(tableName)

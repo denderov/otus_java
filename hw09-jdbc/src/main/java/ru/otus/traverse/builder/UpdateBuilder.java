@@ -1,12 +1,20 @@
 package ru.otus.traverse.builder;
 
+import java.util.Set;
 import java.util.stream.Collectors;
 
-public class UpdateBuilder extends AbstractStatementBuilder {
+public class UpdateBuilder implements Strategy {
 
 
     @Override
-    public String build() {
+    public String execute(ClassContext context) {
+        String tableName = context.getClassName();
+        Set<String> columns  = context.getFields()
+                .stream()
+                .map(field->field.getName())
+                .collect(Collectors.toSet());
+        String idColumnName = context.getIdField().getName();
+
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("update ")
                 .append(tableName)

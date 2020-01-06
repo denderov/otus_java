@@ -1,9 +1,19 @@
 package ru.otus.traverse.builder;
 
-public class SelectBuilder extends AbstractStatementBuilder {
+import java.util.Set;
+import java.util.stream.Collectors;
+
+public class SelectBuilder implements Strategy {
 
     @Override
-    public String build() {
+    public String execute(ClassContext context) {
+        String tableName = context.getClassName();
+        Set<String> columns  = context.getFields()
+                .stream()
+                .map(field->field.getName())
+                .collect(Collectors.toSet());
+        String idColumnName = context.getIdField().getName();
+
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("select ")
                 .append(String.join(", ", idColumnName, String.join(", ", columns)))
