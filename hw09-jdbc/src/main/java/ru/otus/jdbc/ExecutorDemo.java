@@ -19,7 +19,7 @@ public class ExecutorDemo {
   private static final String URL = "jdbc:h2:mem:";
   private static Logger logger = LoggerFactory.getLogger(ExecutorDemo.class);
 
-  public static void main(String[] args) throws SQLException {
+  public static void main(String[] args) throws SQLException, IllegalAccessException {
     ExecutorDemo demo = new ExecutorDemo();
 
     try (Connection connection = DriverManager.getConnection(URL)) {

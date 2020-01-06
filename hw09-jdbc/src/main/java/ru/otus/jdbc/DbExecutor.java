@@ -2,7 +2,11 @@ package ru.otus.jdbc;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.otus.traverse.builder.ClassContext;
+import ru.otus.traverse.type.TraversedClass;
+import ru.otus.traverse.visitor.ContextClassVisitor;
 
+import java.lang.reflect.ParameterizedType;
 import java.sql.*;
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +18,17 @@ import java.util.function.Function;
  */
 public class DbExecutor<T> {
   private static Logger logger = LoggerFactory.getLogger(DbExecutor.class);
+  private final Class<?> clazz;
+  private ClassContext classContext;
+
+  public DbExecutor() throws IllegalAccessException {
+    clazz = (Class<T>) ((ParameterizedType) getClass()
+            .getGenericSuperclass()).getActualTypeArguments()[0];
+    ContextClassVisitor visitor = new ContextClassVisitor();
+    new TraversedClass(clazz).accept(visitor);
+    classContext = visitor.getClassContext();
+  }
+
 
   public long insertRecord(Connection connection, String sql, List<String> params) throws SQLException {
     Savepoint savePoint = connection.setSavepoint("savePointName");

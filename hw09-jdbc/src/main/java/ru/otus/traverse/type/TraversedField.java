@@ -14,6 +14,11 @@ public class TraversedField {
         this.field = field;
     }
 
+    public TraversedField(Field field) {
+        this.field = field;
+        parentObject = null;
+    }
+
     public String getFieldName() {
         return field.getName();
     }
