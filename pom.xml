@@ -19,7 +19,7 @@
         <module>hw04-agent</module>
         <module>hw05-annotations</module>
         <module>hw06-atm</module>
-        <module>hw06-atmDept</module>
+        <module>hw07-atmDept</module>
     </modules>
 
     <properties>
@@ -28,7 +28,10 @@
         <maven.compiler.target>11</maven.compiler.target>
         <com.google.guava.version>28.1-jre</com.google.guava.version>
         <maven-assembly-plugin.version>3.1.1</maven-assembly-plugin.version>
+        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
         <junit.version>4.12</junit.version>
+        <junit-jupiter.version>5.5.2</junit-jupiter.version>
+        <hamcrest-core.version>2.1</hamcrest-core.version>
     </properties>
 
     <dependencyManagement>
@@ -53,8 +56,19 @@
             <dependency>
                 <groupId>org.hamcrest</groupId>
                 <artifactId>hamcrest-core</artifactId>
-                <version>2.1</version>
+                <version>${hamcrest-core.version}</version>
                 <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter</artifactId>
+                <version>${junit-jupiter.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>LATEST</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -66,6 +80,11 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-assembly-plugin</artifactId>
                     <version>${maven-assembly-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven-surefire-plugin.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
