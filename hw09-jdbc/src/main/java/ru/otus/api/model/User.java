@@ -2,9 +2,20 @@ package ru.otus.api.model;
 
 public class User {
   @Id
-  private final long id;
+  private long id;
   private String name;
   private int age;
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public void setAge(int age) {
+    this.age = age;
+  }
+
+  public User() {
+  }
 
   public User(long id, String name, int age) {
     this.id = id;

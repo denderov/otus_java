@@ -5,12 +5,16 @@ import org.slf4j.LoggerFactory;
 import ru.otus.jdbc.sessionmanager.SessionManagerJdbc;
 import ru.otus.traverse.builder.ClassContext;
 import ru.otus.traverse.builder.InsertBuilder;
+import ru.otus.traverse.builder.SelectBuilder;
+import ru.otus.traverse.builder.UpdateBuilder;
 import ru.otus.traverse.type.TraversedClass;
 import ru.otus.traverse.visitor.ContextClassVisitor;
 
 import java.lang.reflect.Field;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class JdbcTemplate<T> {
@@ -69,6 +73,70 @@ public class JdbcTemplate<T> {
             logger.error(e.getMessage(), e);
             throw new JdbcTemplateException(e);
         }
+    }
+
+    public void update(T objectData) throws JdbcTemplateException {
+        try {
+            String sql = classContext.setStrategy(new UpdateBuilder()).build();
+            List<Object> fieldValues = classContext.getFields()
+                    .stream()
+                    .map(field -> {
+                        try {
+                            return field.get(objectData);
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
+                        }
+                        return null;
+                    })
+                    .collect(Collectors.toList());
+            Object id = classContext.getIdField().get(objectData);
+            fieldValues.add(id);
+            sessionManager.beginSession();
+            try {
+
+                dbExecutor.updateRecord(getConnection(), sql, fieldValues);
+                sessionManager.commitSession();
+
+                logger.info("updated object: {}", id);
+            } catch (Exception e) {
+                logger.error(e.getMessage(), e);
+                sessionManager.rollbackSession();
+                throw new JdbcTemplateException(e);
+            }
+
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            throw new JdbcTemplateException(e);
+        }
+    }
+
+    public T load(long id) {
+        Optional<T> optionalInstance = Optional.empty();
+        try {
+
+            T instance = (T) clazz.getDeclaredConstructor().newInstance();
+            String sql = classContext.setStrategy(new SelectBuilder()).build();
+            System.out.println(sql);
+            optionalInstance = dbExecutor.selectRecord(getConnection(), sql, id, resultSet -> {
+                try {
+                    if (resultSet.next()) {
+                        for (Field field : classContext.getFields()) {
+                            field.setAccessible(true);
+                            field.set(instance, resultSet.getObject(field.getName()));
+                        }
+                    }
+                } catch (SQLException | IllegalAccessException e) {
+                    logger.error(e.getMessage(), e);
+                }
+                return instance;
+
+            });
+
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+        }
+
+        return optionalInstance.orElse(null);
     }
 
     private Connection getConnection() {

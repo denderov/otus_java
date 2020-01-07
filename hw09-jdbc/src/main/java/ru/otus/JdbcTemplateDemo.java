@@ -30,7 +30,18 @@ public class JdbcTemplateDemo {
     SessionManagerJdbc sessionManager = new SessionManagerJdbc(dataSource);
     DbExecutor<User> dbExecutor = new DbExecutor<>();
     JdbcTemplate<User> jdbcTemplate = new JdbcTemplate<>(sessionManager, dbExecutor, User.class);
-    jdbcTemplate.create(new User(0,"User1",20));
+
+    User user1 = new User(0,"User1",20);
+    System.out.println(user1);
+    jdbcTemplate.create(user1);
+    System.out.println(user1);
+
+    user1.setAge(user1.getAge()+1);
+    jdbcTemplate.update(user1);
+    System.out.println(user1);
+
+    User user2 = jdbcTemplate.load(1);
+    System.out.println(user2);
 
   }
 
