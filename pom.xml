@@ -20,6 +20,7 @@
         <module>hw05-annotations</module>
         <module>hw06-atm</module>
         <module>hw07-atmDept</module>
+        <module>hw08-json</module>
     </modules>
 
     <properties>
@@ -62,6 +63,12 @@
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter</artifactId>
+                <version>${junit-jupiter.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-params</artifactId>
                 <version>${junit-jupiter.version}</version>
                 <scope>test</scope>
             </dependency>
