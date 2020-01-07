@@ -1,0 +1,77 @@
+package ru.otus.jdbc;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import ru.otus.jdbc.sessionmanager.SessionManagerJdbc;
+import ru.otus.traverse.builder.ClassContext;
+import ru.otus.traverse.builder.InsertBuilder;
+import ru.otus.traverse.type.TraversedClass;
+import ru.otus.traverse.visitor.ContextClassVisitor;
+
+import java.lang.reflect.Field;
+import java.sql.Connection;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class JdbcTemplate<T> {
+
+    private static Logger logger = LoggerFactory.getLogger(JdbcTemplate.class);
+
+    private Class<?> clazz;
+    private SessionManagerJdbc sessionManager;
+    private DbExecutor<T> dbExecutor;
+    private ClassContext classContext;
+
+    public JdbcTemplate(SessionManagerJdbc sessionManager, DbExecutor<T> dbExecutor, Class<T> clazz) throws IllegalAccessException {
+        this.sessionManager = sessionManager;
+        this.dbExecutor = dbExecutor;
+        this.clazz = clazz;
+        fillClassContext(clazz);
+    }
+
+    private void fillClassContext(Class<T> clazz) throws IllegalAccessException {
+        TraversedClass traversedClass = new TraversedClass(clazz);
+        ContextClassVisitor visitor = new ContextClassVisitor();
+        traversedClass.accept(visitor);
+        classContext = visitor.getClassContext();
+    }
+
+    public void create(T objectData) throws JdbcTemplateException {
+        try {
+            String sql = classContext.setStrategy(new InsertBuilder()).build();
+            List<Object> fieldValues = classContext.getFields()
+                    .stream()
+                    .map(field -> {
+                        try {
+                            return field.get(objectData);
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
+                        }
+                        return null;
+                    })
+                    .collect(Collectors.toList());
+            sessionManager.beginSession();
+            try {
+                long id = dbExecutor.insertRecord(getConnection(), sql, fieldValues);
+                Field idField = classContext.getIdField();
+                idField.setAccessible(true);
+                idField.set(objectData,id);
+                sessionManager.commitSession();
+
+                logger.info("created object: {}", id);
+            } catch (Exception e) {
+                logger.error(e.getMessage(), e);
+                sessionManager.rollbackSession();
+                throw new JdbcTemplateException(e);
+            }
+
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            throw new JdbcTemplateException(e);
+        }
+    }
+
+    private Connection getConnection() {
+        return sessionManager.getCurrentSession().getConnection();
+    }
+}
