@@ -1,13 +1,13 @@
 package ru.otus.traverse.builder;
 
 import java.lang.reflect.Field;
-import java.util.Set;
+import java.util.List;
 
 public interface ClassContext {
 
     String getClassName();
 
-    Set<Field> getFields();
+    List<Field> getFields();
 
     Field getIdField();
 

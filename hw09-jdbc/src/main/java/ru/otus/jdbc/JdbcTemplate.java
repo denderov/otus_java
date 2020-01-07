@@ -11,8 +11,10 @@ import ru.otus.traverse.type.TraversedClass;
 import ru.otus.traverse.visitor.ContextClassVisitor;
 
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -45,6 +47,7 @@ public class JdbcTemplate<T> {
             String sql = classContext.setStrategy(new InsertBuilder()).build();
             List<Object> fieldValues = classContext.getFields()
                     .stream()
+                    .sorted(Comparator.comparing(Field::getName))
                     .map(field -> {
                         try {
                             return field.get(objectData);
@@ -56,10 +59,11 @@ public class JdbcTemplate<T> {
                     .collect(Collectors.toList());
             sessionManager.beginSession();
             try {
-                long id = dbExecutor.insertRecord(getConnection(), sql, fieldValues);
+                Object id = dbExecutor.insertRecord(getConnection(), sql, fieldValues);
                 Field idField = classContext.getIdField();
                 idField.setAccessible(true);
-                idField.set(objectData,id);
+                idField.set(objectData,convertValue(id,idField.getType()));
+
                 sessionManager.commitSession();
 
                 logger.info("created object: {}", id);
@@ -75,11 +79,17 @@ public class JdbcTemplate<T> {
         }
     }
 
+    private Object convertValue(Object id, Class<?> clazz) {
+
+        return clazz == BigDecimal.class ? BigDecimal.valueOf((Long) id) : id;
+    }
+
     public void update(T objectData) throws JdbcTemplateException {
         try {
             String sql = classContext.setStrategy(new UpdateBuilder()).build();
             List<Object> fieldValues = classContext.getFields()
                     .stream()
+                    .sorted(Comparator.comparing(Field::getName))
                     .map(field -> {
                         try {
                             return field.get(objectData);
@@ -124,6 +134,9 @@ public class JdbcTemplate<T> {
                             field.setAccessible(true);
                             field.set(instance, resultSet.getObject(field.getName()));
                         }
+                        Field idField = classContext.getIdField();
+                        idField.setAccessible(true);
+                        idField.set(instance, convertValue(resultSet.getObject(idField.getName()),classContext.getIdField().getType()));
                     }
                 } catch (SQLException | IllegalAccessException e) {
                     logger.error(e.getMessage(), e);

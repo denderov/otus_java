@@ -1,6 +1,8 @@
 package ru.otus.traverse.builder;
 
-import java.util.Set;
+import java.lang.reflect.Field;
+import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class UpdateBuilder implements Strategy {
@@ -9,10 +11,11 @@ public class UpdateBuilder implements Strategy {
     @Override
     public String execute(ClassContext context) {
         String tableName = context.getClassName();
-        Set<String> columns  = context.getFields()
+        List<String> columns  = context.getFields()
                 .stream()
-                .map(field->field.getName())
-                .collect(Collectors.toSet());
+                .sorted(Comparator.comparing(Field::getName))
+                .map(Field::getName)
+                .collect(Collectors.toList());
         String idColumnName = context.getIdField().getName();
 
         StringBuilder stringBuilder = new StringBuilder();

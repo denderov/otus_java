@@ -28,7 +28,7 @@ public class SqlStatementsGenerationTest {
     void selectStatementBuildingTest() throws NoSuchFieldException, IllegalAccessException {
         ClassContext context = getClassContext();
         String selectStatement = context.setStrategy(new SelectBuilder()).build();
-        assertThat(selectStatement).isEqualTo("select id, name, age from user where id = ?");
+        assertThat(selectStatement).isEqualTo("select id, age, name from user where id = ?");
     }
 
     @Test
@@ -36,7 +36,7 @@ public class SqlStatementsGenerationTest {
     void selectInsertBuildingTest() throws NoSuchFieldException, IllegalAccessException {
         ClassContext context = getClassContext();
         String insertStatement = context.setStrategy(new InsertBuilder()).build();
-        assertThat(insertStatement).isEqualTo("insert into user(name,age) values (?,?)");
+        assertThat(insertStatement).isEqualTo("insert into user(age,name) values (?,?)");
     }
 
     @Test
@@ -44,7 +44,7 @@ public class SqlStatementsGenerationTest {
     void updateStatementBuildingTest() throws NoSuchFieldException, IllegalAccessException {
         ClassContext context = getClassContext();
         String selectStatement = context.setStrategy(new UpdateBuilder()).build();
-        assertThat(selectStatement).isEqualTo("update user set name = ?, age = ? where id = ?");
+        assertThat(selectStatement).isEqualTo("update user set age = ?, name = ? where id = ?");
     }
 
 }

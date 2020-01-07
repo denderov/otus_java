@@ -15,7 +15,7 @@ import java.util.function.Function;
 public class DbExecutor<T> {
   private static Logger logger = LoggerFactory.getLogger(DbExecutor.class);
 
-  public long insertRecord(Connection connection, String sql, List<Object> params) throws SQLException {
+  Object insertRecord(Connection connection, String sql, List<Object> params) throws SQLException {
     Savepoint savePoint = connection.setSavepoint("savePointName");
     try (PreparedStatement pst = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
       for (int idx = 0; idx < params.size(); idx++) {
@@ -24,7 +24,7 @@ public class DbExecutor<T> {
       pst.executeUpdate();
       try (ResultSet rs = pst.getGeneratedKeys()) {
         rs.next();
-        return rs.getInt(1);
+        return rs.getObject(1);
       }
     } catch (SQLException ex) {
       connection.rollback(savePoint);
@@ -33,7 +33,7 @@ public class DbExecutor<T> {
     }
   }
 
-  public Optional<T> selectRecord(Connection connection, String sql, long id, Function<ResultSet, T> rsHandler) throws SQLException {
+  Optional<T> selectRecord(Connection connection, String sql, long id, Function<ResultSet, T> rsHandler) throws SQLException {
     try (PreparedStatement pst = connection.prepareStatement(sql)) {
       pst.setLong(1, id);
       try (ResultSet rs = pst.executeQuery()) {
@@ -42,7 +42,7 @@ public class DbExecutor<T> {
     }
   }
 
-  public void updateRecord(Connection connection, String sql, List<Object> params) throws SQLException {
+  void updateRecord(Connection connection, String sql, List<Object> params) throws SQLException {
     Savepoint savePoint = connection.setSavepoint("savePointName");
     try (PreparedStatement pst = connection.prepareStatement(sql)) {
       for (int idx = 0; idx < params.size(); idx++) {
