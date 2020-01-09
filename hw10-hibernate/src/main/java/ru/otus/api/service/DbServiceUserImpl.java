@@ -43,7 +43,7 @@ public class DbServiceUserImpl implements DBServiceUser {
       try {
         Optional<User> userOptional = userDao.findById(id);
 
-        logger.info("user: {}", userOptional.orElse(null));
+//        logger.info("user: {}", userOptional.orElse(null));
         return userOptional;
       } catch (Exception e) {
         logger.error(e.getMessage(), e);
