@@ -9,10 +9,11 @@ public class ClassContextImpl implements ClassContext {
 
     private String className;
     private List<Field> fields = new ArrayList<>();
-
     private Field idField;
-
-    private Strategy strategy;
+    private StatementBulder statementBulder;
+    private String selectStatement;
+    private String insertStatement;
+    private String updateStatement;
 
     @Override
     public String getClassName() {
@@ -27,6 +28,21 @@ public class ClassContextImpl implements ClassContext {
     @Override
     public Field getIdField() {
         return idField;
+    }
+
+    @Override
+    public String getUpdateStatement() {
+        return updateStatement;
+    }
+
+    @Override
+    public String getInsertStatement() {
+        return insertStatement;
+    }
+
+    @Override
+    public String getSelectStatement() {
+        return selectStatement;
     }
 
     @Override
@@ -56,13 +72,20 @@ public class ClassContextImpl implements ClassContext {
     }
 
     @Override
-    public ClassContext setStrategy(Strategy strategy) {
-        this.strategy = strategy;
+    public ClassContext setStatementBuilder(StatementBulder statementBulder) {
+        this.statementBulder = statementBulder;
         return this;
     }
 
     @Override
-    public <T> T build() {
-        return strategy.execute(this);
+    public String makeStatement() {
+        return statementBulder.execute(this);
+    }
+
+    @Override
+    public void build() {
+        this.selectStatement = this.setStatementBuilder(new SelectBuilder()).makeStatement();
+        this.insertStatement = this.setStatementBuilder(new InsertBuilder()).makeStatement();
+        this.updateStatement = this.setStatementBuilder(new UpdateBuilder()).makeStatement();
     }
 }

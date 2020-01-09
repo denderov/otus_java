@@ -5,7 +5,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SelectBuilder implements Strategy {
+public class SelectBuilder implements StatementBulder {
 
     @Override
     public String execute(ClassContext context) {
@@ -17,14 +17,9 @@ public class SelectBuilder implements Strategy {
                 .collect(Collectors.toList());
         String idColumnName = context.getIdField().getName();
 
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("select ")
-                .append(String.join(", ", idColumnName, String.join(", ", columns)))
-                .append(" from ")
-                .append(tableName)
-                .append(" where ")
-                .append(idColumnName)
-                .append(" = ?");
-        return stringBuilder.toString();
+        return String.format("select %s from %s where %s = ?"
+                ,String.join(", ", idColumnName, String.join(", ", columns))
+                ,tableName
+                ,idColumnName);
     }
 }

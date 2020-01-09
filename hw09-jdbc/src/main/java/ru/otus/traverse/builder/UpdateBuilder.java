@@ -5,7 +5,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class UpdateBuilder implements Strategy {
+public class UpdateBuilder implements StatementBulder {
 
 
     @Override
@@ -18,16 +18,11 @@ public class UpdateBuilder implements Strategy {
                 .collect(Collectors.toList());
         String idColumnName = context.getIdField().getName();
 
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("update ")
-                .append(tableName)
-                .append(" set ")
-                .append(columns.stream()
+        return String.format("update %s set %s where %s = ?"
+                ,tableName
+                ,columns.stream()
                         .map(column->column + " = ?")
-                        .collect(Collectors.joining(", ")))
-                .append(" where ")
-                .append(idColumnName)
-                .append(" = ?");
-        return stringBuilder.toString();
+                        .collect(Collectors.joining(", "))
+                ,idColumnName);
     }
 }

@@ -11,13 +11,21 @@ public interface ClassContext {
 
     Field getIdField();
 
+    String getUpdateStatement();
+
+    String getInsertStatement();
+
+    String getSelectStatement();
+
     ClassContext addTableName(String tableName);
 
     ClassContext addField(Field field);
 
     ClassContext addIdField(Field idField);
 
-    ClassContext setStrategy(Strategy strategy);
+    ClassContext setStatementBuilder(StatementBulder statementBulder);
 
-    <T> T build();
+    String makeStatement();
+
+    void build();
 }

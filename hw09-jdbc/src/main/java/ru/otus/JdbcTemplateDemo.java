@@ -46,7 +46,7 @@ public class JdbcTemplateDemo {
         System.out.println("user2 = "+user2);
 
         DbExecutor<Account> accountExecutor = new DbExecutor<>();
-        JdbcTemplate<Account> accountTemplate = new JdbcTemplate(sessionManager, accountExecutor, Account.class);
+        JdbcTemplate<Account> accountTemplate = new JdbcTemplate<>(sessionManager, accountExecutor, Account.class);
 
         Account accountCurrent = new Account(BigDecimal.ZERO,"Current", BigDecimal.ZERO);
         System.out.println("accountCurrent = "+accountCurrent);

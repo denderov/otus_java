@@ -5,7 +5,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class InsertBuilder implements Strategy {
+public class InsertBuilder implements StatementBulder {
 
     @Override
     public String execute(ClassContext context) {
@@ -16,16 +16,11 @@ public class InsertBuilder implements Strategy {
                 .map(Field::getName)
                 .collect(Collectors.toList());
 
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("insert into ")
-                .append(tableName)
-                .append("(")
-                .append(String.join(",", columns))
-                .append(") values (")
-                .append(columns.stream()
+        return String.format("insert into %s (%s) values (%s)"
+                ,tableName
+                ,String.join(",", columns)
+                ,columns.stream()
                         .map(column->"?")
-                        .collect(Collectors.joining(",")))
-                .append(")");
-        return stringBuilder.toString();
+                        .collect(Collectors.joining(",")));
     }
 }

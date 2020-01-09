@@ -26,6 +26,8 @@ public class ContextClassVisitor implements ClassVisitor {
             }
         }
 
+        classContext.build();
+
     }
 
     private boolean isNotStatic(Field field) {

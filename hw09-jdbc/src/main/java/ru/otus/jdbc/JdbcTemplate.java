@@ -4,9 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.otus.jdbc.sessionmanager.SessionManagerJdbc;
 import ru.otus.traverse.builder.ClassContext;
-import ru.otus.traverse.builder.InsertBuilder;
-import ru.otus.traverse.builder.SelectBuilder;
-import ru.otus.traverse.builder.UpdateBuilder;
 import ru.otus.traverse.type.TraversedClass;
 import ru.otus.traverse.visitor.ContextClassVisitor;
 
@@ -23,28 +20,29 @@ public class JdbcTemplate<T> {
 
     private static Logger logger = LoggerFactory.getLogger(JdbcTemplate.class);
 
-    private Class<?> clazz;
-    private SessionManagerJdbc sessionManager;
-    private DbExecutor<T> dbExecutor;
-    private ClassContext classContext;
+    private final Class<?> clazz;
+    private final SessionManagerJdbc sessionManager;
+    private final DbExecutor<T> dbExecutor;
+    private final ClassContext classContext;
 
     public JdbcTemplate(SessionManagerJdbc sessionManager, DbExecutor<T> dbExecutor, Class<T> clazz) throws IllegalAccessException {
         this.sessionManager = sessionManager;
         this.dbExecutor = dbExecutor;
         this.clazz = clazz;
-        fillClassContext(clazz);
+        this.classContext = fillClassContext(clazz);
     }
 
-    private void fillClassContext(Class<T> clazz) throws IllegalAccessException {
+    private ClassContext fillClassContext(Class<T> clazz) throws IllegalAccessException {
         TraversedClass traversedClass = new TraversedClass(clazz);
         ContextClassVisitor visitor = new ContextClassVisitor();
         traversedClass.accept(visitor);
-        classContext = visitor.getClassContext();
+
+        return visitor.getClassContext();
     }
 
     public void create(T objectData) throws JdbcTemplateException {
         try {
-            String sql = classContext.setStrategy(new InsertBuilder()).build();
+            String sql = classContext.getInsertStatement();
             List<Object> fieldValues = classContext.getFields()
                     .stream()
                     .sorted(Comparator.comparing(Field::getName))
@@ -86,7 +84,7 @@ public class JdbcTemplate<T> {
 
     public void update(T objectData) throws JdbcTemplateException {
         try {
-            String sql = classContext.setStrategy(new UpdateBuilder()).build();
+            String sql = classContext.getUpdateStatement();
             List<Object> fieldValues = classContext.getFields()
                     .stream()
                     .sorted(Comparator.comparing(Field::getName))
@@ -125,7 +123,7 @@ public class JdbcTemplate<T> {
         try {
 
             T instance = (T) clazz.getDeclaredConstructor().newInstance();
-            String sql = classContext.setStrategy(new SelectBuilder()).build();
+            String sql = classContext.getSelectStatement();
             System.out.println(sql);
             optionalInstance = dbExecutor.selectRecord(getConnection(), sql, id, resultSet -> {
                 try {
