@@ -16,7 +16,7 @@ public class InsertBuilder implements StatementBulder {
                 .map(Field::getName)
                 .collect(Collectors.toList());
 
-        return String.format("insert into %s (%s) values (%s)"
+        return String.format("insert into %s(%s) values (%s)"
                 ,tableName
                 ,String.join(",", columns)
                 ,columns.stream()
