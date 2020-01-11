@@ -1,0 +1,38 @@
+package ru.otus.api.service;
+
+import ru.otus.api.dao.UserDao;
+import ru.otus.api.model.User;
+import ru.otus.cachehw.HwCache;
+import ru.otus.cachehw.MyCache;
+
+import java.util.Optional;
+
+public class DbServiceUserCached extends DbServiceUserImpl {
+
+    MyCache<Long, User> myCache;
+
+    public DbServiceUserCached(UserDao userDao, HwCache<Long, User> cache) {
+        super(userDao);
+        this.myCache = (MyCache<Long, User>) cache;
+    }
+
+    @Override
+    public long saveUser(User user) {
+        long userId = super.saveUser(user);
+        myCache.put(userId, user);
+        return userId;
+    }
+
+    @Override
+    public Optional<User> getUser(long id) {
+        Optional<User> user = Optional.ofNullable(myCache.get(id));
+        if (user.isEmpty()) {
+            user = super.getUser(id);
+            if (user.isPresent()) {
+                myCache.put(user.get().getId(), user.get());
+            }
+        }
+        return user;
+    }
+}
+

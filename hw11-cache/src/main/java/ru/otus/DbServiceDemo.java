@@ -8,13 +8,16 @@ import ru.otus.api.model.AddressDataSet;
 import ru.otus.api.model.PhoneDataSet;
 import ru.otus.api.model.User;
 import ru.otus.api.service.DBServiceUser;
+import ru.otus.api.service.DbServiceUserCached;
 import ru.otus.api.service.DbServiceUserImpl;
+import ru.otus.cachehw.HwCache;
+import ru.otus.cachehw.MyCache;
 import ru.otus.hibernate.HibernateUtils;
 import ru.otus.hibernate.dao.UserDaoHibernate;
 import ru.otus.hibernate.sessionmanager.SessionManagerHibernate;
 
-import java.util.Arrays;
-import java.util.Collections;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Optional;
 
 public class DbServiceDemo {
@@ -28,22 +31,36 @@ public class DbServiceDemo {
     UserDao userDao = new UserDaoHibernate(sessionManager);
     DBServiceUser dbServiceUser = new DbServiceUserImpl(userDao);
 
-    User user = new User("Вася"
-            ,new AddressDataSet("Дерибасовская")
-            , Arrays.asList(new PhoneDataSet("9999999999"),new PhoneDataSet("4959999999")));
+    Instant start = Instant.now();
+    processUsers(dbServiceUser);
+    Instant finish = Instant.now();
+    System.out.println(String.format("Time without caching in ms: %d", Duration.between(start, finish).toMillis()));
 
-    long id = dbServiceUser.saveUser(user);
-    Optional<User> mayBeCreatedUser = dbServiceUser.getUser(id);
+    HwCache<Long, User> myCache = new MyCache<Long, User>(1000);
+    dbServiceUser = new DbServiceUserCached(userDao, myCache);
 
-    user.setName("Vasya");
-    user.setAddressDataSet(new AddressDataSet("Brighton Beach"));
-    user.setPhoneDataSet(Collections.singleton(new PhoneDataSet("7189999999")));
+//    HwListener<Long, User> listener =
+//            (key, value, action) -> logger.info("key:{}, value:{}, action: {}", key, value, action);
+//    myCache.addListener(listener);
 
-    id = dbServiceUser.saveUser(user);
-    Optional<User> mayBeUpdatedUser = dbServiceUser.getUser(id);
+    start = Instant.now();
+    processUsers(dbServiceUser);
+    finish = Instant.now();
+    System.out.println(String.format("Time with caching in ms: %d", Duration.between(start, finish).toMillis()));
+  }
 
-    outputUserOptional("Created user", mayBeCreatedUser);
-    outputUserOptional("Updated user", mayBeUpdatedUser);
+  private static void processUsers(DBServiceUser dbServiceUser) {
+    long id = 1000L;
+
+    for (long i = 0; i < 1000L; i++) {
+      User user = new User("Вася #"+i);
+      id = dbServiceUser.saveUser(user);
+    }
+
+    for (long i = id - 999L; i <= id; i++) {
+      Optional<User> optionalUser = dbServiceUser.getUser(i);
+    }
+
   }
 
   private static void outputUserOptional(String header, Optional<User> mayBeUser) {
