@@ -38,6 +38,7 @@ public class MyCache<K, V> implements HwCache<K, V> {
   @Override
   public void remove(K key) {
     V value = cache.remove(key);
+    keysOrderedByInsertion.remove(key);
     notifyEach(key, value, "REMOVE");
   }
 
@@ -55,7 +56,12 @@ public class MyCache<K, V> implements HwCache<K, V> {
 
   @Override
   public void removeListener(HwListener listener) {
-    listeners.remove(listener);
+    for (WeakReference<HwListener<K, V>> listenerRef :
+            listeners) {
+      if (listener == listenerRef.get()) {
+        listeners.remove(listenerRef);
+      }
+    }
   }
 
   private void compactCache(int sizeToCompact) {
@@ -68,7 +74,7 @@ public class MyCache<K, V> implements HwCache<K, V> {
   private void notifyEach(K key, V value, String action) {
     for (WeakReference<HwListener<K, V>> listener :
             listeners) {
-      listener.get().notify(key, value, action);
+      Objects.requireNonNull(listener.get()).notify(key, value, action);
     }
   }
 

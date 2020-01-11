@@ -23,6 +23,7 @@ public class HWCacheDemo {
 
     logger.info("getValue:{}", cache.get(1));
 
+//    cache.removeListener(listener);
     listener=null;
     System.gc();
 
