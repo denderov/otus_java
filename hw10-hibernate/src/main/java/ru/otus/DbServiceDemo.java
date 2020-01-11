@@ -44,8 +44,6 @@ public class DbServiceDemo {
 
     outputUserOptional("Created user", mayBeCreatedUser);
     outputUserOptional("Updated user", mayBeUpdatedUser);
-
-      Optional<User> tstUser = dbServiceUser.getUser(999L);
   }
 
   private static void outputUserOptional(String header, Optional<User> mayBeUser) {
