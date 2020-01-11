@@ -63,11 +63,13 @@ public class JdbcTemplate<T> {
                 idField.set(objectData,convertValue(id,idField.getType()));
 
                 sessionManager.commitSession();
+                sessionManager.close();
 
                 logger.info("created object: {}", id);
             } catch (Exception e) {
                 logger.error(e.getMessage(), e);
                 sessionManager.rollbackSession();
+                sessionManager.close();
                 throw new JdbcTemplateException(e);
             }
 
@@ -104,11 +106,13 @@ public class JdbcTemplate<T> {
 
                 dbExecutor.updateRecord(getConnection(), sql, fieldValues);
                 sessionManager.commitSession();
+                sessionManager.close();
 
                 logger.info("updated object: {}", id);
             } catch (Exception e) {
                 logger.error(e.getMessage(), e);
                 sessionManager.rollbackSession();
+                sessionManager.close();
                 throw new JdbcTemplateException(e);
             }
 
