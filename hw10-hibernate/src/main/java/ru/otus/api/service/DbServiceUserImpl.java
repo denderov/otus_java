@@ -1,6 +1,5 @@
 package ru.otus.api.service;
 
-import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.otus.api.dao.UserDao;
@@ -45,8 +44,6 @@ public class DbServiceUserImpl implements DBServiceUser {
         Optional<User> userOptional = userDao.findById(id);
 
 //        logger.info("user: {}", userOptional.orElse(null));
-        Hibernate.initialize(userOptional.get().getAddressDataSet());
-        Hibernate.initialize(userOptional.get().getPhoneDataSet());
         return userOptional;
       } catch (Exception e) {
         logger.error(e.getMessage(), e);
