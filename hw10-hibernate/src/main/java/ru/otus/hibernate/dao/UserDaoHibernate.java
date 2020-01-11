@@ -29,8 +29,10 @@ public class UserDaoHibernate implements UserDao {
     DatabaseSessionHibernate currentSession = sessionManager.getCurrentSession();
     try {
       Optional<User> userOptional = Optional.ofNullable(currentSession.getHibernateSession().find(User.class, id));
-      Hibernate.initialize(userOptional.get().getAddressDataSet());
-      Hibernate.initialize(userOptional.get().getPhoneDataSet());
+      if (userOptional.isPresent()) {
+        Hibernate.initialize(userOptional.get().getAddressDataSet());
+        Hibernate.initialize(userOptional.get().getPhoneDataSet());
+      }
       return userOptional;
     } catch (Exception e) {
       logger.error(e.getMessage(), e);
