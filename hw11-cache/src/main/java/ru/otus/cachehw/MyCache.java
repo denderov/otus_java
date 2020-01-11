@@ -1,30 +1,30 @@
 package ru.otus.cachehw;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Queue;
+import java.lang.ref.WeakReference;
+import java.util.*;
 
 /**
  * @author sergey
  * created on 14.12.18.
+ * modified by Alexander Fedorov
  */
 public class MyCache<K, V> implements HwCache<K, V> {
 
+  private final Set<WeakReference<HwListener<K,V>>> listeners;
   private final Map<K, V> cache;
   private final Queue<K> keysOrderedByInsertion;
   private int limit;
-
+  
   public MyCache(int limit) {
     this.limit = limit;
     this.cache = new HashMap<>();
     this.keysOrderedByInsertion = new LinkedList<>();
+    this.listeners =  Collections.newSetFromMap(
+            new WeakHashMap<>());
   }
 
   public MyCache() {
-    this.limit = 10;
-    this.cache = new HashMap<>();
-    this.keysOrderedByInsertion = new LinkedList<>();
+    this(10);
   }
 
   @Override
@@ -32,32 +32,43 @@ public class MyCache<K, V> implements HwCache<K, V> {
     compactCache(limit - 1);
     cache.put(key, value);
     keysOrderedByInsertion.add(key);
+    notifyEach(key, value, "PUT");
   }
 
   @Override
   public void remove(K key) {
-    cache.remove(key);
+    V value = cache.remove(key);
+    notifyEach(key, value, "REMOVE");
   }
 
   @Override
   public V get(K key) {
-    return cache.get(key);
+    V value = cache.get(key);
+    notifyEach(key, value, "GET");
+    return value;
   }
 
   @Override
   public void addListener(HwListener listener) {
-
+    listeners.add(new WeakReference<HwListener<K, V>>(listener));
   }
 
   @Override
   public void removeListener(HwListener listener) {
-
+    listeners.remove(listener);
   }
 
   private void compactCache(int sizeToCompact) {
     while (cache.size() > sizeToCompact) {
       K keyForRemove = keysOrderedByInsertion.poll();
       cache.remove(keyForRemove);
+    }
+  }
+
+  private void notifyEach(K key, V value, String action) {
+    for (WeakReference<HwListener<K, V>> listener :
+            listeners) {
+      listener.get().notify(key, value, action);
     }
   }
 

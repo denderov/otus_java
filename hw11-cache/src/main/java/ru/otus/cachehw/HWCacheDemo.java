@@ -10,11 +10,11 @@ import org.slf4j.LoggerFactory;
 public class HWCacheDemo {
   private static final Logger logger = LoggerFactory.getLogger(HWCacheDemo.class);
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws InterruptedException {
     new HWCacheDemo().demo();
   }
 
-  private void demo() {
+  private void demo() throws InterruptedException {
     HwCache<Integer, Integer> cache = new MyCache<>();
     HwListener<Integer, Integer> listener =
         (key, value, action) -> logger.info("key:{}, value:{}, action: {}", key, value, action);
@@ -22,6 +22,10 @@ public class HWCacheDemo {
     cache.put(1, 1);
 
     logger.info("getValue:{}", cache.get(1));
+
+    listener=null;
+    System.gc();
+
     cache.remove(1);
     cache.removeListener(listener);
 
