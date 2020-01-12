@@ -24,14 +24,11 @@ public class DbServiceUserCached extends DbServiceUserImpl {
 
     @Override
     public Optional<User> getUser(long id) {
-        Optional<User> user = Optional.ofNullable(myCache.get(id));
-        if (user.isEmpty()) {
-            user = super.getUser(id);
-            if (user.isPresent()) {
-                myCache.put(user.get().getId(), user.get());
-            }
-        }
-        return user;
+        return Optional.of(myCache.get(id))
+                .or(() -> super.getUser(id).map(userFromDb -> {
+                    myCache.put(userFromDb.getId(), userFromDb);
+                    return userFromDb;
+                }));
     }
 }
 
