@@ -3,17 +3,16 @@ package ru.otus.api.service;
 import ru.otus.api.dao.UserDao;
 import ru.otus.api.model.User;
 import ru.otus.cachehw.HwCache;
-import ru.otus.cachehw.MyCache;
 
 import java.util.Optional;
 
 public class DbServiceUserCached extends DbServiceUserImpl {
 
-    MyCache<Long, User> myCache;
+    HwCache<Long, User> myCache;
 
     public DbServiceUserCached(UserDao userDao, HwCache<Long, User> cache) {
         super(userDao);
-        this.myCache = (MyCache<Long, User>) cache;
+        this.myCache = cache;
     }
 
     @Override
