@@ -1,8 +1,6 @@
 package ru.otus;
 
 import org.hibernate.SessionFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import ru.otus.api.dao.UserDao;
 import ru.otus.api.model.AddressDataSet;
 import ru.otus.api.model.PhoneDataSet;
@@ -21,7 +19,6 @@ import java.time.Instant;
 import java.util.Optional;
 
 public class DbServiceDemo {
-  private static Logger logger = LoggerFactory.getLogger(DbServiceDemo.class);
 
   public static void main(String[] args) {
     SessionFactory sessionFactory = HibernateUtils.buildSessionFactory("hibernate.cfg.xml",
@@ -36,7 +33,7 @@ public class DbServiceDemo {
     Instant finish = Instant.now();
     System.out.println(String.format("Time without caching in ms: %d", Duration.between(start, finish).toMillis()));
 
-    HwCache<Long, User> myCache = new MyCache<Long, User>(1000);
+    HwCache<Long, User> myCache = new MyCache<>();
     dbServiceUser = new DbServiceUserCached(userDao, myCache);
 
 //    HwListener<Long, User> listener =
@@ -63,9 +60,4 @@ public class DbServiceDemo {
 
   }
 
-  private static void outputUserOptional(String header, Optional<User> mayBeUser) {
-    System.out.println("-----------------------------------------------------------");
-    System.out.println(header);
-    mayBeUser.ifPresentOrElse(System.out::println, () -> logger.info("User not found"));
-  }
 }

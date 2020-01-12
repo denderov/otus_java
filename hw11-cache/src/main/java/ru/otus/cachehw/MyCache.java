@@ -1,5 +1,8 @@
 package ru.otus.cachehw;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.lang.ref.WeakReference;
 import java.util.*;
 
@@ -10,26 +13,20 @@ import java.util.*;
  */
 public class MyCache<K, V> implements HwCache<K, V> {
 
+  private static Logger logger = LoggerFactory.getLogger(MyCache.class);
   private final Set<WeakReference<HwListener<K,V>>> listeners;
   private final Map<K, V> cache;
   private final Queue<K> keysOrderedByInsertion;
-  private int limit;
-  
-  public MyCache(int limit) {
-    this.limit = limit;
-    this.cache = new HashMap<>();
-    this.keysOrderedByInsertion = new LinkedList<>();
-    this.listeners =  Collections.newSetFromMap(
-            new WeakHashMap<>());
-  }
 
   public MyCache() {
-    this(10);
+      this.cache = new WeakHashMap<>();
+      this.keysOrderedByInsertion = new LinkedList<>();
+      this.listeners =  Collections.newSetFromMap(
+              new WeakHashMap<>());
   }
 
   @Override
   public void put(K key, V value) {
-    compactCache(limit - 1);
     cache.put(key, value);
     keysOrderedByInsertion.add(key);
     notifyEach(key, value, "PUT");
@@ -64,30 +61,19 @@ public class MyCache<K, V> implements HwCache<K, V> {
     }
   }
 
-  private void compactCache(int sizeToCompact) {
-    while (cache.size() > sizeToCompact) {
-      K keyForRemove = keysOrderedByInsertion.poll();
-      cache.remove(keyForRemove);
-    }
-  }
-
   private void notifyEach(K key, V value, String action) {
     for (WeakReference<HwListener<K, V>> listener :
             listeners) {
-      Objects.requireNonNull(listener.get()).notify(key, value, action);
+        try {
+            Objects.requireNonNull(listener.get()).notify(key, value, action);
+        } catch (Exception e) {
+            logger.error("Listener throwed exception", e);
+        }
     }
   }
 
   public int getActualSize() {
     return cache.size();
-  }
-
-  public int getLimit() {
-    return limit;
-  }
-
-  public void setLimit(int limit) {
-    this.limit = limit;
   }
 
 }
