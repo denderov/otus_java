@@ -52,4 +52,21 @@ public class DbServiceUserImpl implements DBServiceUser {
       return Optional.empty();
     }
   }
+
+  @Override
+  public Optional<User> findByLogin(String login) {
+    try (SessionManager sessionManager = userDao.getSessionManager()) {
+      sessionManager.beginSession();
+      try {
+        Optional<User> userOptional = userDao.findByLogin(login);
+
+        logger.info("user: {}", userOptional.orElse(null));
+        return userOptional;
+      } catch (Exception e) {
+        logger.error(e.getMessage(), e);
+        sessionManager.rollbackSession();
+      }
+      return Optional.empty();
+    }
+  }
 }

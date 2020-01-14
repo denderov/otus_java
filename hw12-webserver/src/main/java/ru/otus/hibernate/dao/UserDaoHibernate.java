@@ -62,4 +62,23 @@ public class UserDaoHibernate implements UserDao {
   public SessionManager getSessionManager() {
     return sessionManager;
   }
+
+  @Override
+  public Optional<User> findByLogin(String login) {
+    DatabaseSessionHibernate currentSession = sessionManager.getCurrentSession();
+    try {
+      Optional<User> userOptional = currentSession.getHibernateSession()
+              .byNaturalId(User.class)
+              .using("login", login)
+              .loadOptional();
+      if (userOptional.isPresent()) {
+        Hibernate.initialize(userOptional.get().getAddressDataSet());
+        Hibernate.initialize(userOptional.get().getPhoneDataSet());
+      }
+      return userOptional;
+    } catch (Exception e) {
+      logger.error(e.getMessage(), e);
+    }
+    return Optional.empty();
+  }
 }

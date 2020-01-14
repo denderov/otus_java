@@ -14,7 +14,7 @@ import org.eclipse.jetty.servlet.FilterHolder;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.util.security.Constraint;
-import ru.otus.api.dao.UserDao;
+import ru.otus.api.service.DBServiceUser;
 import ru.otus.web.helpers.FileSystemHelper;
 import ru.otus.web.services.TemplateProcessor;
 import ru.otus.web.services.UserAuthService;
@@ -38,21 +38,21 @@ public class UsersWebServerImpl implements UsersWebServer {
     private final SecurityType securityType;
     private final UserAuthService userAuthServiceForFilterBasedSecurity;
     private final LoginService loginServiceForBasicSecurity;
-    private final UserDao userDao;
+    private final DBServiceUser dbServiceUser;
     private final Gson gson;
     private final TemplateProcessor templateProcessor;
     private final Server server;
 
     public UsersWebServerImpl(int port, SecurityType securityType,
                               UserAuthService userAuthServiceForFilterBasedSecurity,
-                              LoginService loginServiceForBasicSecurity, UserDao userDao,
+                              LoginService loginServiceForBasicSecurity, DBServiceUser dbServiceUser,
                               Gson gson,
                               TemplateProcessor templateProcessor) {
         this.port = port;
         this.securityType = securityType;
         this.userAuthServiceForFilterBasedSecurity = userAuthServiceForFilterBasedSecurity;
         this.loginServiceForBasicSecurity = loginServiceForBasicSecurity;
-        this.userDao = userDao;
+        this.dbServiceUser = dbServiceUser;
         this.gson = gson;
         this.templateProcessor = templateProcessor;
         server = initContext();
@@ -97,8 +97,8 @@ public class UsersWebServerImpl implements UsersWebServer {
 
     private ServletContextHandler createServletContextHandler() {
         ServletContextHandler servletContextHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
-        servletContextHandler.addServlet(new ServletHolder(new UsersServlet(templateProcessor, userDao)), "/users");
-        servletContextHandler.addServlet(new ServletHolder(new UsersApiServlet(userDao, gson)), "/api/user/*");
+        servletContextHandler.addServlet(new ServletHolder(new UsersServlet(templateProcessor, dbServiceUser)), "/users");
+        servletContextHandler.addServlet(new ServletHolder(new UsersApiServlet(dbServiceUser, gson)), "/api/user/*");
         return servletContextHandler;
     }
 

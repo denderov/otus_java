@@ -1,6 +1,6 @@
 package ru.otus.web.servlet;
 
-import ru.otus.api.dao.UserDao;
+import ru.otus.api.service.DBServiceUser;
 import ru.otus.web.services.TemplateProcessor;
 
 import javax.servlet.http.HttpServlet;
@@ -16,18 +16,18 @@ public class UsersServlet extends HttpServlet {
     private static final String USERS_PAGE_TEMPLATE = "users.html";
     private static final String TEMPLATE_ATTR_RANDOM_USER = "randomUser";
 
-    private final UserDao userDao;
+    private final DBServiceUser dbServiceUser;
     private final TemplateProcessor templateProcessor;
 
-    public UsersServlet(TemplateProcessor templateProcessor, UserDao userDao) {
+    public UsersServlet(TemplateProcessor templateProcessor, DBServiceUser dbServiceUser) {
         this.templateProcessor = templateProcessor;
-        this.userDao = userDao;
+        this.dbServiceUser = dbServiceUser;
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse response) throws IOException {
         Map<String, Object> paramsMap = new HashMap<>();
-        userDao.findById(1).ifPresent(firstUser -> paramsMap.put(TEMPLATE_ATTR_RANDOM_USER, firstUser));
+        dbServiceUser.getUser(1).ifPresent(firstUser -> paramsMap.put(TEMPLATE_ATTR_RANDOM_USER, firstUser));
 
         response.setContentType("text/html");
         response.getWriter().println(templateProcessor.getPage(USERS_PAGE_TEMPLATE, paramsMap));

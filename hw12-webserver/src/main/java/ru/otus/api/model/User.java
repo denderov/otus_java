@@ -3,6 +3,7 @@ package ru.otus.api.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -21,6 +22,10 @@ public class User {
   @Column(name = "name")
   private String name;
 
+  @NaturalId
+  @Column(name = "login")
+  private String login;
+
   @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   @JoinColumn(name = "address_id")
   private AddressDataSet addressDataSet;
@@ -35,15 +40,22 @@ public class User {
     this.phoneDataSet = phoneDataSet;
   }
 
+  public User(String name, String login, AddressDataSet addressDataSet, Collection<PhoneDataSet> phoneDataSet) {
+    this.name = name;
+    this.login = login;
+    this.addressDataSet = addressDataSet;
+    this.phoneDataSet = phoneDataSet;
+  }
+
   public User(String name) {
     this.name = name;
   }
 
   public String getLogin() {
-    return null;
+    return login;
   }
 
   public String getPassword() {
-    return null;
+    return "123";
   }
 }
