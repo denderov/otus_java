@@ -2,8 +2,6 @@ package ru.otus;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.eclipse.jetty.security.HashLoginService;
-import org.eclipse.jetty.security.LoginService;
 import org.hibernate.SessionFactory;
 import ru.otus.api.dao.UserDao;
 import ru.otus.api.model.AddressDataSet;
@@ -54,10 +52,10 @@ public class Main {
 
         User adminUser = new User("Vasya","vas",null,null);
         dbServiceUser.saveUser(adminUser);
+        User anotherUser = new User("Ivan","iv",null,null);
+        dbServiceUser.saveUser(anotherUser);
 
         UserAuthService userAuthServiceForFilterBasedSecurity = new UserAuthServiceImpl(dbServiceUser);
-        LoginService loginServiceForBasicSecurity = new HashLoginService(REALM_NAME, hashLoginServiceConfigPath);
-        //LoginService loginServiceForBasicSecurity = new InMemoryLoginServiceImpl(userDao);
 
         Gson gson = new GsonBuilder().serializeNulls().setPrettyPrinting().create();
         TemplateProcessor templateProcessor = new TemplateProcessorImpl(TEMPLATES_DIR);
@@ -65,7 +63,7 @@ public class Main {
         UsersWebServer usersWebServer = new UsersWebServerImpl(WEB_SERVER_PORT,
                 FILTER_BASED,
                 userAuthServiceForFilterBasedSecurity,
-                loginServiceForBasicSecurity,
+                null,
                 dbServiceUser,
                 gson,
                 templateProcessor);
