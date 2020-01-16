@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,9 +29,7 @@ public class UsersServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse response) throws IOException {
         Map<String, Object> paramsMap = new HashMap<>();
-        List<User> users = new ArrayList<>();
-        dbServiceUser.getUser(1).ifPresent(users::add);
-        dbServiceUser.getUser(2).ifPresent(users::add);
+        List<User> users = dbServiceUser.getAll();
 
         paramsMap.put(TEMPLATE_USERS, users);
 

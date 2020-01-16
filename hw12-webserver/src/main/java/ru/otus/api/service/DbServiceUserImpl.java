@@ -6,6 +6,8 @@ import ru.otus.api.dao.UserDao;
 import ru.otus.api.model.User;
 import ru.otus.api.sessionmanager.SessionManager;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class DbServiceUserImpl implements DBServiceUser {
@@ -23,6 +25,7 @@ public class DbServiceUserImpl implements DBServiceUser {
       sessionManager.beginSession();
       try {
         long userId = userDao.saveUser(user);
+        System.out.println(userId);
         sessionManager.commitSession();
 
         logger.info("created user: {}", userId);
@@ -67,6 +70,21 @@ public class DbServiceUserImpl implements DBServiceUser {
         sessionManager.rollbackSession();
       }
       return Optional.empty();
+    }
+  }
+
+  @Override
+  public List<User> getAll() {
+    try (SessionManager sessionManager = userDao.getSessionManager()) {
+      sessionManager.beginSession();
+      try {
+
+        return userDao.getAll();
+      } catch (Exception e) {
+        logger.error(e.getMessage(), e);
+        sessionManager.rollbackSession();
+      }
+      return new ArrayList<>();
     }
   }
 }

@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
-import java.util.Collection;
 
 @Entity
 @Table(name = "users")
@@ -26,29 +25,17 @@ public class User {
   @Column(name = "login")
   private String login;
 
-  @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-  @JoinColumn(name = "address_id")
-  private AddressDataSet addressDataSet;
-
-  @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-  @JoinColumn(name = "user_id")
-  private Collection<PhoneDataSet> phoneDataSet;
-
-  public User(String name, AddressDataSet addressDataSet, Collection<PhoneDataSet> phoneDataSet) {
-    this.name = name;
-    this.addressDataSet = addressDataSet;
-    this.phoneDataSet = phoneDataSet;
-  }
-
-  public User(String name, String login, AddressDataSet addressDataSet, Collection<PhoneDataSet> phoneDataSet) {
-    this.name = name;
-    this.login = login;
-    this.addressDataSet = addressDataSet;
-    this.phoneDataSet = phoneDataSet;
-  }
+  @Column(name = "password")
+  private String password;
 
   public User(String name) {
     this.name = name;
+  }
+
+  public User(String name, String login, String password) {
+    this.name = name;
+    this.login = login;
+    this.password = password;
   }
 
   public String getLogin() {
@@ -56,6 +43,6 @@ public class User {
   }
 
   public String getPassword() {
-    return "123";
+    return password;
   }
 }
