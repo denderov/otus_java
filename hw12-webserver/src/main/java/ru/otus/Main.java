@@ -8,6 +8,7 @@ import ru.otus.api.service.DbServiceUserImpl;
 import ru.otus.hibernate.HibernateUtils;
 import ru.otus.hibernate.dao.UserDaoHibernate;
 import ru.otus.hibernate.sessionmanager.SessionManagerHibernate;
+import ru.otus.web.helpers.UsersHelper;
 import ru.otus.web.server.UsersWebServer;
 import ru.otus.web.server.UsersWebServerImpl;
 import ru.otus.web.services.TemplateProcessor;
@@ -28,7 +29,7 @@ public class Main {
         UserDao userDao = new UserDaoHibernate(sessionManager);
         DBServiceUser dbServiceUser = new DbServiceUserImpl(userDao);
 
-        makeDefaultUsers(dbServiceUser);
+        UsersHelper.makeDefaultUsers(dbServiceUser);
 
         UserAuthService userAuthServiceForFilterBasedSecurity = new UserAuthServiceImpl(dbServiceUser);
 
@@ -43,10 +44,4 @@ public class Main {
         usersWebServer.join();
     }
 
-    private static void makeDefaultUsers(DBServiceUser dbServiceUser) {
-        User adminUser = new User("Vasya","vas","123");
-        dbServiceUser.saveUser(adminUser);
-        User anotherUser = new User("Ivan","ivan","123");
-        dbServiceUser.saveUser(anotherUser);
-    }
 }
