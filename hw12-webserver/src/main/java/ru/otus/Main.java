@@ -28,10 +28,7 @@ public class Main {
         UserDao userDao = new UserDaoHibernate(sessionManager);
         DBServiceUser dbServiceUser = new DbServiceUserImpl(userDao);
 
-        User adminUser = new User("Vasya","vas","123");
-        dbServiceUser.saveUser(adminUser);
-        User anotherUser = new User("Ivan","ivan","123");
-        dbServiceUser.saveUser(anotherUser);
+        makeDefaultUsers(dbServiceUser);
 
         UserAuthService userAuthServiceForFilterBasedSecurity = new UserAuthServiceImpl(dbServiceUser);
 
@@ -44,5 +41,12 @@ public class Main {
 
         usersWebServer.start();
         usersWebServer.join();
+    }
+
+    private static void makeDefaultUsers(DBServiceUser dbServiceUser) {
+        User adminUser = new User("Vasya","vas","123");
+        dbServiceUser.saveUser(adminUser);
+        User anotherUser = new User("Ivan","ivan","123");
+        dbServiceUser.saveUser(anotherUser);
     }
 }
