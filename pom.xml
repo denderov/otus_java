@@ -26,6 +26,7 @@
         <module>hw11-cache</module>
         <module>hw12-webserver</module>
         <module>hw13-ioc</module>
+        <module>hw14-jmm</module>
     </modules>
 
     <properties>
