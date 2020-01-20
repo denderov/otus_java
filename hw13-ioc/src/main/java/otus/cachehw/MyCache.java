@@ -1,4 +1,4 @@
-package ru.otus.cachehw;
+package otus.cachehw;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,17 +25,8 @@ public class MyCache<K, V> implements HwCache<K, V> {
               new WeakHashMap<>());
   }
 
-  public MyCache() {
-    this(10);
-  }
-
-  public MyCache() {
-    this(10);
-  }
-
   @Override
   public void put(K key, V value) {
-    compactCache(limit - 1);
     cache.put(key, value);
     keysOrderedByInsertion.add(key);
     notifyEach(key, value, "PUT");
@@ -67,13 +58,6 @@ public class MyCache<K, V> implements HwCache<K, V> {
       if (listener == listenerRef.get()) {
         listeners.remove(listenerRef);
       }
-    }
-  }
-
-  private void compactCache(int sizeToCompact) {
-    while (cache.size() > sizeToCompact) {
-      K keyForRemove = keysOrderedByInsertion.poll();
-      cache.remove(keyForRemove);
     }
   }
 
