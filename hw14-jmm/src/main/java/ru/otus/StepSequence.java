@@ -1,4 +1,3 @@
-
 package ru.otus;
 
 public class StepSequence {
