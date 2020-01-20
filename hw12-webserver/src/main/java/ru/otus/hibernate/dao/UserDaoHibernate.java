@@ -1,7 +1,6 @@
 package ru.otus.hibernate.dao;
 
 
-import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +11,8 @@ import ru.otus.api.sessionmanager.SessionManager;
 import ru.otus.hibernate.sessionmanager.DatabaseSessionHibernate;
 import ru.otus.hibernate.sessionmanager.SessionManagerHibernate;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class UserDaoHibernate implements UserDao {
@@ -28,12 +29,7 @@ public class UserDaoHibernate implements UserDao {
   public Optional<User> findById(long id) {
     DatabaseSessionHibernate currentSession = sessionManager.getCurrentSession();
     try {
-      Optional<User> userOptional = Optional.ofNullable(currentSession.getHibernateSession().find(User.class, id));
-      if (userOptional.isPresent()) {
-        Hibernate.initialize(userOptional.get().getAddressDataSet());
-        Hibernate.initialize(userOptional.get().getPhoneDataSet());
-      }
-      return userOptional;
+      return Optional.ofNullable(currentSession.getHibernateSession().find(User.class, id));
     } catch (Exception e) {
       logger.error(e.getMessage(), e);
     }
@@ -61,5 +57,30 @@ public class UserDaoHibernate implements UserDao {
   @Override
   public SessionManager getSessionManager() {
     return sessionManager;
+  }
+
+  @Override
+  public Optional<User> findByLogin(String login) {
+    DatabaseSessionHibernate currentSession = sessionManager.getCurrentSession();
+    try {
+      return currentSession.getHibernateSession()
+              .byNaturalId(User.class)
+              .using("login", login)
+              .loadOptional();
+    } catch (Exception e) {
+      logger.error(e.getMessage(), e);
+    }
+    return Optional.empty();
+  }
+
+  @Override
+  public List<User> getAll() {
+    DatabaseSessionHibernate currentSession = sessionManager.getCurrentSession();
+    try {
+      return (List<User>) currentSession.getHibernateSession().createCriteria(User.class).list();
+    } catch (Exception e) {
+      logger.error(e.getMessage(), e);
+    }
+    return new ArrayList<>();
   }
 }
