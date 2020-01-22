@@ -44,7 +44,7 @@ public class StepSequence {
     }
 
     private void waitIfNotOurTurn(boolean isCurrentHandRight) {
-        if (isCurrentHandRight != isCurrentStepRight) {
+        while (isCurrentHandRight != isCurrentStepRight) {
             try{
                 wait();
             } catch(InterruptedException e) {
