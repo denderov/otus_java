@@ -11,6 +11,9 @@
 
 <artifactId>hw13-ioc</artifactId>
 
+    <packaging>war</packaging>
+    <name>DIhello</name>
+
 <properties>
     <logback-classic.version>1.2.3</logback-classic.version>
     <h2.version>1.4.200</h2.version>
@@ -151,13 +154,30 @@
     </dependency>
 </dependencies>
 
-<build>
-    <plugins>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <version>${maven-surefire-plugin.version}</version>
-        </plugin>
-    </plugins>
-</build>
+
+    <build>
+        <finalName>${name}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.2.2</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>war</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <webResources>
+                        <resource>
+                            <directory>src/main/resources</directory>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
