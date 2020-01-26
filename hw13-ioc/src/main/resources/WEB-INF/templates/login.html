@@ -1,4 +1,6 @@
-﻿<html xmlns="http://www.w3.org/1999/xhtml" content="text/html;">
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" content="text/html;">
 <head>
     <title>Login</title>
 </head>
@@ -6,15 +8,15 @@
 <div class="top">
     <img src="img/login.png">
     <br/>
-    <form action="login" method="post">
+    <form th:action="@{/login}" method="post">
         <label>
             login <br/>
-            <input type="text" name="login" value="vas">
+            <input type="text" name="login"  th:value="${login}">
         </label>
         <br/>
         <label>
             password<br/>
-            <input type="password" name="password" value="123">
+            <input type="password" name="password"  th:value="${password}">
         </label>
         <br/><br/>
         <input type="submit" value="Перейти к списку пользователей">

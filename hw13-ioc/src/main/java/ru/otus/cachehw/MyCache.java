@@ -2,6 +2,7 @@ package ru.otus.cachehw;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import java.lang.ref.WeakReference;
 import java.util.*;
@@ -11,6 +12,7 @@ import java.util.*;
  * created on 14.12.18.
  * modified by Alexander Fedorov
  */
+@Component
 public class MyCache<K, V> implements HwCache<K, V> {
 
   private static Logger logger = LoggerFactory.getLogger(MyCache.class);

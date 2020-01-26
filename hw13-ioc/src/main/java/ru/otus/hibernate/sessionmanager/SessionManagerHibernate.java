@@ -3,19 +3,25 @@ package ru.otus.hibernate.sessionmanager;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Component;
+import ru.otus.api.model.User;
 import ru.otus.api.sessionmanager.SessionManager;
 import ru.otus.api.sessionmanager.SessionManagerException;
+import ru.otus.hibernate.HibernateUtils;
 
+@Component
 public class SessionManagerHibernate implements SessionManager {
 
   private DatabaseSessionHibernate databaseSession;
   private final SessionFactory sessionFactory;
 
-  public SessionManagerHibernate(SessionFactory sessionFactory) {
-    if (sessionFactory == null) {
-      throw new SessionManagerException("SessionFactory is null");
-    }
-    this.sessionFactory = sessionFactory;
+  public SessionManagerHibernate() {
+      SessionFactory sessionFactory = HibernateUtils.buildSessionFactory("hibernate.cfg.xml",
+              User.class);
+      if (sessionFactory == null) {
+          throw new SessionManagerException("SessionFactory is null");
+      }
+      this.sessionFactory = sessionFactory;
   }
 
   @Override

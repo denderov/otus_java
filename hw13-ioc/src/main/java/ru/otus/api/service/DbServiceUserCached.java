@@ -1,11 +1,15 @@
 package ru.otus.api.service;
 
+import org.springframework.stereotype.Component;
 import ru.otus.api.dao.UserDao;
 import ru.otus.api.model.User;
 import ru.otus.cachehw.HwCache;
+import ru.otus.web.helpers.UsersHelper;
+import javax.annotation.PostConstruct;
 
 import java.util.Optional;
 
+@Component
 public class DbServiceUserCached extends DbServiceUserImpl {
 
     HwCache<Long, User> myCache;
@@ -13,6 +17,11 @@ public class DbServiceUserCached extends DbServiceUserImpl {
     public DbServiceUserCached(UserDao userDao, HwCache<Long, User> cache) {
         super(userDao);
         this.myCache = cache;
+    }
+
+    @PostConstruct
+    public void loadData() {
+        UsersHelper.makeDefaultUsers(this);
     }
 
     @Override

@@ -1,7 +1,9 @@
 package ru.otus.web.services;
 
+import org.springframework.stereotype.Service;
 import ru.otus.api.service.DBServiceUser;
 
+@Service
 public class UserAuthServiceImpl implements UserAuthService {
 
     private final DBServiceUser dbServiceUser;
