@@ -27,7 +27,7 @@ public class UserController {
         return "users.html";
     }
 
-    @GetMapping("/user/create")
+    @GetMapping("/user/add")
     public String userCreateView(Model model) {
         model.addAttribute("user", new User());
         return "add_user.html";

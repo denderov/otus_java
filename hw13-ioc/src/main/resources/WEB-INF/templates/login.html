@@ -8,15 +8,15 @@
 <div class="top">
     <img src="img/login.png">
     <br/>
-    <form th:action="@{/login}" method="post">
+    <form th:action="@{/login}" method="post" th:object="${loginUser}">
         <label>
             login <br/>
-            <input type="text" name="login"  th:value="${login}">
+            <input type="text" name="login"  th:field="*{login}">
         </label>
         <br/>
         <label>
             password<br/>
-            <input type="password" name="password"  th:value="${password}">
+            <input type="password" name="password"  th:field="*{password}">
         </label>
         <br/><br/>
         <input type="submit" value="Перейти к списку пользователей">
