@@ -11,6 +11,7 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
+import ru.otus.web.helpers.UsersHelper;
 
 @Configuration
 @ComponentScan
@@ -49,6 +50,11 @@ public class WebConfig implements WebMvcConfigurer {
         viewResolver.setOrder(1);
         viewResolver.setCharacterEncoding("UTF-8");
         return viewResolver;
+    }
+
+    @Bean(initMethod="init")
+    public UsersHelper initUsers() {
+        return new UsersHelper();
     }
 
     @Override
