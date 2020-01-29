@@ -15,7 +15,7 @@ import java.util.*;
 @Component
 public class MyCache<K, V> implements HwCache<K, V> {
 
-  private static Logger logger = LoggerFactory.getLogger(MyCache.class);
+  private static final Logger logger = LoggerFactory.getLogger(MyCache.class);
   private final Set<WeakReference<HwListener<K,V>>> listeners;
   private final Map<K, V> cache;
   private final Queue<K> keysOrderedByInsertion;

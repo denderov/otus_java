@@ -12,7 +12,7 @@ import java.util.Optional;
 @Component
 public class DbServiceUserCached extends DbServiceUserImpl {
 
-    HwCache<Long, User> myCache;
+    final HwCache<Long, User> myCache;
 
     public DbServiceUserCached(UserDao userDao, HwCache<Long, User> cache) {
         super(userDao);
