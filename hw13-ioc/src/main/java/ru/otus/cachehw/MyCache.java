@@ -18,11 +18,9 @@ public class MyCache<K, V> implements HwCache<K, V> {
   private static final Logger logger = LoggerFactory.getLogger(MyCache.class);
   private final Set<WeakReference<HwListener<K,V>>> listeners;
   private final Map<K, V> cache;
-  private final Queue<K> keysOrderedByInsertion;
 
   public MyCache() {
       this.cache = new WeakHashMap<>();
-      this.keysOrderedByInsertion = new LinkedList<>();
       this.listeners =  Collections.newSetFromMap(
               new WeakHashMap<>());
   }
@@ -30,14 +28,12 @@ public class MyCache<K, V> implements HwCache<K, V> {
   @Override
   public void put(K key, V value) {
     cache.put(key, value);
-    keysOrderedByInsertion.add(key);
     notifyEach(key, value, "PUT");
   }
 
   @Override
   public void remove(K key) {
     V value = cache.remove(key);
-    keysOrderedByInsertion.remove(key);
     notifyEach(key, value, "REMOVE");
   }
 
