@@ -12,7 +12,7 @@
 <artifactId>hw13-ioc</artifactId>
 
     <packaging>war</packaging>
-    <name>DIhello</name>
+    <name>DItest</name>
 
 <properties>
     <logback-classic.version>1.2.3</logback-classic.version>
