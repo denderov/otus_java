@@ -1,6 +1,5 @@
-package ru.otus;
+package ru.otus.config;
 
-import org.hibernate.SessionFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -12,13 +11,9 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
-import ru.otus.api.model.User;
-import ru.otus.api.sessionmanager.SessionManagerException;
-import ru.otus.hibernate.HibernateUtils;
-import ru.otus.web.helpers.UsersHelper;
 
 @Configuration
-@ComponentScan
+@ComponentScan("ru.otus")
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
 
@@ -59,20 +54,5 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/**").addResourceLocations("/WEB-INF/static/");
-    }
-
-    @Bean(initMethod="init")
-    public UsersHelper initUsers() {
-        return new UsersHelper();
-    }
-
-    @Bean
-    public SessionFactory sessionFactory() {
-        SessionFactory sessionFactory = HibernateUtils.buildSessionFactory("hibernate.cfg.xml",
-                User.class);
-        if (sessionFactory == null) {
-            throw new SessionManagerException("SessionFactory is null");
-        }
-        return sessionFactory;
     }
 }

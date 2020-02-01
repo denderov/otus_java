@@ -2,6 +2,7 @@ package ru.otus;
 
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+import ru.otus.config.WebConfig;
 
 import javax.servlet.Filter;
 
