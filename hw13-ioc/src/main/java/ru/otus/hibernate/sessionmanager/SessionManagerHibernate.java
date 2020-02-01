@@ -3,7 +3,6 @@ package ru.otus.hibernate.sessionmanager;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.otus.api.sessionmanager.SessionManager;
 import ru.otus.api.sessionmanager.SessionManagerException;
@@ -12,10 +11,10 @@ import ru.otus.api.sessionmanager.SessionManagerException;
 public class SessionManagerHibernate implements SessionManager {
 
   private DatabaseSessionHibernate databaseSession;
-  @Autowired
-  private SessionFactory sessionFactory;
+  private final SessionFactory sessionFactory;
 
-  public SessionManagerHibernate() {
+  public SessionManagerHibernate(SessionFactory sessionFactory) {
+    this.sessionFactory = sessionFactory;
   }
 
   @Override
