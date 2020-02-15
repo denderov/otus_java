@@ -8,7 +8,6 @@ import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-
 public final class MessageSystemImpl implements MessageSystem {
   private static final Logger logger = LoggerFactory.getLogger(MessageSystemImpl.class);
   private static final int MESSAGE_QUEUE_SIZE = 100_000;

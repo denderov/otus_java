@@ -2,6 +2,10 @@ package ru.otus.web.front;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Service;
 import ru.otus.web.messagesystem.Message;
 import ru.otus.web.messagesystem.MessageType;
 import ru.otus.web.messagesystem.MsClient;
@@ -12,7 +16,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
 
-
+@Service
 public class FrontendServiceImpl implements FrontendService {
   private static final Logger logger = LoggerFactory.getLogger(FrontendServiceImpl.class);
 
@@ -20,7 +24,7 @@ public class FrontendServiceImpl implements FrontendService {
   private final MsClient msClient;
   private final String databaseServiceClientName;
 
-  public FrontendServiceImpl(MsClient msClient, String databaseServiceClientName) {
+  public FrontendServiceImpl(@Lazy @Qualifier("frontendMsClient") MsClient msClient, @Value("databaseService") String databaseServiceClientName) {
     this.msClient = msClient;
     this.databaseServiceClientName = databaseServiceClientName;
   }
