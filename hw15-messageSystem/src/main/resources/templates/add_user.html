@@ -2,26 +2,28 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Add user</title>
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/main.css" rel="stylesheet">
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script src="/app.js"></script>
 </head>
 <body>
 <div class="top">
-    <form id="create-form" th:action="@{/user/save}" th:object="${user}" th:method="post" accept-charset="utf-8">
-        <label>
-            name<br/>
-            <input type="text" name="name" th:value="${user.name}">
-        </label>
+    <form class="form-inline">
+        <div class="form-group">
+            <label for="name">name</label>
+            <input type="text" id="name" class="form-control" placeholder="name">
+            <br/>
+            <label for="login">login</label>
+            <input type="text" id="login" class="form-control" placeholder="login">
+            <br/>
+            <label for="password">password</label>
+            <input type="password" id="password" class="form-control" placeholder="******">
+        </div>
         <br/>
-        <label>
-            login <br/>
-            <input type="text" name="login" th:value="${user.login}">
-        </label>
-        <br/>
-        <label>
-            password<br/>
-            <input type="password" name="password" th:value="${user.password}">
-        </label>
-        <br/><br/>
-        <input type="submit" value="Добавить пользователя">
+        <button id="send" class="btn btn-default" type="submit">Добавить пользователя</button>
     </form>
 </div>
 </body>
