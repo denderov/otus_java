@@ -1,4 +1,4 @@
-var stompClient = null;
+var stompClient = Stomp.over(new SockJS('/app/websocket'));
 
 function setConnected(connected) {
     $("#connect").prop("disabled", connected);
@@ -13,8 +13,6 @@ function setConnected(connected) {
 }
 
 function connect() {
-    var socket = new SockJS('/websocket-endpoint');
-    stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         setConnected(true);
         console.log('Connected: ' + frame);

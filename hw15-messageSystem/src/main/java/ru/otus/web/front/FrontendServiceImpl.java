@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
+import ru.otus.api.model.User;
 import ru.otus.web.messagesystem.Message;
 import ru.otus.web.messagesystem.MessageType;
 import ru.otus.web.messagesystem.MsClient;
@@ -35,6 +36,14 @@ public class FrontendServiceImpl implements FrontendService {
     consumerMap.put(outMsg.getId(), dataConsumer);
     msClient.sendMessage(outMsg);
   }
+
+  @Override
+  public void createUser(User user, Consumer<String> dataConsumer) {
+    Message outMsg = msClient.produceMessage(databaseServiceClientName, user, MessageType.USER_DATA);
+    consumerMap.put(outMsg.getId(), dataConsumer);
+    msClient.sendMessage(outMsg);
+  }
+
 
   @Override
   public <T> Optional<Consumer<T>> takeConsumer(UUID sourceMessageId, Class<T> tClass) {
