@@ -1,40 +1,16 @@
-var stompClient = Stomp.over(new SockJS('/app/websocket'));
+var stompClient = Stomp.over(new SockJS('/websocket'));
 
-function setConnected(connected) {
-    $("#connect").prop("disabled", connected);
-    $("#disconnect").prop("disabled", !connected);
-    if (connected) {
-        $("#conversation").show();
-    }
-    else {
-        $("#conversation").hide();
-    }
-    $("#greetings").html("");
-}
-
-function connect() {
+function initWS() {
     stompClient.connect({}, function (frame) {
-        setConnected(true);
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/frontend/get_user', function (user) {
-            showGreeting(JSON.parse(greeting.body).user);
+        stompClient.subscribe('/topic/user', function (msg) {
+            console.log('resp: ' + JSON.parse(msg.body));
+            showResult(JSON.parse(msg.body));
         });
     });
 }
 
-function disconnect() {
-    if (stompClient !== null) {
-        stompClient.disconnect();
-    }
-    setConnected(false);
-    console.log("Disconnected");
-}
-
-function sendName() {
-    stompClient.send("/app/hello", {}, JSON.stringify({'name': $("#name").val()}));
-}
-
-function addUser(json) {
+function showUser(json) {
     $("#users").append(
         "<td>" + JSON.parse(json).id + "</td>" +
         "<td>" + JSON.parse(json).name + "</td>" +
@@ -43,12 +19,19 @@ function addUser(json) {
         );
 }
 
+function createUser() {
+    stompClient.send("/app/createUser", {}, JSON.stringify({
+                    'name': $("#name").val() ,
+                    'login': $("#login").val() ,
+                    'password': $("#password").val() ,
+                  }));
+}
+
 $(function () {
-    $("form").on('submit', function (e) {
-        e.preventDefault();
-    });
-    $( "#connect" ).click(function() { connect(); });
-    $( "#disconnect" ).click(function() { disconnect(); });
-    $( "#send" ).click(function() { sendName(); });
+    $( "#send" ).click(function() { createUser(); });
 });
+
+function showResult(message) {
+    $("#result").append("<tr><td>" + message + "</td></tr>");
+}
 

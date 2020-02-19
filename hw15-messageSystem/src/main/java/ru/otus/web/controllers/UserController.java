@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
-import ru.otus.api.model.User;
 import ru.otus.api.service.DBServiceUser;
 import ru.otus.web.front.FrontendService;
 
@@ -31,26 +30,28 @@ public class UserController {
 
     @GetMapping({"/users"})
     public String userListView(Model model) {
-        List<User> users = serviceUser.getAll();
+        List<ru.otus.api.model.User> users = serviceUser.getAll();
         model.addAttribute("users", users);
         return "users.html";
     }
 
     @GetMapping("/user/add")
     public String userCreateView(Model model) {
-        model.addAttribute("user", new User());
+        model.addAttribute("user", new ru.otus.api.model.User());
         return "add_user.html";
     }
 
     @PostMapping("/user/save")
-    public RedirectView userSave(@ModelAttribute User user) {
+    public RedirectView userSave(@ModelAttribute ru.otus.api.model.User user) {
         serviceUser.saveUser(user);
         return new RedirectView("/users", true);
     }
 
     @MessageMapping("/createUser")
-    public void createUser(User user) {
-        frontendService.createUser(user, data -> this.messagingTemplate.convertAndSend("/topic/user", data));
+    public void createUser(String userJson) {
+        frontendService.createUser(userJson, data -> this.messagingTemplate.convertAndSend("/topic/user", data));
     }
+
+
 
 }

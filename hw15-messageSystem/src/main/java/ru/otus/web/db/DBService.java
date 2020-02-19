@@ -1,5 +1,8 @@
 package ru.otus.web.db;
 
+
+import ru.otus.api.model.User;
+
 public interface DBService {
-    String getUserData(long id);
+    long saveUser(User user);
 }

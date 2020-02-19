@@ -9,7 +9,7 @@
     <script src="/webjars/stomp-websocket/stomp.min.js"></script>
     <script src="/app.js"></script>
 </head>
-<body>
+<body onload="initWS()">
 <div class="top">
     <form class="form-inline">
         <div class="form-group">
@@ -25,6 +25,15 @@
         <br/>
         <button id="send" class="btn btn-default" type="submit">Добавить пользователя</button>
     </form>
+    <table id="conversation" class="table table-striped">
+        <thead>
+        <tr>
+            <th>Results:</th>
+        </tr>
+        </thead>
+        <tbody id="result">
+        </tbody>
+    </table>
 </div>
 </body>
 </html>

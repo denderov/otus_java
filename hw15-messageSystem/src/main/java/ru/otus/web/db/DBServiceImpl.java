@@ -3,6 +3,8 @@ package ru.otus.web.db;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import ru.otus.api.model.User;
+import ru.otus.api.service.DBServiceUser;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,20 +13,15 @@ import java.util.Map;
 public class DBServiceImpl implements DBService {
   private static final Logger logger = LoggerFactory.getLogger(DBServiceImpl.class);
   private final Map<Long, String> database = new HashMap<>();
+  private final DBServiceUser dbServiceUser;
 
-  private void initDatabase() {
-    database.put(1L, "val1");
-    database.put(2L, "val2");
-    database.put(3L, "val3");
+  public DBServiceImpl(DBServiceUser dbServiceUser) {
+    this.dbServiceUser = dbServiceUser;
   }
 
-  public DBServiceImpl() {
-    initDatabase();
-  }
-
-  public String getUserData(long id) {
-    logger.info("get data for id:{}", id);
-    return database.get(id);
+  public long saveUser(User user) {
+    logger.info("get data for id:{}", user);
+    return dbServiceUser.saveUser(user);
   }
 
 }
