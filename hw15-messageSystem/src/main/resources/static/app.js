@@ -1,6 +1,8 @@
-var stompClient = Stomp.over(new SockJS('/websocket'));
+var stompClient = null;
 
 function initWS() {
+    var socket = new SockJS('/user-websocket');
+    stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         console.log('Connected: ' + frame);
         stompClient.subscribe('/topic/user', function (msg) {
@@ -20,6 +22,7 @@ function showUser(json) {
 }
 
 function createUser() {
+            console.log('createUser');
     stompClient.send("/app/createUser", {}, JSON.stringify({
                     'name': $("#name").val() ,
                     'login': $("#login").val() ,

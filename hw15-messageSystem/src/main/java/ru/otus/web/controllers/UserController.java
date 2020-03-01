@@ -1,7 +1,7 @@
 package ru.otus.web.controllers;
 
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,23 +9,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
 import ru.otus.api.service.DBServiceUser;
-import ru.otus.web.front.FrontendService;
 
 import java.util.List;
 
 @Controller
 public class UserController {
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     private final DBServiceUser serviceUser;
 
-    private final FrontendService frontendService;
-
-    private final SimpMessagingTemplate messagingTemplate;
-
-    public UserController(DBServiceUser serviceUser, FrontendService frontendService, SimpMessagingTemplate messagingTemplate) {
+    public UserController(DBServiceUser serviceUser) {
         this.serviceUser = serviceUser;
-        this.frontendService = frontendService;
-        this.messagingTemplate = messagingTemplate;
     }
 
     @GetMapping({"/users"})
@@ -46,12 +40,5 @@ public class UserController {
         serviceUser.saveUser(user);
         return new RedirectView("/users", true);
     }
-
-    @MessageMapping("/createUser")
-    public void createUser(String userJson) {
-        frontendService.createUser(userJson, data -> this.messagingTemplate.convertAndSend("/topic/user", data));
-    }
-
-
 
 }
