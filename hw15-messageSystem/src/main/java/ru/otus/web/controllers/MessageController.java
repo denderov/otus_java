@@ -21,6 +21,16 @@ public class MessageController {
         this.messagingTemplate = messagingTemplate;
     }
 
+    @MessageMapping("/getAllUsers")
+    @SendTo("/topic/allUsers")
+    public void getAllUsers() {
+        frontendService.getAllUserData(data ->
+        {
+            logger.info("all users: {}", data);
+            messagingTemplate.convertAndSend("/topic/allUsers", data);
+        });
+    }
+
     @MessageMapping("/createUser")
     @SendTo("/topic/user")
     public void createUser(String userJson) {

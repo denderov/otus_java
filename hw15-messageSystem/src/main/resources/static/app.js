@@ -1,28 +1,22 @@
 var stompClient = null;
 
 function initWS() {
-    showHeadUser();
     var socket = new SockJS('/user-websocket');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         console.log('Connected: ' + frame);
         stompClient.subscribe('/topic/user', function (msg) {
             console.log('resp: ' + JSON.parse(msg.body));
-            showAddedUser(JSON.parse(msg.body));
-//            showResult(JSON.parse(msg.body));
+            showResult(JSON.parse(msg.body));
+        });
+
+        stompClient.subscribe('/topic/allUsers', function (msg) {
+            console.log('resp: ' + JSON.parse(msg.body));
+            showAllUsers(JSON.parse(msg.body));
         });
     });
-}
 
-function showAddedUser(json) {
-    $("#users").append(
-        "<tr>" +
-        "<td>" + JSON.parse(json).id + "</td>" +
-        "<td>" + JSON.parse(json).name + "</td>" +
-        "<td>" + JSON.parse(json).login + "</td>" +
-        "<td>" + JSON.parse(json).password + "</td>" +
-        "</tr>"
-        );
+    getUsers();
 }
 
 function showHeadUser() {
@@ -45,11 +39,40 @@ function createUser() {
                   }));
 }
 
+function getUsers() {
+            console.log('getUsers');
+    stompClient.send("/app/getAllUsers", {}, null);
+}
+
 $(function () {
     $( "#send" ).click(function() { createUser(); });
+    $( "#getUsers" ).click(function() { getUsers() ; });
 });
 
 function showResult(message) {
     $("#result").html("<tr><td>Created new user. ID:" + message + "</td></tr>");
 }
+
+
+
+function showAllUsers(json) {
+
+    $('#table_head').empty();
+    $('#table_content').empty();
+
+    // Get Table headers and print
+    for (var k = 0; k < Object.keys(json[0]).length; k++) {
+      $('#table_head').append('<td style="width: 100px">' + Object.keys(json[0])[k] + '</td>');
+    }
+
+    // Get table body and print
+    for (var i = 0; i < Object.keys(json).length; i++) {
+      $('#table_content').append('<tr>');
+      for (var j = 0; j < Object.keys(json[0]).length; j++) {
+        $('#table_content').append('<td>' + json[i][Object.keys(json[0])[j]] + '</td>');
+      }
+      $('#table_content').append('</tr>');
+    }
+}
+
 
