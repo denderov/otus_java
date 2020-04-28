@@ -1,7 +1,7 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+﻿<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Main</title>
+    <title>Add user</title>
     <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/main.css" rel="stylesheet">
     <script src="/webjars/jquery/jquery.min.js"></script>
@@ -10,27 +10,41 @@
     <script src="/app.js"></script>
 </head>
 <body onload="initWS()">
-<h4>Список пользователей</h4>
-<table style="width: 400px">
-    <thead>
-        <tr>
-            <td style="width: 50px">Id</td>
-            <td style="width: 150px">Имя</td>
-            <td style="width: 100px">Логин</td>
-            <td style="width: 100px">Пароль</td>
+<div class="top">
+    <table>
+        <thead>
+        <tr id="table_head">
+
         </tr>
-    </thead>
-    <tbody>
-    <tr th:each="user : ${users}">
-        <td th:text="${user.id}"></td>
-        <td th:text="${user.name}"></td>
-        <td th:text="${user.login}"></td>
-        <td th:text="${user.password}"></td>
-    </tr>
-    </tbody>
-</table>
-<form th:action="@{/user/add}" method="get">
-    <input type="submit" value="Добавить пользователя">
-</form>
+        </thead>
+        <tbody id="table_content">
+
+        </tbody>
+    </table>
+    <button id="getUsers" class="btn btn-default" type="button">Обновить пользователей</button>
+    <form class="form-inline">
+        <div class="form-group">
+            <label for="name">name</label>
+            <input type="text" id="name" class="form-control" placeholder="name">
+            <br/>
+            <label for="login">login</label>
+            <input type="text" id="login" class="form-control" placeholder="login">
+            <br/>
+            <label for="password">password</label>
+            <input type="password" id="password" class="form-control" placeholder="******">
+        </div>
+        <br/>
+        <button id="send" class="btn btn-default" type="button">Добавить пользователя</button>
+    </form>
+    <table id="conversation" class="table table-striped">
+        <thead>
+        <tr>
+            <th>Results:</th>
+        </tr>
+        </thead>
+        <tbody id="result">
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

@@ -8,6 +8,7 @@ function initWS() {
         stompClient.subscribe('/topic/user', function (msg) {
             console.log('resp: ' + JSON.parse(msg.body));
             showResult(JSON.parse(msg.body));
+            getUsers();
         });
 
         stompClient.subscribe('/topic/allUsers', function (msg) {
@@ -16,22 +17,11 @@ function initWS() {
         });
     });
 
-    getUsers();
-}
-
-function showHeadUser() {
-    $("#users").append(
-        "<tr>" +
-        "<td>id</td>" +
-        "<td>name</td>" +
-        "<td>login</td>" +
-        "<td>password</td>" +
-        "</tr>"
-        );
+    setTimeout(function(){ getUsers(); }, 1000);
 }
 
 function createUser() {
-            console.log('createUser');
+    console.log('createUser');
     stompClient.send("/app/createUser", {}, JSON.stringify({
                     'name': $("#name").val() ,
                     'login': $("#login").val() ,
@@ -40,20 +30,18 @@ function createUser() {
 }
 
 function getUsers() {
-            console.log('getUsers');
+    console.log('getUsers');
     stompClient.send("/app/getAllUsers", {}, null);
 }
 
 $(function () {
     $( "#send" ).click(function() { createUser(); });
-    $( "#getUsers" ).click(function() { getUsers() ; });
+    $( "#getUsers" ).click(function() { getUsers() });
 });
 
 function showResult(message) {
     $("#result").html("<tr><td>Created new user. ID:" + message + "</td></tr>");
 }
-
-
 
 function showAllUsers(json) {
 

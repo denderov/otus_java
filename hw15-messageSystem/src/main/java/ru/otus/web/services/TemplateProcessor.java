@@ -1,6 +1,5 @@
 package ru.otus.web.services;
 
-import java.io.IOException;
 import java.util.Map;
 
 public interface TemplateProcessor {

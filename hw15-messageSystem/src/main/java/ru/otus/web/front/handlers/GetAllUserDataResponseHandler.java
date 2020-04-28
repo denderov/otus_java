@@ -1,6 +1,5 @@
 package ru.otus.web.front.handlers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.otus.web.common.Serializers;
@@ -21,7 +20,7 @@ public class GetAllUserDataResponseHandler implements RequestHandler {
     }
 
     @Override
-    public Optional<Message> handle(Message msg) throws JsonProcessingException {
+    public Optional<Message> handle(Message msg) {
         logger.info("new message:{}", msg);
         try {
             String allUsers = Serializers.deserialize(msg.getPayload(), String.class);

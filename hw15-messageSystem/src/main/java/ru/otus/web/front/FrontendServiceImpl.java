@@ -43,7 +43,6 @@ public class FrontendServiceImpl implements FrontendService {
     msClient.sendMessage(outMsg);
   }
 
-
   @Override
   public <T> Optional<Consumer<T>> takeConsumer(UUID sourceMessageId, Class<T> tClass) {
     Consumer<T> consumer = (Consumer<T>) consumerMap.remove(sourceMessageId);
