@@ -3,7 +3,6 @@ package ru.otus.config;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import ru.otus.api.model.User;
 import ru.otus.api.service.DBServiceUser;
 import ru.otus.api.sessionmanager.SessionManagerException;
@@ -18,7 +17,7 @@ import ru.otus.web.helpers.DBInitializer;
 import ru.otus.web.messagesystem.*;
 
 @Configuration
-public class AppConfig implements WebMvcConfigurer {
+public class AppConfig {
 
     private static final String FRONTEND_SERVICE_CLIENT_NAME = "frontendService";
     private static final String DATABASE_SERVICE_CLIENT_NAME = "databaseService";
