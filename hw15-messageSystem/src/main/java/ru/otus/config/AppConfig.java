@@ -1,5 +1,6 @@
 package ru.otus.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -43,9 +44,14 @@ public class AppConfig {
     }
 
     @Bean
-    public MsClient databaseMsClient(MessageSystem messageSystem, DBService dbService) {
+    public ObjectMapper objectMapper() {
+        return new ObjectMapper();
+    }
+
+    @Bean
+    public MsClient databaseMsClient(MessageSystem messageSystem, DBService dbService, ObjectMapper objectMapper) {
         MsClient databaseMsClient = new MsClientImpl(DATABASE_SERVICE_CLIENT_NAME, messageSystem);
-        databaseMsClient.addHandler(MessageType.USER_DATA, new GetUserDataRequestHandler(dbService));
+        databaseMsClient.addHandler(MessageType.USER_DATA, new GetUserDataRequestHandler(dbService, objectMapper));
         databaseMsClient.addHandler(MessageType.ALL_USERS_DATA, new GetAllUserDataRequestHandler(dbService));
         messageSystem.addClient(databaseMsClient);
         return databaseMsClient;

@@ -14,10 +14,11 @@ import java.util.Optional;
 
 public class GetUserDataRequestHandler implements RequestHandler {
   private final DBService dbService;
-  private final ObjectMapper objectMapper = new ObjectMapper();
+  private final ObjectMapper objectMapper;
 
-  public GetUserDataRequestHandler(DBService dbService) {
+  public GetUserDataRequestHandler(DBService dbService, ObjectMapper objectMapper) {
     this.dbService = dbService;
+    this.objectMapper = objectMapper;
   }
 
   @Override
