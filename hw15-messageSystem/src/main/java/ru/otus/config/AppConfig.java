@@ -37,7 +37,7 @@ public class AppConfig {
         return sessionFactory;
     }
 
-    @Bean
+    @Bean(destroyMethod="dispose")
     public MessageSystem messageSystem() {
         return new MessageSystemImpl();
     }
