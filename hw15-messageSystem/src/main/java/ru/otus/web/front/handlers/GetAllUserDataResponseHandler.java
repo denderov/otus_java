@@ -11,7 +11,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public class GetAllUserDataResponseHandler implements RequestHandler {
-    private static final Logger logger = LoggerFactory.getLogger(GetUserDataResponseHandler.class);
+    private static final Logger logger = LoggerFactory.getLogger(GetAllUserDataResponseHandler.class);
 
     private final FrontendService frontendService;
 
