@@ -44,11 +44,6 @@ public class AppConfig {
     }
 
     @Bean
-    public ObjectMapper objectMapper() {
-        return new ObjectMapper();
-    }
-
-    @Bean
     public MsClient databaseMsClient(MessageSystem messageSystem, DBService dbService, ObjectMapper objectMapper) {
         MsClient databaseMsClient = new MsClientImpl(DATABASE_SERVICE_CLIENT_NAME, messageSystem);
         databaseMsClient.addHandler(MessageType.USER_DATA, new GetUserDataRequestHandler(dbService, objectMapper));
