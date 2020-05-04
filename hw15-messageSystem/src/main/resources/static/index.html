@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Add user</title>
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/main.css" rel="stylesheet">
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script src="/app.js"></script>
+</head>
+<body onload="initWS()">
+<div class="top">
+    <table>
+        <thead>
+        <tr id="table_head">
+
+        </tr>
+        </thead>
+        <tbody id="table_content">
+
+        </tbody>
+    </table>
+    <button id="getUsers" class="btn btn-default" type="button">Обновить пользователей</button>
+    <form class="form-inline">
+        <div class="form-group">
+            <label for="name">name</label>
+            <input type="text" id="name" class="form-control" placeholder="name">
+            <br/>
+            <label for="login">login</label>
+            <input type="text" id="login" class="form-control" placeholder="login">
+            <br/>
+            <label for="password">password</label>
+            <input type="password" id="password" class="form-control" placeholder="******">
+        </div>
+        <br/>
+        <button id="send" class="btn btn-default" type="button">Добавить пользователя</button>
+    </form>
+    <table id="conversation" class="table table-striped">
+        <thead>
+        <tr>
+            <th>Results:</th>
+        </tr>
+        </thead>
+        <tbody id="result">
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
