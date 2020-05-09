@@ -27,6 +27,9 @@
         <module>hw12-webserver</module>
         <module>hw13-ioc</module>
         <module>hw15-messageSystem</module>
+        <module>hw16-messageServer</module>
+        <module>hw16-frontend</module>
+        <module>hw16-dbServer</module>
     </modules>
 
     <properties>
