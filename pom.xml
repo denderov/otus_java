@@ -30,6 +30,7 @@
         <module>hw16-messageServer</module>
         <module>hw16-frontend</module>
         <module>hw16-dbServer</module>
+        <module>hw16-messageSystem</module>
     </modules>
 
     <properties>
