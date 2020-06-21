@@ -17,8 +17,8 @@ import ru.otus.socket.SocketServerImpl;
 @Configuration
 public class AppConfig {
 
-    private static final String FRONTEND_SERVICE_CLIENT_NAME = "frontendService";
-    private static final String DATABASE_SERVICE_CLIENT_NAME = "databaseService";
+    private static final String FRONTEND_SERVICE_CLIENT_NAME = "frontendService1";
+    private static final String DATABASE_SERVICE_CLIENT_NAME = "databaseService1";
 
     @Bean(destroyMethod="dispose")
     public MessageSystem messageSystem() {

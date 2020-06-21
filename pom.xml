@@ -12,21 +12,21 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>hw01-maven</module>
-        <module>hw02-diyarraylist</module>
-        <module>hw03-gc</module>
-        <module>hw04-autoLogging</module>
-        <module>hw04-agent</module>
-        <module>hw05-annotations</module>
-        <module>hw06-atm</module>
-        <module>hw07-atmDept</module>
-        <module>hw08-json</module>
-        <module>hw09-jdbc</module>
-        <module>hw10-hibernate</module>
-        <module>hw11-cache</module>
-        <module>hw12-webserver</module>
-        <module>hw13-ioc</module>
-        <module>hw15-messageSystem</module>
+<!--        <module>hw01-maven</module>-->
+<!--        <module>hw02-diyarraylist</module>-->
+<!--        <module>hw03-gc</module>-->
+<!--        <module>hw04-autoLogging</module>-->
+<!--        <module>hw04-agent</module>-->
+<!--        <module>hw05-annotations</module>-->
+<!--        <module>hw06-atm</module>-->
+<!--        <module>hw07-atmDept</module>-->
+<!--        <module>hw08-json</module>-->
+<!--        <module>hw09-jdbc</module>-->
+<!--        <module>hw10-hibernate</module>-->
+<!--        <module>hw11-cache</module>-->
+<!--        <module>hw12-webserver</module>-->
+<!--        <module>hw13-ioc</module>-->
+<!--        <module>hw15-messageSystem</module>-->
         <module>hw16-messageServer</module>
         <module>hw16-frontend</module>
         <module>hw16-dbServer</module>

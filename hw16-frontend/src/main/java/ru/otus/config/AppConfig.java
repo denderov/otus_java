@@ -1,5 +1,6 @@
 package ru.otus.config;
 
+import org.springframework.boot.ApplicationArguments;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import ru.otus.front.FrontendService;
@@ -19,27 +20,27 @@ import ru.otus.socket.SocketServerImpl;
 @Configuration
 public class AppConfig {
 
-    private static final String FRONTEND_SERVICE_CLIENT_NAME = "frontendService";
-    private static final String DATABASE_SERVICE_CLIENT_NAME = "databaseService";
-
     @Bean(destroyMethod="dispose")
     public MessageSystem messageSystem() {
         return new MessageSystemImpl();
     }
 
     @Bean
-    public SocketClient socketClient() {
-        return new SocketClientImpl("localhost", 8085);
+    public SocketClient socketClient(ApplicationArguments arguments) {
+        return new SocketClientImpl("localhost",
+            Integer.parseInt(arguments.getSourceArgs()[1])); //8085
     }
 
     @Bean
-    public SocketServer socketServer(MessageSystem messageSystem) {
-        return new SocketServerImpl(messageSystem,8086);
+    public SocketServer socketServer(MessageSystem messageSystem, ApplicationArguments arguments) {
+        return new SocketServerImpl(messageSystem,
+            Integer.parseInt(arguments.getSourceArgs()[0])); //8087
     }
 
     @Bean
-    public MsClient socketMsClient(MessageSystem messageSystem,SocketClient socketClient) {
-        MsClient databaseMsClient = new MsClientImpl(DATABASE_SERVICE_CLIENT_NAME, messageSystem);
+    public MsClient socketMsClient(MessageSystem messageSystem, SocketClient socketClient,
+        ApplicationArguments arguments) {
+        MsClient databaseMsClient = new MsClientImpl(arguments.getSourceArgs()[3], messageSystem); //DATABASE_SERVICE_CLIENT_NAME
         databaseMsClient
             .addHandler(MessageType.USER_DATA, new GeneralRequestHandler(socketClient));
         databaseMsClient
@@ -49,8 +50,9 @@ public class AppConfig {
     }
 
     @Bean
-    public MsClient frontendMsClient(MessageSystem messageSystem, FrontendService frontendService) {
-        MsClient frontendMsClient = new MsClientImpl(FRONTEND_SERVICE_CLIENT_NAME, messageSystem);
+    public MsClient frontendMsClient(MessageSystem messageSystem, FrontendService frontendService,
+        ApplicationArguments arguments) {
+        MsClient frontendMsClient = new MsClientImpl(arguments.getSourceArgs()[2], messageSystem); //FRONTEND_SERVICE_CLIENT_NAME
         frontendMsClient
             .addHandler(MessageType.USER_DATA, new GetUserDataResponseHandler(frontendService));
         frontendMsClient

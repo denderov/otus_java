@@ -71,11 +71,6 @@
             <version>2.11.0</version>
             <scope>compile</scope>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.slf4j</groupId>-->
-<!--            <artifactId>slf4j-api</artifactId>-->
-<!--            <version>${slf4j-api.version}</version>-->
-<!--        </dependency>-->
     </dependencies>
 
     <build>

@@ -8,7 +8,7 @@ import java.util.function.Consumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.ApplicationArguments;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import ru.otus.messagesystem.Message;
@@ -21,23 +21,23 @@ public class FrontendServiceImpl implements FrontendService {
 
   private final Map<UUID, Consumer<?>> consumerMap = new ConcurrentHashMap<>();
   private final MsClient msClient;
-  private final String databaseServiceClientName;
+  private final ApplicationArguments arguments;
 
-  public FrontendServiceImpl(@Lazy @Qualifier("frontendMsClient") MsClient msClient, @Value("databaseService") String databaseServiceClientName) {
+  public FrontendServiceImpl(@Lazy @Qualifier("frontendMsClient") MsClient msClient, ApplicationArguments arguments) { //@Value("databaseService") String databaseServiceClientName
     this.msClient = msClient;
-    this.databaseServiceClientName = databaseServiceClientName;
+    this.arguments = arguments;
   }
 
   @Override
   public void getAllUserData( Consumer<String> dataConsumer) {
-    Message outMsg = msClient.produceMessage(databaseServiceClientName, null, MessageType.ALL_USERS_DATA);
+    Message outMsg = msClient.produceMessage(arguments.getSourceArgs()[3], null, MessageType.ALL_USERS_DATA);
     consumerMap.put(outMsg.getId(), dataConsumer);
     msClient.sendMessage(outMsg);
   }
 
   @Override
   public void createUser(String userJson, Consumer<Long> dataConsumer) {
-    Message outMsg = msClient.produceMessage(databaseServiceClientName, userJson, MessageType.USER_DATA);
+    Message outMsg = msClient.produceMessage(arguments.getSourceArgs()[3], userJson, MessageType.USER_DATA);
     consumerMap.put(outMsg.getId(), dataConsumer);
     msClient.sendMessage(outMsg);
   }

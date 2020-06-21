@@ -2,6 +2,7 @@ package ru.otus.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hibernate.SessionFactory;
+import org.springframework.boot.ApplicationArguments;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import ru.otus.api.model.User;
@@ -24,9 +25,6 @@ import ru.otus.socket.SocketServerImpl;
 @Configuration
 public class AppConfig {
 
-    private static final String FRONTEND_SERVICE_CLIENT_NAME = "frontendService";
-    private static final String DATABASE_SERVICE_CLIENT_NAME = "databaseService";
-
     @Bean
     public SessionFactory sessionFactory() {
         SessionFactory sessionFactory = HibernateUtils.buildSessionFactory("hibernate.cfg.xml",
@@ -43,13 +41,15 @@ public class AppConfig {
     }
 
     @Bean
-    public SocketClient socketClient() {
-        return new SocketClientImpl("localhost", 8085);
+    public SocketClient socketClient(ApplicationArguments arguments) {
+      return new SocketClientImpl("localhost",
+          Integer.parseInt(arguments.getSourceArgs()[1])); //8085
     }
 
     @Bean
-    public SocketServer socketServer(MessageSystem messageSystem) {
-        return new SocketServerImpl(messageSystem,8087);
+    public SocketServer socketServer(MessageSystem messageSystem, ApplicationArguments arguments) {
+      return new SocketServerImpl(messageSystem,
+          Integer.parseInt(arguments.getSourceArgs()[0])); //8087
     }
 
     @Bean
@@ -59,8 +59,8 @@ public class AppConfig {
 
     @Bean
     public MsClient databaseMsClient(MessageSystem messageSystem, DBService dbService,
-        ObjectMapper objectMapper) {
-        MsClient databaseMsClient = new MsClientImpl(DATABASE_SERVICE_CLIENT_NAME, messageSystem);
+        ObjectMapper objectMapper, ApplicationArguments arguments) {
+        MsClient databaseMsClient = new MsClientImpl(arguments.getSourceArgs()[3], messageSystem);
         databaseMsClient.addHandler(MessageType.USER_DATA,
             new GetUserDataRequestHandler(dbService, objectMapper));
         databaseMsClient
@@ -70,8 +70,9 @@ public class AppConfig {
     }
 
     @Bean
-    public MsClient frontendMsClient(MessageSystem messageSystem, SocketClient socketClient) {
-        MsClient frontendMsClient = new MsClientImpl(FRONTEND_SERVICE_CLIENT_NAME, messageSystem);
+    public MsClient frontendMsClient(MessageSystem messageSystem, SocketClient socketClient,
+        ApplicationArguments arguments) {
+        MsClient frontendMsClient = new MsClientImpl(arguments.getSourceArgs()[2], messageSystem);
         frontendMsClient
             .addHandler(MessageType.USER_DATA, new GeneralRequestHandler(socketClient));
         frontendMsClient
