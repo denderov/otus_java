@@ -23,10 +23,16 @@ public class AppRunner {
       System.out.println(foo.getAbsolutePath());
       runWrapper(
           new File("./hw16-frontend/target/hw16-frontend.jar"),
-          "8086", "8085", "frontendService1", "databaseService1");
+          "8086", "8085", "frontendService1", "databaseService1", "--server.port=8080");
       runWrapper(
           new File("./hw16-dbServer/target/hw16-dbServer.jar"),
           "8087", "8085", "frontendService1", "databaseService1");
+      runWrapper(
+          new File("./hw16-frontend/target/hw16-frontend.jar"),
+          "8088", "8085", "frontendService2", "databaseService2", "--server.port=8081");
+      runWrapper(
+          new File("./hw16-dbServer/target/hw16-dbServer.jar"),
+          "8089", "8085", "frontendService2", "databaseService2");
       socketServer.go();
     } catch (IOException e) {
       e.printStackTrace();
