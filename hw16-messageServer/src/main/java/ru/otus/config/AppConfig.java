@@ -9,6 +9,8 @@ import ru.otus.messagesystem.MessageSystemImpl;
 import ru.otus.messagesystem.MessageType;
 import ru.otus.messagesystem.MsClient;
 import ru.otus.messagesystem.MsClientImpl;
+import ru.otus.pool.PoolService;
+import ru.otus.pool.handlers.PoolRequestHandler;
 import ru.otus.socket.SocketClient;
 import ru.otus.socket.SocketClientImpl;
 import ru.otus.socket.SocketServer;
@@ -25,6 +27,7 @@ public class AppConfig {
     private static final String DATABASE_SERVICE_CLIENT_NAME_2 = "databaseService2";
     public static final int FRONTEND_CLIENT_PORT_2 = 8088;
     public static final int DATABASE_CLIENT_PORT_2 = 8089;
+    private static final String DATABASE_POOL_CLIENT_NAME = "databasePool";
 
     @Bean(destroyMethod="dispose")
     public MessageSystem messageSystem() {
@@ -104,5 +107,15 @@ public class AppConfig {
         return frontendMsClient;
     }
 
+    @Bean
+    public MsClient poolMsClient(MessageSystem messageSystem, PoolService poolService) {
+        MsClient poolMsClient = new MsClientImpl(DATABASE_POOL_CLIENT_NAME, messageSystem);
+        poolMsClient
+            .addHandler(MessageType.USER_DATA, new PoolRequestHandler(poolService));
+        poolMsClient
+            .addHandler(MessageType.ALL_USERS_DATA, new PoolRequestHandler(poolService));
+        messageSystem.addClient(poolMsClient);
+        return poolMsClient;
+    }
 
 }
