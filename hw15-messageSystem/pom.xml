@@ -21,7 +21,7 @@
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
     <logback-classic.version>1.2.3</logback-classic.version>
-    <h2.version>1.4.200</h2.version>
+    <h2.version>2.0.206</h2.version>
     <lombok.version>1.18.10</lombok.version>
     <hibernate-core.version>5.4.4.Final</hibernate-core.version>
     <mockito-core.version>3.2.4</mockito-core.version>
