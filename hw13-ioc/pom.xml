@@ -18,7 +18,7 @@
     <logback-classic.version>1.2.3</logback-classic.version>
     <h2.version>1.4.200</h2.version>
     <lombok.version>1.18.10</lombok.version>
-    <hibernate-core.version>5.4.4.Final</hibernate-core.version>
+    <hibernate-core.version>5.4.24.Final</hibernate-core.version>
     <mockito-core.version>3.2.4</mockito-core.version>
     <mockito-junit-jupiter.version>3.2.4</mockito-junit-jupiter.version>
     <assertj-core.version>3.14.0</assertj-core.version>
